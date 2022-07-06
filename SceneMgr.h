@@ -1,4 +1,5 @@
 #pragma once
+
 #include"Menu.h"
 #include"Adventurer.h"
 
@@ -18,7 +19,7 @@ public:
 	void Scene_Input();
 	void Scene_Update();
 	void Scene_Render();
-	void SceneMgr_ChangeScene(eScene nextScene);
+	 void SceneMgr_ChangeScene(eScene nextScene);
 
 	eScene scene{ eScene::Menu };
 protected:

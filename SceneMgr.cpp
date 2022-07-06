@@ -1,9 +1,11 @@
 #include"SceneMgr.h"
-#include"Adventurer.h"
 #include"DxLib.h"
 
 //コンストラクタ
-SceneMgr::SceneMgr() {
+SceneMgr::SceneMgr()
+  :adventurer(*this)
+  ,menu(*this)
+{
 
 }
 
@@ -14,6 +16,7 @@ SceneMgr::~SceneMgr() {
 
 void SceneMgr::Scene_Input() {
   menu.Menu_Input();
+  adventurer.Adventurer_Input();
 }
 
 void SceneMgr::Scene_Update() {

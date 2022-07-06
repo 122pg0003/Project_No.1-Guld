@@ -1,8 +1,10 @@
 #include"Adventurer.h"
+#include"SceneMgr.h"
 #include"DxLib.h"
-//#include"SceneMgr.h"
 
-Adventurer::Adventurer() {
+Adventurer::Adventurer(SceneMgr& scenemgr)
+:_scenemgr(scenemgr)
+{
 
 }
 
@@ -12,11 +14,10 @@ Adventurer::~Adventurer() {
 
 void Adventurer::Adventurer_Input() {
 	if (CheckHitKey(KEY_INPUT_G) != 0) {
-
-		 SceneMgr_ChangeScene(*Menu);
-
+		ClearDrawScreen();
+		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 		DrawString(0, 0, "冒険者画面です。", GetColor(255, 255, 255));
-		DrawString(0, 60, "Gキーを押すとメニュー画面に進みます。", GetColor(255, 255, 255));
+		DrawString(0, 60, "Aキーを押すとメニュー画面に進みます。", GetColor(255, 255, 255));
 	}
 }
 
