@@ -1,7 +1,7 @@
 #pragma once
-#include"SceneMgr.h"
 
 
+class SceneMgr;
 
 class Adventurer{
 public:
@@ -10,7 +10,7 @@ public:
 	void Adventurer_Input();
 	void Adventurer_Update();
 	
-	protected:
-	SceneMgr scenemgr;
+//protected:
+	//SceneMgr scenemgr;
 
 };
