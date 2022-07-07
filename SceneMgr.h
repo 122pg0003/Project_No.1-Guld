@@ -1,7 +1,10 @@
 #pragma once
-
-#include"Menu.h"
 #include"Adventurer.h"
+#include"Menu.h"
+//#include"Game.h"
+
+
+class Game;
 
 class SceneMgr{
 public:
@@ -14,7 +17,7 @@ public:
 		NextMonth    //ŽŸ‚ÌŒŽ
 	};
 
-	SceneMgr();
+	SceneMgr(Game& game);
 	~SceneMgr();
 	void Scene_Input();
 	void Scene_Update();
@@ -23,6 +26,8 @@ public:
 
 	eScene scene{ eScene::Menu };
 protected:
+	Game& _game;
 	Menu  menu;
 	Adventurer adventurer;
+
 };
