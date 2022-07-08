@@ -1,5 +1,5 @@
 #include"SceneMgr.h"
-//#include"DxLib.h"
+#include"DxLib.h"
 
 //コンストラクタ
 SceneMgr::SceneMgr(Game& game)
@@ -8,7 +8,7 @@ SceneMgr::SceneMgr(Game& game)
   ,menu(*this)
   
 {
-
+  _bg = LoadGraph("images/Scene_Config.png");
 }
 
 //デストラクタ
@@ -41,6 +41,9 @@ void SceneMgr::Scene_Update() {
   case eScene::NextMonth:
    // Config_Update();
     break;
+  case eScene::Game:
+    DrawGraph(0, 0, _bg, FALSE);
+
   }
 }
 

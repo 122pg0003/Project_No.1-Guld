@@ -5,6 +5,7 @@
 Game::Game() :
 scenemgr(*this)
 ,mouse(*this)
+
 {
 
 }
@@ -27,7 +28,7 @@ void Game::Update() {
 
 //描画
 void Game::Render() {
-	DrawString(0, 20, "Gキーでゲーム画面、Cキーで設定、Mキーでメニュー画面になります。", GetColor(255, 255, 255));
+	mouse.M();
 }
 
 //

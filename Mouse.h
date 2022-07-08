@@ -7,8 +7,8 @@ public:
 	Mouse(Game& game);
 	~Mouse();
 	void M();
-	int GetMouse() { return MouseX; }
-
+	int GetMouseX() { return MouseX; }
+	int GetMouseY() { return MouseY; }
 protected:
 	Game& _game;
 

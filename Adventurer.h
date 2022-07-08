@@ -7,7 +7,7 @@
 class SceneMgr;
 class Game;
 
-class Adventurer   {
+class Adventurer :public SceneMgr {
 public:
 	Adventurer(SceneMgr& scenemgr,Game& game);
 	~Adventurer();
@@ -19,4 +19,6 @@ protected:
 	//SceneMgr scenemgr;
 private:
 	SceneMgr& _scenemgr;
+	int _cg;
+	//int x1,y1,x2,y2;
 };

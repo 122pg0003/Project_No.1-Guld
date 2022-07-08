@@ -28,12 +28,12 @@ void Mouse::M() {
   DrawBox(0, 0, 640, 32, BoxCr, TRUE);
 
   // 座標文字列を描く
-  DrawFormatString(0, 0, StringCr, "座標Ｘ %d　　座標Ｙ %d", MouseX, MouseY);
+  DrawFormatString(0, 300, StringCr, "座標Ｘ %d　　座標Ｙ %d", MouseX, MouseY);
 
   // メッセージ処理
 
 
   // 一定時間待つ
-  WaitTimer(100);
+  //WaitTimer(100);
 }
 

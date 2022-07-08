@@ -15,8 +15,8 @@ void Menu::Menu_Input() {
 	if (CheckHitKey(KEY_INPUT_A) != 0) {
 		ClearDrawScreen();
 		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Adventurer);
-		DrawString(0, 0, "メニュー画面です。", GetColor(255, 255, 255));
-		DrawString(0, 40, "Gキーを押すと冒険者画面に進みます。", GetColor(255, 255, 255));
+		DrawBox(100, 100, 0, 0, GetColor(255, 0, 0), TRUE);
+		DrawString(0, 40, "マウスをクリックすると冒険者画面に進みます。", GetColor(255, 255, 255));
 	}
 }
 
