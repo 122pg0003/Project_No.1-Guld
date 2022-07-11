@@ -1,7 +1,7 @@
 #pragma once
 #include"SceneMgr.h"
 #include"Mouse.h"
-
+#include"Collision.h"
 
 constexpr auto SCREEN_W = 1280;
 constexpr auto SCREEN_H = 720;
@@ -16,9 +16,11 @@ public:
 	void Render();   //•`‰æ
 	int  GetMouseX() { return mouse.GetMouseX(); }
 	int  GetMouseY() { return mouse.GetMouseY(); }
+	bool CheckHit() { return aabb.CheckHit(); }
 protected:
 	SceneMgr scenemgr;
 	Mouse mouse;
+	AABB  aabb;
 
 
 	/*private:

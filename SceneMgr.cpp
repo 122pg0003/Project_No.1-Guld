@@ -5,7 +5,7 @@
 SceneMgr::SceneMgr(Game& game)
   :_game(game)
   ,adventurer(*this,_game)
-  ,menu(*this)
+  ,menu(*this,_game)
   
 {
   _bg = LoadGraph("images/Scene_Config.png");
