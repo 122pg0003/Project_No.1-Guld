@@ -6,6 +6,7 @@ Game::Game() :
 	scenemgr(*this)
 	, mouse(*this)
 	, aabb(*this) 
+	,background(*this)
 	
 {
 
@@ -30,6 +31,8 @@ void Game::Update() {
 
 //•`‰æ
 void Game::Render() {
+	//background.BackGround_Render();
 	mouse.M();
 	scenemgr.Scene_Render();
+
 }

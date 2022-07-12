@@ -2,6 +2,7 @@
 #include"SceneMgr.h"
 #include"Mouse.h"
 #include"Collision.h"
+#include"BackGround.h"
 
 
 constexpr auto SCREEN_W = 1980;
@@ -22,6 +23,7 @@ protected:
 	SceneMgr scenemgr;
 	Mouse mouse;
 	AABB  aabb;   //“–‚½‚è”»’è
+	BackGround  background;
 	
 
 	/*private:

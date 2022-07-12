@@ -152,21 +152,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Adventurer.cpp" />
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Quest.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adventurer.h" />
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Quest.h" />
     <ClInclude Include="SceneMgr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

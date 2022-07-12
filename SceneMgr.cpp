@@ -28,6 +28,7 @@ void SceneMgr::Scene_Input() {
   }
 }
 
+
 //XV
 void SceneMgr::Scene_Update() {
   switch (scene) {       
@@ -58,7 +59,7 @@ void SceneMgr::Scene_Render() {
   menu.Menu_Render();
     break;
   /*case eScene::Adventurer:
-    adventurer.Adventurer_Input();
+    adventurer.Adventurer_Render();
     break;*/
   }
 }
