@@ -53,7 +53,14 @@ void SceneMgr::Scene_Update() {
 }
 
 void SceneMgr::Scene_Render() {
+  switch (scene) {
+  case eScene::Menu:
   menu.Menu_Render();
+    break;
+  /*case eScene::Adventurer:
+    adventurer.Adventurer_Input();
+    break;*/
+  }
 }
 
 void SceneMgr::SceneMgr_ChangeScene(eScene nextScene) {

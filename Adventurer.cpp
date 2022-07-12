@@ -82,8 +82,8 @@ void Adventurer::Adventurer_Input() {
 	}
 }
 void Adventurer::Adventurer_Update() {
-		ClearDrawScreen();
-		DrawGraph(100, 200, _cg, FALSE);
+		//ClearDrawScreen();
+		DrawGraph(100, 200, _cg, TRUE);
 		DrawString(0, 60, "Aキーを押すとメニュー画面に進みます。", GetColor(255, 255, 255));
 
 

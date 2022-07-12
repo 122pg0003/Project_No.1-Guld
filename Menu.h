@@ -16,14 +16,13 @@ protected:
 private:
 
 	enum class  MENU_NUM {
-		クエスト,
-		//Quest,         //クエスト
-		Adventurer,   //冒険者
-		Guild,        //ギルド
-		Trede,        //交易
-		Investment,   //投資
-		NextMonth,    //次の月
-		Game
+		クエスト,         //クエスト
+		冒険者,           //冒険者
+		ギルド,           //ギルド
+		交易,             //交易
+		投資,             //投資
+		次の月,           //次の月
+		
 	};
 
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);

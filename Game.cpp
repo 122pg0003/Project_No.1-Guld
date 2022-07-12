@@ -31,5 +31,5 @@ void Game::Update() {
 //•`‰æ
 void Game::Render() {
 	mouse.M();
-
+	scenemgr.Scene_Render();
 }

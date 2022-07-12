@@ -4,8 +4,8 @@
 #include"Collision.h"
 
 
-constexpr auto SCREEN_W = 1280;
-constexpr auto SCREEN_H = 720;
+constexpr auto SCREEN_W = 1980;
+constexpr auto SCREEN_H = 1080;
 constexpr auto SCREEN_DEPTH = 32;
 
 class Game {
