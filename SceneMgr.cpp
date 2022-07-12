@@ -16,12 +16,20 @@ SceneMgr::~SceneMgr() {
 
 }
 
+//“ü—Í
 void SceneMgr::Scene_Input() {
+  switch (scene) {
+  case eScene::Menu:
+    menu.Menu_Input();
+    break;
+  case eScene::Adventurer:
+    adventurer.Adventurer_Input();
+    break;
+  }
 }
 
+//XV
 void SceneMgr::Scene_Update() {
-  menu.Menu_Input();
-  adventurer.Adventurer_Input();
   switch (scene) {       
   case eScene::Menu:   
     menu.Menu_Update();   
@@ -41,9 +49,6 @@ void SceneMgr::Scene_Update() {
   case eScene::NextMonth:
    // Config_Update();
     break;
-  case eScene::Game:
-    DrawGraph(0, 0, _bg, FALSE);
-
   }
 }
 

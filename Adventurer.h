@@ -20,7 +20,7 @@ protected:
 	//SceneMgr scenemgr;
 private:
 
-	enum MENU_NUM {
+	enum class MENU_NUM {
 		クエスト,
 		冒険者,
 		ギルド,

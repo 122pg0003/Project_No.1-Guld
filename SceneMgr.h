@@ -10,6 +10,7 @@ class SceneMgr{
 public:
 	enum class eScene {
 		Menu,         //メニュー
+		Quest,         //クエスト
 		Adventurer,   //冒険者
 		Guild,        //ギルド
 		Trede,        //交易
@@ -25,7 +26,7 @@ public:
 	virtual void Scene_Render();
 	virtual void SceneMgr_ChangeScene(eScene nextScene);
  
-	eScene scene{ eScene::Game };
+	eScene scene{ eScene::Menu };
 protected:
 	Game& _game;
 	Menu  menu;

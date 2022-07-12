@@ -3,10 +3,10 @@
 
 //コンストラクタ
 Game::Game() :
-scenemgr(*this)
-,mouse(*this)
-,aabb(*this)
-
+	scenemgr(*this)
+	, mouse(*this)
+	, aabb(*this) 
+	
 {
 
 }
@@ -31,4 +31,5 @@ void Game::Update() {
 //描画
 void Game::Render() {
 	mouse.M();
+
 }
