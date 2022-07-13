@@ -28,7 +28,7 @@ void Mouse::M() {
   DrawBox(0, 0, 640, 32, BoxCr, TRUE);
 
   // 座標文字列を描く
-  DrawFormatString(0, 600, StringCr, "座標Ｘ %d　　座標Ｙ %d", MouseX, MouseY);
+  DrawFormatString(1000, 50, StringCr, "座標Ｘ %d　　座標Ｙ %d", MouseX, MouseY);
 
   // メッセージ処理
 

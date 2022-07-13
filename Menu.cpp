@@ -8,6 +8,7 @@ Menu::Menu(SceneMgr& scenemgr, Game& game)
 ,_game(game) 
 {
 	//_cg = LoadGraph("images/Scene_Menu.png");
+	_bg = LoadGraph("images/back_Full.png");
 	QGrHandle = LoadGraph("images/Quest_Slot.png");  //クエストスロット
 	MGrHandle = LoadGraph("images/Member_Slot.png");  //メンバースロット
 	GGrHandle = LoadGraph("images/Guild_Slot.png");  //ギルドスロット
@@ -161,6 +162,7 @@ void Menu::Menu_Update() {
 
 //描画
 void Menu::Menu_Render() {
+	DrawGraph(0, 0, _bg, TRUE);
 	DrawGraph(0, 190, QGrHandle, TRUE);
 	DrawGraph(0, 338, MGrHandle, TRUE);
 	DrawGraph(0, 486, GGrHandle, TRUE);

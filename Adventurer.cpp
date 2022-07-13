@@ -28,11 +28,21 @@ int[] Adventurer::GetMenuPosition(int menuIndex) {
 	return hoge[menuIndex];
 }*/
 
+//‘I‘ğ€–Ú‚Ì—Ìˆæw’è
 void Adventurer::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y) {
 	switch (menuIndex)
 	{
+	case MENU_NUM::ƒƒjƒ…[:
+
+		max_x = 1850;
+		min_x = 1800;
+		max_y = 90;
+		min_y = 45;
+
+		break;
+
 	case MENU_NUM::–`Œ¯Ò1:
-	{
+	
 		max_x = 800;
 		min_x = 900;
 		max_y = 800;
@@ -91,15 +101,27 @@ void Adventurer::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int
 
 		break;
 	}
-	}
+	
 }
 
 void Adventurer::Adventurer_Input() {
 	int max_x, min_x, max_y, min_y;
 
+	GetMenuPosition(MENU_NUM::ƒƒjƒ…[, max_x, min_x, max_y, min_y);
+
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
+		
+				_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
+
+			}
+
 	GetMenuPosition(MENU_NUM::–`Œ¯Ò1, max_x, min_x, max_y, min_y);
 
-	if (((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) &&
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 		((_game.GetMouseX() < max_x) &&
 		(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
@@ -114,7 +136,7 @@ void Adventurer::Adventurer_Input() {
 
 	GetMenuPosition(MENU_NUM::–`Œ¯Ò2, max_x, min_x, max_y, min_y);
 
-	if (((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) &&
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
@@ -126,7 +148,7 @@ void Adventurer::Adventurer_Input() {
 
 	GetMenuPosition(MENU_NUM::–`Œ¯Ò3, max_x, min_x, max_y, min_y);
 
-	if (((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) &&
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
@@ -137,7 +159,7 @@ void Adventurer::Adventurer_Input() {
 	}
 	GetMenuPosition(MENU_NUM::–`Œ¯Ò4, max_x, min_x, max_y, min_y);
 
-	if (((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) &&
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
@@ -148,7 +170,7 @@ void Adventurer::Adventurer_Input() {
 	}
 	GetMenuPosition(MENU_NUM::–`Œ¯Ò5, max_x, min_x, max_y, min_y);
 
-	if (((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) &&
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
@@ -159,7 +181,7 @@ void Adventurer::Adventurer_Input() {
 	}
 	GetMenuPosition(MENU_NUM::–`Œ¯Ò6, max_x, min_x, max_y, min_y);
 
-	if (((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) &&
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
@@ -171,7 +193,7 @@ void Adventurer::Adventurer_Input() {
 
 	GetMenuPosition(MENU_NUM::–`Œ¯Ò7, max_x, min_x, max_y, min_y);
 
-	if (((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) &&
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
@@ -183,14 +205,13 @@ void Adventurer::Adventurer_Input() {
 }
 void Adventurer::Adventurer_Update() {
 		//ClearDrawScreen();
-	DrawBox(800, 900, 900, 800, GetColor(255, 0, 0),TRUE);
+	DrawBox(1800, 45, 1850, 90, GetColor(255, 0, 0), TRUE);
 		DrawGraph(100, 200, _cg, TRUE);
 		//DrawString(0, 60, "AƒL[‚ğ‰Ÿ‚·‚Æƒƒjƒ…[‰æ–Ê‚Éi‚İ‚Ü‚·B", GetColor(255, 255, 255));
 		//if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 			switch (scene)
 			{
 			case Adventurer::MENU_NUM::–`Œ¯Ò1:
-				DrawString(800, 800,"aaaaaaaaaaaa", GetColor(255, 255, 0),TRUE);
 				break;
 			case Adventurer::MENU_NUM::–`Œ¯Ò2:
 				break;

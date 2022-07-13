@@ -17,7 +17,8 @@ protected:
 
 private:
 	enum class MENU_NUM {
-		 クエスト1
+		  メニュー
+		,クエスト1
 		,クエスト2
 		,クエスト3
 		,クエスト4

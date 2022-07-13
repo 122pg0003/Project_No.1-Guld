@@ -28,7 +28,7 @@ private:
 
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	SceneMgr& _scenemgr;
-	//int _cg;
+	int _bg;
 	int QGrHandle;
 	int	MGrHandle;
 	int	GGrHandle;

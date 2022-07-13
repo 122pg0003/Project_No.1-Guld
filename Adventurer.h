@@ -21,7 +21,8 @@ protected:
 private:
 
 	enum class MENU_NUM {
-		 –`Œ¯Ò1
+		ƒƒjƒ…[
+		,–`Œ¯Ò1
 		,–`Œ¯Ò2
 		,–`Œ¯Ò3
 		,–`Œ¯Ò4
@@ -34,6 +35,7 @@ private:
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	SceneMgr& _scenemgr;
 	int _cg;
+
 	//int _cursorIndex;
 	//int x1,y1,x2,y2;
 };

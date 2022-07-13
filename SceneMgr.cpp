@@ -8,8 +8,12 @@ SceneMgr::SceneMgr(Game& game)
   ,menu(*this,_game)
   ,quest(*this,_game)
   ,guild(*this,_game)
+  ,trede(*this, _game)
+  ,investment(*this, _game)
+  ,nextmonth(*this, _game)
 {
-  _bg = LoadGraph("images/Scene_Config.png");
+  //_bg = LoadGraph("images/Scene_Config.png");
+  _bg = LoadGraph("images/back_Full.png");
 }
 
 //デストラクタ
@@ -29,6 +33,21 @@ void SceneMgr::Scene_Input() {
   case eScene::Quest:
     quest.Quest_Input();
     break;
+  case eScene::Guild:
+    guild.Guild_Input();
+    break;
+  case eScene::Trede:
+    trede.Trede_Input();
+    break;
+  case eScene::Investment:
+    investment.Investment_Input();
+    break;
+  case eScene::NextMonth:
+    nextmonth.NextMonth_Input();
+    break;
+  /*case eScene::Quest:
+    quest.Quest_Input();
+    break;*/
   }
 }
 
@@ -49,18 +68,19 @@ void SceneMgr::Scene_Update() {
    guild.Guild_Update();
     break;
   case eScene::Trede:
-  // Config_Update();
+  trede.Trede_Update();
     break;
   case eScene::Investment:
-   // Config_Update();
+   investment.Investment_Update();
     break;
   case eScene::NextMonth:
-   // Config_Update();
+   nextmonth.NextMonth_Update();
     break;
   }
 }
 
 void SceneMgr::Scene_Render() {
+ // DrawGraph(0, 0, _bg, TRUE);
   switch (scene) {
   case eScene::Menu:
   menu.Menu_Render();

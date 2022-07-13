@@ -20,8 +20,14 @@ Quest::~Quest()
 void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y) {
 	switch (menuIndex)
 	{
+	case MENU_NUM::メニュー:
+		max_x = 1850;
+		min_x = 1800;
+		max_y = 90;
+		min_y = 45;
+		break;
 	case MENU_NUM::クエスト1:
-	{
+	
 		max_x = 420;
 		min_x = 0;
 		max_y = 290;
@@ -71,11 +77,22 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 
 	}
 	}
-}
+
 
 //入力
 void Quest::Quest_Input(){
 		int max_x, min_x, max_y, min_y;
+		GetMenuPosition(MENU_NUM::メニュー, max_x, min_x, max_y, min_y);
+
+		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+			((_game.GetMouseX() < max_x) &&
+				(_game.GetMouseX() > min_x)) &&
+			(_game.GetMouseY() < max_y) &&
+			(_game.GetMouseY() > min_y)) {
+
+			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
+		}
+
 		GetMenuPosition(MENU_NUM::クエスト1, max_x, min_x, max_y, min_y);
 
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
@@ -152,6 +169,7 @@ void Quest::Quest_Update() {
 //描画
 void Quest::Quest_Render() {
 	DrawGraph(0, 0, _cg, TRUE);
+	DrawBox(1800, 45, 1850, 90, GetColor(255, 0, 0), TRUE);
 	if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 		switch (scene)
 		{

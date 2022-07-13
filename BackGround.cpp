@@ -14,5 +14,5 @@ BackGround::~BackGround() {
 }
 
 void BackGround::BackGround_Render() {
-	DrawGraph(0, 0, _bg, TRUE);
+	//DrawGraph(0, 0, _bg, TRUE);
 }

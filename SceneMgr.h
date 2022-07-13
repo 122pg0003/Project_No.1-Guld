@@ -3,7 +3,9 @@
 #include"Menu.h"
 #include"Quest.h"
 #include"Guild.h"
-
+#include"Trede.h"
+#include"Investment.h"
+#include"NextMonth.h"
 
 class Game;
 
@@ -33,6 +35,9 @@ protected:
 	Adventurer adventurer;
 	Quest quest;
 	Guild guild;
+	Trede trede;
+	Investment investment;
+	NextMonth nextmonth;
 
 private:
 	int _bg;
