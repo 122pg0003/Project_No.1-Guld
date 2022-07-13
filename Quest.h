@@ -26,7 +26,25 @@ private:
 		,クエスト6
 	};
 
+	enum class Q {
+		Q1
+	 ,Q2
+	 ,Q3
+	 ,Q4
+	 ,Q5
+   ,Q6
+	};
+	Q  q;
+
 	MENU_NUM scene;
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	int _cg;
+	int _BIGrHandle;
+	int Q1GrHandle;
+	int Q2GrHandle;
+	int Q3GrHandle;
+	int Q4GrHandle;
+	int Q5GrHandle;
+	int Q6GrHandle;
+ 
 };

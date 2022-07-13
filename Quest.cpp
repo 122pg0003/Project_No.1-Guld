@@ -8,6 +8,13 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	_scenemgr(scenemgr)
 	, _game(game) {
 	_cg = LoadGraph("images/Adventurer.jpg");
+	_BIGrHandle = LoadGraph("images/Base-Illust.png");
+	Q1GrHandle = LoadGraph("images/Quest-1.png");  //クエスト1スロット
+	Q2GrHandle = LoadGraph("images/Quest-2.png");  //クエスト2スロット
+	Q3GrHandle = LoadGraph("images/Quest-3.png");  //クエスト3スロット
+	Q4GrHandle = LoadGraph("images/Quest-4.png");  //クエスト4スロット
+	Q5GrHandle = LoadGraph("images/Quest-5.png");  //クエスト5スロット
+	Q6GrHandle = LoadGraph("images/Quest-6.png");  //クエスト6スロット
 }
 
 //デストラクタ
@@ -21,62 +28,66 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 	switch (menuIndex)
 	{
 	case MENU_NUM::メニュー:
+
 		max_x = 1850;
 		min_x = 1800;
 		max_y = 90;
 		min_y = 45;
-		break;
-	case MENU_NUM::クエスト1:
-	
-		max_x = 420;
-		min_x = 0;
-		max_y = 290;
-		min_y = 190;
 
 		break;
+
+	case MENU_NUM::クエスト1:
+
+		max_x = 656;
+		min_x = 396;
+		max_y = 580;
+		min_y = 270;
+
+		break;
+
 	case MENU_NUM::クエスト2:
 
-		max_x = 420;
-		min_x = 0;
-		max_y = 438;
-		min_y = 338;
+		max_x = 1090;
+		min_x = 830;
+		max_y = 580;
+		min_y = 270;
 
 		break;
+
 	case MENU_NUM::クエスト3:
 
-		max_x = 420;
-		min_x = 0;
-		max_y = 586;
-		min_y = 486;
+		max_x = 1524;
+		min_x = 1264;
+		max_y = 580;
+		min_y = 270;
 
 		break;
 	case MENU_NUM::クエスト4:
 
-		max_x = 420;
-		min_x = 0;
-		max_y = 734;
-		min_y = 634;
+		max_x = 656;
+		min_x = 396;
+		max_y = 950;
+		min_y = 640;
 
 		break;
 	case MENU_NUM::クエスト5:
 
-		max_x = 420;
-		min_x = 0;
-		max_y = 882;
-		min_y = 782;
+		max_x = 1090;
+		min_x = 830;
+		max_y = 950;
+		min_y = 640;
 
 		break;
 	case MENU_NUM::クエスト6:
 
-		max_x = 420;
-		min_x = 0;
-		max_y = 1030;
-		min_y = 930;
+		max_x = 1524;
+		min_x = 1264;
+		max_y = 950;
+		min_y = 640;
 
 		break;
-
 	}
-	}
+}
 
 
 //入力
@@ -100,7 +111,7 @@ void Quest::Quest_Input(){
 				(_game.GetMouseX() > min_x)) &&
 			(_game.GetMouseY() < max_y) &&
 			(_game.GetMouseY() > min_y)) {
-
+			Q q = Q::Q1;
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Quest);
 		}
 
@@ -168,25 +179,32 @@ void Quest::Quest_Update() {
 
 //描画
 void Quest::Quest_Render() {
-	DrawGraph(0, 0, _cg, TRUE);
+	DrawGraph(400, 200, _cg, TRUE);
 	DrawBox(1800, 45, 1850, 90, GetColor(255, 0, 0), TRUE);
+	DrawGraph(396, 270, Q1GrHandle, TRUE);  //画像サイズ　幅260　高さ310　以下同じ
+	DrawGraph(830, 270, Q2GrHandle, TRUE);
+	DrawGraph(1264, 270, Q3GrHandle, TRUE);
+	DrawGraph(396, 640, Q4GrHandle, TRUE);
+	DrawGraph(830, 640, Q5GrHandle, TRUE);
+	DrawGraph(1264, 640, Q6GrHandle, TRUE);
 	if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-		switch (scene)
+		switch (q)
 		{
-		case Quest::MENU_NUM::クエスト1:
+		case Q::Q1:
+			DrawBox(800, 45, 850, 90, GetColor(255, 255, 0), TRUE);
+		break;
+		/*case
 			break;
-		case Quest::MENU_NUM::クエスト2:
+		case 
 			break;
-		case Quest::MENU_NUM::クエスト3:
+		case 
 			break;
-		case Quest::MENU_NUM::クエスト4:
+		case :
 			break;
-		case Quest::MENU_NUM::クエスト5:
-			break;
-		case Quest::MENU_NUM::クエスト6:
+		case 
 			break;
 		default:
-			break;
+			break;*/
 		}
 	}
 }

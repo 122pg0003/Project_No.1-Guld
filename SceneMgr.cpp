@@ -88,9 +88,19 @@ void SceneMgr::Scene_Render() {
   case eScene::Quest:
     quest.Quest_Render();
     break;
- /*case eScene::Adventurer:
+ case eScene::Adventurer:
     adventurer.Adventurer_Render();
-    break;*/
+    break;
+  case eScene::Guild:
+    guild.Guild_Render();
+    break;
+  case eScene::Trede:
+    trede.Trede_Render();
+    break;
+  case eScene::Investment:
+    investment.Investment_Render();
+      break;
+
   }
 }
 
