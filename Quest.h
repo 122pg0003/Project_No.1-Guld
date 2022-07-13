@@ -36,7 +36,7 @@ private:
 	};
 	Q  q;
 
-	MENU_NUM scene;
+	MENU_NUM scene{};
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	int _cg;
 	int _BIGrHandle;

@@ -18,8 +18,7 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 }
 
 //デストラクタ
-Quest::~Quest()
-{
+Quest::~Quest() {
 
 }
 
@@ -91,85 +90,90 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 
 
 //入力
-void Quest::Quest_Input(){
-		int max_x, min_x, max_y, min_y;
-		GetMenuPosition(MENU_NUM::メニュー, max_x, min_x, max_y, min_y);
+void Quest::Quest_Input() {
+	int max_x, min_x, max_y, min_y;
+	GetMenuPosition(MENU_NUM::メニュー, max_x, min_x, max_y, min_y);
 
-		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-			((_game.GetMouseX() < max_x) &&
-				(_game.GetMouseX() > min_x)) &&
-			(_game.GetMouseY() < max_y) &&
-			(_game.GetMouseY() > min_y)) {
+	int mouse_x = _game.GetMouseX();
+	int mouse_y = _game.GetMouseY();
 
-			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		}
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
 
-		GetMenuPosition(MENU_NUM::クエスト1, max_x, min_x, max_y, min_y);
-
-		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-			((_game.GetMouseX() < max_x) &&
-				(_game.GetMouseX() > min_x)) &&
-			(_game.GetMouseY() < max_y) &&
-			(_game.GetMouseY() > min_y)) {
-			Q q = Q::Q1;
-			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Quest);
-		}
-
-		GetMenuPosition(MENU_NUM::クエスト2, max_x, min_x, max_y, min_y);
-
-		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-			((_game.GetMouseX() < max_x) &&
-				(_game.GetMouseX() > min_x)) &&
-			(_game.GetMouseY() < max_y) &&
-			(_game.GetMouseY() > min_y)) {
-
-			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Adventurer);
-		}
-
-		GetMenuPosition(MENU_NUM::クエスト3, max_x, min_x, max_y, min_y);
-
-		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-			((_game.GetMouseX() < max_x) &&
-				(_game.GetMouseX() > min_x)) &&
-			(_game.GetMouseY() < max_y) &&
-			(_game.GetMouseY() > min_y)) {
-
-			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Guild);
-		}
-
-		GetMenuPosition(MENU_NUM::クエスト4, max_x, min_x, max_y, min_y);
-
-		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-			((_game.GetMouseX() < max_x) &&
-				(_game.GetMouseX() > min_x)) &&
-			(_game.GetMouseY() < max_y) &&
-			(_game.GetMouseY() > min_y)) {
-
-			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Trede);
-		}
-
-		GetMenuPosition(MENU_NUM::クエスト5, max_x, min_x, max_y, min_y);
-
-		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-			((_game.GetMouseX() < max_x) &&
-				(_game.GetMouseX() > min_x)) &&
-			(_game.GetMouseY() < max_y) &&
-			(_game.GetMouseY() > min_y)) {
-
-			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Investment);
-		}
-
-		GetMenuPosition(MENU_NUM::クエスト6, max_x, min_x, max_y, min_y);
-
-		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-			((_game.GetMouseX() < max_x) &&
-				(_game.GetMouseX() > min_x)) &&
-			(_game.GetMouseY() < max_y) &&
-			(_game.GetMouseY() > min_y)) {
-
-			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::NextMonth);
-		}
+		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 	}
+
+	GetMenuPosition(MENU_NUM::クエスト1, max_x, min_x, max_y, min_y);
+
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
+
+		scene = MENU_NUM::クエスト1;
+		//return;
+		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Quest);
+	}
+
+	GetMenuPosition(MENU_NUM::クエスト2, max_x, min_x, max_y, min_y);
+
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
+
+		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Adventurer);
+	}
+
+	GetMenuPosition(MENU_NUM::クエスト3, max_x, min_x, max_y, min_y);
+
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
+
+		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Guild);
+	}
+
+	GetMenuPosition(MENU_NUM::クエスト4, max_x, min_x, max_y, min_y);
+
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
+
+		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Trede);
+	}
+
+	GetMenuPosition(MENU_NUM::クエスト5, max_x, min_x, max_y, min_y);
+
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
+
+		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Investment);
+	}
+
+	GetMenuPosition(MENU_NUM::クエスト6, max_x, min_x, max_y, min_y);
+
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
+
+		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::NextMonth);
+	}
+}
 
 
 //更新
@@ -180,31 +184,32 @@ void Quest::Quest_Update() {
 //描画
 void Quest::Quest_Render() {
 	DrawGraph(400, 200, _cg, TRUE);
-	DrawBox(1800, 45, 1850, 90, GetColor(255, 0, 0), TRUE);
+	DrawBox(1800, 45, 1850, 90, GetColor(255, 0, 0), TRUE);  //戻るボタン
 	DrawGraph(396, 270, Q1GrHandle, TRUE);  //画像サイズ　幅260　高さ310　以下同じ
 	DrawGraph(830, 270, Q2GrHandle, TRUE);
 	DrawGraph(1264, 270, Q3GrHandle, TRUE);
 	DrawGraph(396, 640, Q4GrHandle, TRUE);
 	DrawGraph(830, 640, Q5GrHandle, TRUE);
 	DrawGraph(1264, 640, Q6GrHandle, TRUE);
-	if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-		switch (q)
-		{
-		case Q::Q1:
-			DrawBox(800, 45, 850, 90, GetColor(255, 255, 0), TRUE);
+	//int max_x, min_x, max_y, min_y;
+	//GetMenuPosition(MENU_NUM::クエスト1, max_x, min_x, max_y, min_y);
+	switch (scene)
+	{
+	case MENU_NUM::クエスト1:
+		DrawBox(800, 45, 850, 90, GetColor(255, 0, 0), TRUE);
 		break;
 		/*case
 			break;
-		case 
+		case
 			break;
-		case 
+		case
 			break;
 		case :
 			break;
-		case 
+		case
 			break;
 		default:
 			break;*/
-		}
 	}
 }
+
