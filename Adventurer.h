@@ -21,14 +21,16 @@ protected:
 private:
 
 	enum class MENU_NUM {
-		ƒNƒGƒXƒg,
-		–`Œ¯ŽÒ,
-		ƒMƒ‹ƒh,
-		ŒðˆÕ,
-		“ŠŽ‘,
-		ŽŸ‚ÌŒŽ‚Ö,
+		 –`Œ¯ŽÒ1
+		,–`Œ¯ŽÒ2
+		,–`Œ¯ŽÒ3
+		,–`Œ¯ŽÒ4
+		,–`Œ¯ŽÒ5
+		,–`Œ¯ŽÒ6
+		,–`Œ¯ŽÒ7
 	};
 
+	MENU_NUM scene;
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	SceneMgr& _scenemgr;
 	int _cg;

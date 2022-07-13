@@ -7,7 +7,7 @@
 Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	_scenemgr(scenemgr)
 	, _game(game) {
-
+	_cg = LoadGraph("images/Adventurer.jpg");
 }
 
 //デストラクタ
@@ -20,7 +20,7 @@ Quest::~Quest()
 void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y) {
 	switch (menuIndex)
 	{
-	case MENU_NUM::冒険者1:
+	case MENU_NUM::クエスト1:
 	{
 		max_x = 420;
 		min_x = 0;
@@ -28,7 +28,7 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		min_y = 190;
 
 		break;
-	case MENU_NUM::冒険者2:
+	case MENU_NUM::クエスト2:
 
 		max_x = 420;
 		min_x = 0;
@@ -36,7 +36,7 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		min_y = 338;
 
 		break;
-	case MENU_NUM::冒険者3:
+	case MENU_NUM::クエスト3:
 
 		max_x = 420;
 		min_x = 0;
@@ -44,7 +44,7 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		min_y = 486;
 
 		break;
-	case MENU_NUM::冒険者4:
+	case MENU_NUM::クエスト4:
 
 		max_x = 420;
 		min_x = 0;
@@ -52,7 +52,7 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		min_y = 634;
 
 		break;
-	case MENU_NUM::冒険者5:
+	case MENU_NUM::クエスト5:
 
 		max_x = 420;
 		min_x = 0;
@@ -60,7 +60,7 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		min_y = 782;
 
 		break;
-	case MENU_NUM::冒険者6:
+	case MENU_NUM::クエスト6:
 
 		max_x = 420;
 		min_x = 0;
@@ -76,7 +76,7 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 //入力
 void Quest::Quest_Input(){
 		int max_x, min_x, max_y, min_y;
-		GetMenuPosition(MENU_NUM::冒険者1, max_x, min_x, max_y, min_y);
+		GetMenuPosition(MENU_NUM::クエスト1, max_x, min_x, max_y, min_y);
 
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 			((_game.GetMouseX() < max_x) &&
@@ -84,10 +84,10 @@ void Quest::Quest_Input(){
 			(_game.GetMouseY() < max_y) &&
 			(_game.GetMouseY() > min_y)) {
 
-			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Quest);
+			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Quest);
 		}
 
-		GetMenuPosition(MENU_NUM::冒険者2, max_x, min_x, max_y, min_y);
+		GetMenuPosition(MENU_NUM::クエスト2, max_x, min_x, max_y, min_y);
 
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 			((_game.GetMouseX() < max_x) &&
@@ -95,10 +95,10 @@ void Quest::Quest_Input(){
 			(_game.GetMouseY() < max_y) &&
 			(_game.GetMouseY() > min_y)) {
 
-			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Adventurer);
+			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Adventurer);
 		}
 
-		GetMenuPosition(MENU_NUM::冒険者3, max_x, min_x, max_y, min_y);
+		GetMenuPosition(MENU_NUM::クエスト3, max_x, min_x, max_y, min_y);
 
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 			((_game.GetMouseX() < max_x) &&
@@ -106,10 +106,10 @@ void Quest::Quest_Input(){
 			(_game.GetMouseY() < max_y) &&
 			(_game.GetMouseY() > min_y)) {
 
-			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Guild);
+			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Guild);
 		}
 
-		GetMenuPosition(MENU_NUM::冒険者4, max_x, min_x, max_y, min_y);
+		GetMenuPosition(MENU_NUM::クエスト4, max_x, min_x, max_y, min_y);
 
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 			((_game.GetMouseX() < max_x) &&
@@ -117,10 +117,10 @@ void Quest::Quest_Input(){
 			(_game.GetMouseY() < max_y) &&
 			(_game.GetMouseY() > min_y)) {
 
-			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Trede);
+			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Trede);
 		}
 
-		GetMenuPosition(MENU_NUM::冒険者5, max_x, min_x, max_y, min_y);
+		GetMenuPosition(MENU_NUM::クエスト5, max_x, min_x, max_y, min_y);
 
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 			((_game.GetMouseX() < max_x) &&
@@ -128,10 +128,10 @@ void Quest::Quest_Input(){
 			(_game.GetMouseY() < max_y) &&
 			(_game.GetMouseY() > min_y)) {
 
-			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Investment);
+			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Investment);
 		}
 
-		GetMenuPosition(MENU_NUM::冒険者6, max_x, min_x, max_y, min_y);
+		GetMenuPosition(MENU_NUM::クエスト6, max_x, min_x, max_y, min_y);
 
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 			((_game.GetMouseX() < max_x) &&
@@ -139,7 +139,7 @@ void Quest::Quest_Input(){
 			(_game.GetMouseY() < max_y) &&
 			(_game.GetMouseY() > min_y)) {
 
-			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::NextMonth);
+			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::NextMonth);
 		}
 	}
 
@@ -151,22 +151,24 @@ void Quest::Quest_Update() {
 
 //描画
 void Quest::Quest_Render() {
-	switch (scene)
-	{
-	case Quest::MENU_NUM::冒険者1:
-		break;
-	case Quest::MENU_NUM::冒険者2:
-		break;
-	case Quest::MENU_NUM::冒険者3:
-		break;
-	case Quest::MENU_NUM::冒険者4:
-		break;
-	case Quest::MENU_NUM::冒険者5:
-		break;
-	case Quest::MENU_NUM::冒険者6:
-		break;
-	default:
-		break;
+	DrawGraph(0, 0, _cg, TRUE);
+	if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+		switch (scene)
+		{
+		case Quest::MENU_NUM::クエスト1:
+			break;
+		case Quest::MENU_NUM::クエスト2:
+			break;
+		case Quest::MENU_NUM::クエスト3:
+			break;
+		case Quest::MENU_NUM::クエスト4:
+			break;
+		case Quest::MENU_NUM::クエスト5:
+			break;
+		case Quest::MENU_NUM::クエスト6:
+			break;
+		default:
+			break;
+		}
 	}
-
 }

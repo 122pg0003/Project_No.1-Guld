@@ -17,14 +17,15 @@ protected:
 
 private:
 	enum class MENU_NUM {
-		冒険者1
-		,冒険者2
-		,冒険者3
-		,冒険者4
-		,冒険者5
-		,冒険者6
+		 クエスト1
+		,クエスト2
+		,クエスト3
+		,クエスト4
+		,クエスト5
+		,クエスト6
 	};
 
 	MENU_NUM scene;
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
+	int _cg;
 };

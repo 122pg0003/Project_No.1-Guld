@@ -1,7 +1,8 @@
 #pragma once
 #include"Adventurer.h"
 #include"Menu.h"
-//#include"Game.h"
+#include"Quest.h"
+#include"Guild.h"
 
 
 class Game;
@@ -16,7 +17,6 @@ public:
 		Trede,        //ŒðˆÕ
 		Investment,   //“ŠŽ‘
 		NextMonth,    //ŽŸ‚ÌŒŽ
-		Game
 	};
 
 	SceneMgr(Game& game);
@@ -31,6 +31,8 @@ protected:
 	Game& _game;
 	Menu  menu;
 	Adventurer adventurer;
+	Quest quest;
+	Guild guild;
 
 private:
 	int _bg;

@@ -155,11 +155,15 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Guild.cpp" />
+    <ClCompile Include="Investment.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="NextMonth.cpp" />
     <ClCompile Include="Quest.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
+    <ClCompile Include="Trede.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,11 +171,15 @@
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Guild.h" />
+    <ClInclude Include="Investment.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="NextMonth.h" />
     <ClInclude Include="Quest.h" />
     <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="Trede.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,7 +6,8 @@ SceneMgr::SceneMgr(Game& game)
   :_game(game)
   ,adventurer(*this,_game)
   ,menu(*this,_game)
-  
+  ,quest(*this,_game)
+  ,guild(*this,_game)
 {
   _bg = LoadGraph("images/Scene_Config.png");
 }
@@ -25,6 +26,9 @@ void SceneMgr::Scene_Input() {
   case eScene::Adventurer:
     adventurer.Adventurer_Input();
     break;
+  case eScene::Quest:
+    quest.Quest_Input();
+    break;
   }
 }
 
@@ -35,11 +39,14 @@ void SceneMgr::Scene_Update() {
   case eScene::Menu:   
     menu.Menu_Update();   
     break;
+  case eScene::Quest:
+    quest.Quest_Update();
+    break;
   case eScene::Adventurer:
     adventurer.Adventurer_Update();
     break;
   case eScene::Guild:
-   // Config_Update();
+   guild.Guild_Update();
     break;
   case eScene::Trede:
   // Config_Update();
@@ -58,7 +65,10 @@ void SceneMgr::Scene_Render() {
   case eScene::Menu:
   menu.Menu_Render();
     break;
-  /*case eScene::Adventurer:
+  case eScene::Quest:
+    quest.Quest_Render();
+    break;
+ /*case eScene::Adventurer:
     adventurer.Adventurer_Render();
     break;*/
   }
