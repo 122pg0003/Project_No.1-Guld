@@ -1,7 +1,10 @@
 #pragma once
+#include"Math.h"
 
 class SceneMgr;
 class Game;
+
+
 
 class Quest {
 public:
@@ -10,10 +13,14 @@ public:
 	void Quest_Input();                    //入力
 	void Quest_Update();                   //更新
 	void Quest_Render();                   //描画
+	//void GetMoney(int& i);
+	                
 
 protected:
 	Game& _game;
 	SceneMgr& _scenemgr;
+	Math math;
+
 
 private:
 	enum class MENU_NUM {
@@ -24,17 +31,23 @@ private:
 		,クエスト4
 		,クエスト5
 		,クエスト6
+		,QInside
+		,QInside1
+		,QInside2
+		,クエスト開始
 	};
 
 	enum class Q {
-		Q1
-	 ,Q2
-	 ,Q3
-	 ,Q4
-	 ,Q5
-   ,Q6
+		Qメニュー
+		,Q1
+		,Q2
+		,Q3
+		,Qクエスト判定
 	};
-	Q  q;
+
+	Q q;
+
+
 
 	MENU_NUM scene{};
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
@@ -46,5 +59,11 @@ private:
 	int Q4GrHandle;
 	int Q5GrHandle;
 	int Q6GrHandle;
- 
+	int _cg1;
+	int Q1;
+	int Q2;
+	int Q3;
+	int menu;
+	int clear;
+	int failure;
 };

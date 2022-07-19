@@ -1,12 +1,17 @@
 #pragma once
+//#include"Quest.h"
 
-class Vector2 {
+
+
+class Math{
 public:
-  // x成分,y成分
-  float x, y;
-  // コンストラクタ
-  Vector2(float inX = 0, float inY = 0)
-    :x{ inX }
-    , y{ inY } {
-  }
+	Math();     //コンストラクタ
+	~Math();   //デストラクタ
+	void Math_Update(int& no);
+	//int Money_Update() { return no; }
+  bool Judgement();
+
+private:
+	//Quest quest;
+	int no;
 };

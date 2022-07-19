@@ -6,6 +6,8 @@
 #include"Trede.h"
 #include"Investment.h"
 #include"NextMonth.h"
+#include"Math.h"
+
 
 class Game;
 
@@ -38,6 +40,7 @@ protected:
 	Trede trede;
 	Investment investment;
 	NextMonth nextmonth;
+	Math math;
 
 private:
 	int _bg;

@@ -5,7 +5,7 @@
 Game::Game() :
 	scenemgr(*this)
 	, mouse(*this)
-	, aabb(*this) 
+	//, aabb(*this) 
 	,background(*this)
 	
 {

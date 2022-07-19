@@ -1,5 +1,8 @@
 #include"SceneMgr.h"
 #include"DxLib.h"
+#include"Math.h"
+
+
 
 //コンストラクタ
 SceneMgr::SceneMgr(Game& game)
@@ -11,6 +14,8 @@ SceneMgr::SceneMgr(Game& game)
   ,trede(*this, _game)
   ,investment(*this, _game)
   ,nextmonth(*this, _game)
+  
+  
 {
   //_bg = LoadGraph("images/Scene_Config.png");
   _bg = LoadGraph("images/back_Full.png");
@@ -80,6 +85,10 @@ void SceneMgr::Scene_Update() {
 }
 
 void SceneMgr::Scene_Render() {
+  int no;
+ math.Math_Update(no);
+   //math.Math_Update();
+  DrawFormatString(1000, 0, GetColor(255, 255, 255), "所持金%d\n",no);
  // DrawGraph(0, 0, _bg, TRUE);
   switch (scene) {
   case eScene::Menu:

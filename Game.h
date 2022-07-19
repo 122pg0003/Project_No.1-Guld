@@ -1,7 +1,6 @@
 #pragma once
 #include"SceneMgr.h"
 #include"Mouse.h"
-#include"Collision.h"
 #include"BackGround.h"
 
 
@@ -18,11 +17,11 @@ public:
 	void Render();   //描画
 	int  GetMouseX() { return mouse.GetMouseX(); }      //マウスのX座標取得
 	int  GetMouseY() { return mouse.GetMouseY(); }      //マウスのY座標取得    
-	bool CheckHit() { return aabb.CheckHit(); }
+	//bool CheckHit() { return aabb.CheckHit(); }
 protected:
 	SceneMgr scenemgr;
 	Mouse mouse;
-	AABB  aabb;   //当たり判定
+	//AABB  aabb;   //当たり判定
 	BackGround  background;
 	
 

@@ -162,6 +162,8 @@ void Menu::Menu_Update() {
 
 //•`‰æ
 void Menu::Menu_Render() {
+	//int no = 100;
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), "Š‹à%d/n", no);
 	DrawGraph(0, 0, _bg, TRUE);
 	DrawGraph(0, 190, QGrHandle, TRUE);
 	DrawGraph(0, 338, MGrHandle, TRUE);
