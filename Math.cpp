@@ -1,11 +1,17 @@
 #include"Math.h"
 #include"Dxlib.h"
+#include"Game.h"
+#include"SceneMgr.h"
+#include"Quest.h"
+//#include
 
 
 
 //コンストラクタ
-Math::Math()
-
+Math::Math(Quest& quest,SceneMgr& scenemgr,Game& game):
+	_quest(quest)
+	,_scenemgr(scenemgr)
+	,_game(game)
 
 {
 	
@@ -29,6 +35,7 @@ void Math::Math_Update(int& no) {
 }
 
 
+//クエスト判定
 bool Math::Judgement() {
 	no = rand() % 100 + 1;
 	return   no <= 50;

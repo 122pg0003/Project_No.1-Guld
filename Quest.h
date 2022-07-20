@@ -19,7 +19,7 @@ public:
 protected:
 	Game& _game;
 	SceneMgr& _scenemgr;
-	Math math;
+	Math& _math;
 
 
 private:

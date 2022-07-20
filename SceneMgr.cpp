@@ -14,6 +14,7 @@ SceneMgr::SceneMgr(Game& game)
   ,trede(*this, _game)
   ,investment(*this, _game)
   ,nextmonth(*this, _game)
+  //,math(*this,_game)
   
   
 {
