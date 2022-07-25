@@ -1,4 +1,5 @@
 #pragma once
+
 //#include"Quest.h"
 
 class Quest;
@@ -7,18 +8,21 @@ class Game;
 
 class Math{
 public:
-	Math(Quest& quest,SceneMgr& scenemgr,Game& game);     //コンストラクタ
+	Math(/*Quest& quest, SceneMgr& scenemgr, Game& game*/ );     //コンストラクタ
 	~Math();   //デストラクタ
+	void Math_Updatea(bool isSuccess, int reward, int cost);
 	void Math_Update(int& no);
+	void Math_Render();
 	//int Money_Update() { return no; }
-  bool Judgement();
+    bool Judgement();
 
 protected:
-	SceneMgr& _scenemgr;
-	Game& _game;
-	Quest& _quest;
+//SceneMgr& _scenemgr;
+//	Game& _game;
+//	Quest& _quest;
 
 private:
-	//Quest quest;
+
+	//Quest& _quest;
 	int no;
 };

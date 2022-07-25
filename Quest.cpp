@@ -1,7 +1,7 @@
 #include"Quest.h"
 #include"DxLib.h"
-//#include"SceneMgr.h"
-//#include"Game.h"
+#include"SceneMgr.h"
+#include"Game.h"
 //#include"Math.h"
 
 
@@ -9,8 +9,9 @@
 //コンストラクタ
 Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	_scenemgr(scenemgr)
-	//, _game(game)
-	,_math(*this,_game,_scenemgr)
+	, _game(game)
+  //,math(*this)
+	//,_math(*this,_game,_scenemgr)
  {
 	//_cg = LoadGraph("images/Adventurer.jpg");
 	_cg1 = LoadGraph("images/クエスト画面2.png");
@@ -291,6 +292,10 @@ void Quest::Quest_Input() {
 			q = Q::Qクエスト判定;
 			if (math.Judgement()) {
 			//	GetMoney(i);
+		
+			}
+			else {
+
 			}
 		}
 		break;

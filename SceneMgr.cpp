@@ -1,6 +1,6 @@
 #include"SceneMgr.h"
 #include"DxLib.h"
-#include"Math.h"
+//#include"Math.h"
 
 
 
@@ -14,7 +14,7 @@ SceneMgr::SceneMgr(Game& game)
   ,trede(*this, _game)
   ,investment(*this, _game)
   ,nextmonth(*this, _game)
-  //,math(*this,_game)
+  //,math(*this)
   
   
 {
@@ -86,10 +86,10 @@ void SceneMgr::Scene_Update() {
 }
 
 void SceneMgr::Scene_Render() {
-  int no;
- math.Math_Update(no);
+  //int no;
+ math.Math_Render();
    //math.Math_Update();
-  DrawFormatString(1000, 0, GetColor(255, 255, 255), "èäéùã‡%d\n",no);
+  //DrawFormatString(1000, 0, GetColor(255, 255, 255), "èäéùã‡%d\n",no);
  // DrawGraph(0, 0, _bg, TRUE);
   switch (scene) {
   case eScene::Menu:

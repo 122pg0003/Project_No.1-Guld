@@ -2,19 +2,19 @@
 #include"Dxlib.h"
 #include"Game.h"
 #include"SceneMgr.h"
-#include"Quest.h"
+//#include"Quest.h"
 //#include
 
 
 
 //コンストラクタ
-Math::Math(Quest& quest,SceneMgr& scenemgr,Game& game):
-	_quest(quest)
-	,_scenemgr(scenemgr)
+Math::Math(/*Quest& quest,SceneMgr& scenemgr,Game& game*/)
+//	_quest(quest)
+	/*_scenemgr(scenemgr)
 	,_game(game)
-
+	,_quest(quest)*/
 {
-	
+
 	no = 0;
 }
 
@@ -23,33 +23,85 @@ Math::Math(Quest& quest,SceneMgr& scenemgr,Game& game):
 Math::~Math() {
 
 }
+int mymoney = 10000;
+int reward = 3000;
+int cost = 1000;
+
+///クエスト判定
+bool Math::Judgement() {
+	no = rand() % 100 + 1;
+	if (no <= 50) {
+int reward = 3000;
+int cost = 1000;
+
+		return  0;
+	}
+	else {
+		int cost = 1000;
+		return 1;
+	}
+}
 
 
-void Math::Math_Update(int& no) {
-	no = 0;
-	//int i;
-	//_quest.GetMoney(i);
-	no++;
-
+/// 報酬の計算
+void Math::Math_Updatea(bool isSuccess, int reward, int cost){
+  
+	// 成功したら報酬から雇った金額だけ差し引いて与える
+	if (Judgement())
+	{
+		 mymoney += (reward - cost);
+	
+	}
+	// 失敗したら雇った金額だけ差し引く
+	else
+	{
+		mymoney -= cost;
+	}
 	
 }
 
 
-//クエスト判定
-bool Math::Judgement() {
-	no = rand() % 100 + 1;
-	return   no <= 50;
-	//DrawFormatString(0, 0, GetColor(255, 255, 255), "ランダム数%d\n", no);
+void Math::Math_Update(int& no) {
 
 
-	/*no = rand() % 100 + 1;
-	if (no <= 50) {
-		graph->DrawC();
-	}
-	else {
-		graph->DrawF();
-	}
-	ScreenFlip();*/
+	Math_Updatea(Judgement(),reward,cost);
+	no = mymoney;
+	//int i;
+	//_quest.GetMoney(i);
+	
+
 
 }
+
+void Math::Math_Render() {
+	Math_Update(no);
+	DrawFormatString(1000, 0, GetColor(255, 255, 255), "所持金%d\n", no);
+
+}
+
+////クエスト判定
+//bool Math::Judgement() {
+//	no = rand() % 100 + 1;
+//	if (no <= 50) {
+//
+//		return  TRUE;
+//	}
+//	else {
+//
+//		return FALSE;
+//	}
+//	//return   no <= 50;
+//	//DrawFormatString(0, 0, GetColor(255, 255, 255), "ランダム数%d\n", no);
+//
+//
+//	/*no = rand() % 100 + 1;
+//	if (no <= 50) {
+//		graph->DrawC();
+//	}
+//	else {
+//		graph->DrawF();
+//	}
+//	ScreenFlip();*/
+//
+//}
 

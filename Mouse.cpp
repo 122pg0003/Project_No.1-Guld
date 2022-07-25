@@ -29,7 +29,7 @@ void Mouse::M() {
 
   // 座標文字列を描く
   DrawFormatString(1000, 50, StringCr, "座標Ｘ %d　　座標Ｙ %d", MouseX, MouseY);
-
+ // DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", Rot);
   // メッセージ処理
 
 
