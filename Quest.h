@@ -14,6 +14,8 @@ public:
 	void Quest_Update();                   //XV
 	void Quest_Render();                   //•`‰æ
 	//void GetMoney(int& i);
+	//int  _gmause;
+	//int _gTrg;
 	                
 
 protected:

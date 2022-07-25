@@ -24,20 +24,25 @@ Math::~Math() {
 
 }
 int mymoney = 10000;
-int reward = 3000;
-int cost = 1000;
+int reward = 10000;
+int cost = 5000;
 
 ///クエスト判定
 bool Math::Judgement() {
+	DrawFormatString(1200, 0, GetColor(255, 255, 255), "クエスト判定%d\n", no);
 	no = rand() % 100 + 1;
 	if (no <= 50) {
-int reward = 3000;
-int cost = 1000;
+
+		//クエスト失敗
+		mymoney -= cost;
+
 
 		return  0;
 	}
 	else {
-		int cost = 1000;
+
+		//クエスト成功
+		mymoney += (reward - cost);
 		return 1;
 	}
 }
@@ -47,7 +52,7 @@ int cost = 1000;
 void Math::Math_Updatea(bool isSuccess, int reward, int cost){
   
 	// 成功したら報酬から雇った金額だけ差し引いて与える
-	if (Judgement())
+	if (isSuccess)
 	{
 		 mymoney += (reward - cost);
 	
@@ -61,11 +66,11 @@ void Math::Math_Updatea(bool isSuccess, int reward, int cost){
 }
 
 
-void Math::Math_Update(int& no) {
+void Math::Math_Update() {
 
 
-	Math_Updatea(Judgement(),reward,cost);
-	no = mymoney;
+	//Math_Updatea(Judgement(), reward, cost);
+	money = mymoney;
 	//int i;
 	//_quest.GetMoney(i);
 	
@@ -74,8 +79,11 @@ void Math::Math_Update(int& no) {
 }
 
 void Math::Math_Render() {
-	Math_Update(no);
-	DrawFormatString(1000, 0, GetColor(255, 255, 255), "所持金%d\n", no);
+	DrawFormatString(1000, 0, GetColor(255, 255, 255), "所持金%d\n", money);
+	
+		Math_Update();
+	
+	DrawFormatString(1200, 0, GetColor(255, 255, 255), "クエスト判定%d\n", no);
 
 }
 

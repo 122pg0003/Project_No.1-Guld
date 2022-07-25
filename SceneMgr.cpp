@@ -87,7 +87,6 @@ void SceneMgr::Scene_Update() {
 
 void SceneMgr::Scene_Render() {
   //int no;
- math.Math_Render();
    //math.Math_Update();
   //DrawFormatString(1000, 0, GetColor(255, 255, 255), "èäéùã‡%d\n",no);
  // DrawGraph(0, 0, _bg, TRUE);
@@ -112,6 +111,7 @@ void SceneMgr::Scene_Render() {
       break;
 
   }
+ math.Math_Render();
 }
 
 void SceneMgr::SceneMgr_ChangeScene(eScene nextScene) {

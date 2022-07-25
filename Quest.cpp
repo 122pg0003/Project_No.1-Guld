@@ -167,7 +167,7 @@ void Quest::Quest_Input() {
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-			DrawGraph(0, 0, _cg1, TRUE);
+			//DrawGraph(0, 0, _cg1, TRUE);
 			scene = MENU_NUM::クエスト1;
 
 
@@ -284,6 +284,12 @@ void Quest::Quest_Input() {
 
 		GetMenuPosition(MENU_NUM::クエスト開始, max_x, min_x, max_y, min_y);
 
+		
+
+    //int Mause = _gmause;
+    //_gmause = GetMouseInput();
+    //_gTrg = (_gmause ^ Mause) & _gmause;	// キーのトリガ情報生成（押した瞬間しか反応しないキー情報）
+
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 			((mouse_x < max_x) &&
 				(mouse_x > min_x)) &&
@@ -293,6 +299,7 @@ void Quest::Quest_Input() {
 			if (math.Judgement()) {
 			//	GetMoney(i);
 		
+				WaitKey();
 			}
 			else {
 
@@ -315,7 +322,7 @@ void Quest::Quest_Update() {
 void Quest::Quest_Render() {
 	//int max_x, min_x, max_y, min_y;
 	//GetMenuPosition(MENU_NUM::クエスト1, max_x, min_x, max_y, min_y);
-	int no = 0;
+	//int no = 0;
 
 	switch (scene)
 	{
@@ -332,7 +339,7 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト1:
-		//DrawGraph(0, 0, _cg1, TRUE);
+		DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
 		DrawBox(760, 270, 1050, 330, GetColor(0, 255, 0), TRUE);
 		DrawBox(760, 330, 1050, 390, GetColor(0, 0, 255), TRUE);
@@ -388,20 +395,23 @@ void Quest::Quest_Render() {
 		int mouse_y = _game.GetMouseY();
 		GetMenuPosition(MENU_NUM::クエスト開始, max_x, min_x, max_y, min_y);
 
-		if(((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-				((mouse_x < max_x) &&
-					(mouse_x > min_x)) &&
-				(mouse_y < max_y) &&
-				(mouse_y > min_y)&&
-			(math.Judgement())){
+		if (math.Judgement()) {
 			DrawGraph(0, 0, clear, TRUE);
-			WaitKey();
-			//math.Math_Update(no); 
-				//no = 100;
-				//return;
-			
+		WaitKey();
 		}
-
+		//if(((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		//		((mouse_x < max_x) &&
+		//			(mouse_x > min_x)) &&
+		//		(mouse_y < max_y) &&
+		//		(mouse_y > min_y)&&
+		//	(math.Judgement())){
+		//	DrawGraph(0, 0, clear, TRUE);
+		//	WaitKey();
+		//	//math.Math_Update(no); 
+		//		//no = 100;
+		//		//return;
+		//	
+		//}
 		else {
 			DrawGraph(0, 0, failure, TRUE);
 			WaitKey();
