@@ -1,5 +1,5 @@
 #pragma once
-#include"Adventurer_Status.h"
+//#include"Adventurer_Status.h"
 
 //#include"Quest.h"
 

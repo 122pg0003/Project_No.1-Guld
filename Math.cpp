@@ -72,11 +72,11 @@ void Math::Math_Updatea(bool isSuccess, int reward, int cost){
 
 
 void Math::Math_Update() {
-	auto A = Adventurer_Status::Find(Key1);
-	auto B = Adventurer_Status::Find(Key2);
+	//auto A = Adventurer_Status::Find(Key1);
+//	auto B = Adventurer_Status::Find(Key2);
 
 
-	 A + B;
+	// A + B;
 
 	//Math_Updatea(Judgement(), reward, cost);
 	money = mymoney;
