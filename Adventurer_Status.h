@@ -1,13 +1,13 @@
 #pragma once
-#include	<unordered_map>
+#include<unordered_map>
 
 class Adventurer_Status {
 	Adventurer_Status();
 	~Adventurer_Status();
-	Find(std;;string);
+	 int Find(std::string status);
 private:
-	static std::unordered_map<std::string, int[2]> _status;
+	static std::unordered_map<std::string, int[3]> _status;
 
 };
 
-	map["Key1"] = 20,30,40;
+	//map["Key1"] = 20,30,40;
