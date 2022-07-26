@@ -32,8 +32,8 @@ void Game::Update() {
 //•`‰æ
 void Game::Render() {
 	ClearDrawScreen();
-	//background.BackGround_Render();
 	mouse.M();
 	scenemgr.Scene_Render();
 	ScreenFlip();
+	//background.BackGround_Render();
 }

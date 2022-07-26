@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Adventurer.cpp" />
+    <ClCompile Include="Adventurer_Status.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adventurer.h" />
+    <ClInclude Include="Adventurer_Status.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Guild.h" />
