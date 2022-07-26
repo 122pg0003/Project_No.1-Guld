@@ -2,6 +2,7 @@
 #include"SceneMgr.h"
 #include"Mouse.h"
 #include"BackGround.h"
+#include"Adventurer_Status.h"
 
 
 constexpr auto SCREEN_W = 1980;

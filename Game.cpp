@@ -1,6 +1,7 @@
 #include"Game.h"
 #include"DxLib.h"
 
+
 //コンストラクタ
 Game::Game() :
 	scenemgr(*this)
@@ -26,6 +27,7 @@ void Game::Input() {
 //更新
 void Game::Update() {
 	scenemgr.Scene_Update();
+	//auto A = Adventurer_Status::Find("Key1");
 
 }
 

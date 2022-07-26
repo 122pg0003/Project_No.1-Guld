@@ -1,7 +1,7 @@
 #include"DxLib.h"
 #include"Adventurer_Status.h"
 
-std::unordered_map<std::string, int[3]>    Adventurer_Status::_status;
+std::unordered_map<std::string, int>    Adventurer_Status::_status;
 
 Adventurer_Status::Adventurer_Status() {
 
@@ -9,8 +9,11 @@ Adventurer_Status::Adventurer_Status() {
 	//{ 20,30,40,"Key1" }
 	//};
 
-	_status["Key1"] = { 20,20,20 };
-	_status["Key2"] = { 20,20,20 };
+	//int neme [3] = {20,20,20};
+	//_status["Key1"] = neme;
+	_status["Key1"] = 20,20,20;
+	_status["Key2"] = 20, 20, 20;
+	//_status["Key2"] = { 20,20,20 };
 
 
 }
