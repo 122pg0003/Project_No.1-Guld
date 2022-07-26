@@ -25,11 +25,16 @@ Math::~Math() {
 }
 int mymoney = 10000;
 int reward = 10000;
-int cost = 5000;
+int cost =1000;
 
 ///クエスト判定
 bool Math::Judgement() {
 	DrawFormatString(1200, 0, GetColor(255, 255, 255), "クエスト判定%d\n", no);
+
+	
+
+
+
 	no = rand() % 100 + 1;
 	if (no <= 50) {
 
@@ -43,7 +48,7 @@ bool Math::Judgement() {
 
 		//クエスト成功
 		mymoney += (reward - cost);
-		return 1;
+		return  1;
 	}
 }
 

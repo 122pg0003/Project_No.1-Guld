@@ -239,6 +239,8 @@ void Quest::Quest_Input() {
 
 		//クエストの中身
 	case MENU_NUM::クエスト1:
+
+
 		GetMenuPosition(MENU_NUM::QInside, max_x, min_x, max_y, min_y);
 
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
@@ -295,15 +297,18 @@ void Quest::Quest_Input() {
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
+			//math.Judgement();
 			q = Q::Qクエスト判定;
-			if (math.Judgement()) {
-			//	GetMoney(i);
+			WaitKey();
+		//	q = Q::Qメニュー;
+			//if (math.Judgement()) {
+			////	GetMoney(i);
 		
-				WaitKey();
-			}
-			else {
+			//	WaitKey();
+			//}
+			//else {
 
-			}
+			//}
 		}
 		break;
 	}
@@ -379,6 +384,8 @@ void Quest::Quest_Render() {
 
 	switch (q)
 	{
+	case Q::Qメニュー:
+		break;
 	case Q::Q1:
 		DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
 		break;
@@ -390,14 +397,14 @@ void Quest::Quest_Render() {
 		break;
 	case Q::Qクエスト判定:
 
-		int max_x, min_x, max_y, min_y,no;
-		int mouse_x = _game.GetMouseX();
-		int mouse_y = _game.GetMouseY();
-		GetMenuPosition(MENU_NUM::クエスト開始, max_x, min_x, max_y, min_y);
-
-		if (math.Judgement()) {
+		//int max_x, min_x, max_y, min_y,no;
+		//int mouse_x = _game.GetMouseX();
+		//int mouse_y = _game.GetMouseY();
+		//GetMenuPosition(MENU_NUM::クエスト開始, max_x, min_x, max_y, min_y);
+		math.Judgement();
+		if (math.Judgement() == 1) {
 			DrawGraph(0, 0, clear, TRUE);
-		WaitKey();
+		//WaitKey();
 		}
 		//if(((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 		//		((mouse_x < max_x) &&
@@ -414,10 +421,10 @@ void Quest::Quest_Render() {
 		//}
 		else {
 			DrawGraph(0, 0, failure, TRUE);
-			WaitKey();
+			//WaitKey();
 		}
 		//DrawFormatString(0, 0, GetColor(255, 255, 255), "ランダム数%d\n", no);
-		
+		q = Q::Qメニュー;
 		break;
 
 	}

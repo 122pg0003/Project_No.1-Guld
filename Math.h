@@ -15,6 +15,7 @@ public:
 	void Math_Render();
 	//int Money_Update() { return no; }
     bool Judgement();
+	
 
 protected:
 //SceneMgr& _scenemgr;
