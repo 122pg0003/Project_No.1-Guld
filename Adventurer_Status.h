@@ -2,8 +2,12 @@
 #include	<unordered_map>
 
 class Adventurer_Status {
+	Adventurer_Status();
+	~Adventurer_Status();
+	Find(std;;string);
+private:
+	static std::unordered_map<std::string, int[2]> _status;
 
 };
-	static std::unordered_map<std::string, int> _status;
 
-	map["Key1"] = 20;
+	map["Key1"] = 20,30,40;
