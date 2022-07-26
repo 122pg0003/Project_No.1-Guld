@@ -6,7 +6,7 @@ class Adventurer_Status {
 	~Adventurer_Status();
 	Find(std::string);
 private:
-	static std::unordered_map<std::string, int[2]> _status;
+	static std::unordered_map<std::string, int[3]> _status;
 
 };
 
