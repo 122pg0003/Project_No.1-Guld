@@ -4,9 +4,10 @@
 class Adventurer_Status {
 	Adventurer_Status();
 	~Adventurer_Status();
-	Find(std::string);
+	int Find(std::string status);
 private:
 	static std::unordered_map<std::string, int[3]> _status;
+   	
 
 };
 

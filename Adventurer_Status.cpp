@@ -5,12 +5,13 @@ std::unordered_map<std::string, int[3]>    Adventurer_Status::_status;
 
 Adventurer_Status::Adventurer_Status() {
 
-	std::unordered_map<std::string, int[3]> _status = {
-	{ 20,30,40,"Key1" }
-	};
+	//std::unordered_map<std::string, int[3]> _status = {
+	//{ 20,30,40,"Key1" }
+	//};
 
-   //_status["Key1"] = 20, 30, 40;
-   //map["Key2"] = 20, 30, 40;
+	_status["Key1"] = { 20,20,20 };
+	_status["Key2"] = { 20,20,20 };
+
 
 }
 
