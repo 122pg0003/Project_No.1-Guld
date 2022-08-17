@@ -47,4 +47,5 @@ private:
 	int QGGrHandle;  //クエスト中
 	int NextGrHandle;  //次の月へ
 	int NextTurnGrHandle;
+	int _mouse, _mousetrg;
 };

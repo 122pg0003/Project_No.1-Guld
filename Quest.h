@@ -105,6 +105,7 @@ private:
 	int Q4GrHandle;
 	int Q5GrHandle;
 	int Q6GrHandle;
+	//int QGraHandle[6];
 	int _cg1;
 	int Q1;
 	int Q1_1;

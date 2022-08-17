@@ -18,12 +18,25 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	_cg = LoadGraph("images/Adventurer.jpg");
 	_cg1 = LoadGraph("images/クエスト画面2.png");
 	_BIGrHandle = LoadGraph("images/Base-Illust.png");
+
+
 	Q1GrHandle = LoadGraph("images/to-batu_s1.png");  //クエスト1スロット
 	Q2GrHandle = LoadGraph("images/bo-ei_s1.png");  //クエスト2スロット
 	Q3GrHandle = LoadGraph("images/saishu_s1.png");  //クエスト3スロット
 	Q4GrHandle = LoadGraph("images/others_s1.png");  //クエスト4スロット
 	Q5GrHandle = LoadGraph("images/to-batu_s1.png");  //クエスト5スロット
 	Q6GrHandle = LoadGraph("images/bo-ei_s1.png");  //クエスト6スロット
+
+
+	//QGraHandle[0] = LoadGraph("images/to-batu_s1.png");  //クエスト1スロット
+	//QGraHandle[1] = LoadGraph("images/bo-ei_s1.png");  //クエスト2スロット
+	//QGraHandle[2] =	LoadGraph("images/saishu_s1.png");  //クエスト3スロット
+	//QGraHandle[3] =	LoadGraph("images/others_s1.png");  //クエスト4スロット
+	//QGraHandle[4] =	LoadGraph("images/to-batu_s1.png");  //クエスト5スロット
+	//QGraHandle[5] =	LoadGraph("images/bo-ei_s1.png");  //クエスト6スロット
+	
+
+
 	Q1 = LoadGraph("images/ch_001.mini.2.png");  //冒険者1
 	Q1_1 = LoadGraph("images/ch_001.mini1.png");
 	Q1Start = LoadGraph("images/出撃ボタン.png");  //出撃ボタン
@@ -283,7 +296,7 @@ void Quest::Quest_Input() {
 	case Quest::MENU_NUM::メニュー:
 		//Random_Quest();
 		//Menu_Back_Button();
-		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		if ((_mousetrg != 0) &&
 			((mouse_x < max_x) &&
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
@@ -292,7 +305,7 @@ void Quest::Quest_Input() {
 			scene = MENU_NUM::メニュー;
 			q = Q::Q初期値;
 			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-			WaitKey();
+			
 		}
 
 		//クエスト1
@@ -381,7 +394,7 @@ void Quest::Quest_Input() {
 		//Back_Button();
 
 
-		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+		if ((_mousetrg != 0) &&
 			((mouse_x < max_x) &&
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
@@ -390,7 +403,7 @@ void Quest::Quest_Input() {
 			scene = MENU_NUM::メニュー;
 			q = Q::Q初期値;
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-			WaitKey();
+			
 		}
 
 
@@ -520,7 +533,7 @@ void Quest::Quest_Input() {
 			//Back_Button();
 
 
-			if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+			if ((_mousetrg != 0) &&
 				((mouse_x < max_x) &&
 					(mouse_x > min_x)) &&
 				(mouse_y < max_y) &&
@@ -529,7 +542,7 @@ void Quest::Quest_Input() {
 				scene = MENU_NUM::メニュー;
 				q = Q::Q初期値;
 				//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-				WaitKey();
+			
 			}
 
 
@@ -660,7 +673,7 @@ void Quest::Quest_Input() {
 				//Back_Button();
 
 
-				if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+				if ((_mousetrg != 0) &&
 					((mouse_x < max_x) &&
 						(mouse_x > min_x)) &&
 					(mouse_y < max_y) &&
@@ -669,7 +682,7 @@ void Quest::Quest_Input() {
 					scene = MENU_NUM::メニュー;
 					q = Q::Q初期値;
 					//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-					WaitKey();
+		
 				}
 
 
@@ -799,7 +812,7 @@ void Quest::Quest_Input() {
 					//Back_Button();
 
 
-					if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+					if ((_mousetrg != 0) &&
 						((mouse_x < max_x) &&
 							(mouse_x > min_x)) &&
 						(mouse_y < max_y) &&
@@ -808,7 +821,7 @@ void Quest::Quest_Input() {
 						scene = MENU_NUM::メニュー;
 						q = Q::Q初期値;
 						//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-						WaitKey();
+					
 					}
 
 
@@ -938,7 +951,7 @@ void Quest::Quest_Input() {
 						//Back_Button();
 
 
-						if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+						if ((_mousetrg != 0) &&
 							((mouse_x < max_x) &&
 								(mouse_x > min_x)) &&
 							(mouse_y < max_y) &&
@@ -947,7 +960,7 @@ void Quest::Quest_Input() {
 							scene = MENU_NUM::メニュー;
 							q = Q::Q初期値;
 							//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-							WaitKey();
+							
 						}
 
 
@@ -1077,7 +1090,7 @@ void Quest::Quest_Input() {
 							//Back_Button();
 
 
-							if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+							if ((_mousetrg != 0) &&
 								((mouse_x < max_x) &&
 									(mouse_x > min_x)) &&
 								(mouse_y < max_y) &&
@@ -1086,7 +1099,7 @@ void Quest::Quest_Input() {
 								scene = MENU_NUM::メニュー;
 								q = Q::Q初期値;
 								//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-								WaitKey();
+							
 							}
 
 
@@ -1229,10 +1242,11 @@ void Quest::Quest_Render() {
 	//int max_x, min_x, max_y, min_y;
 	//GetMenuPosition(MENU_NUM::クエスト1, max_x, min_x, max_y, min_y);
 	//int no = 0;
+		//int i = GetRand(6);
 	switch (scene)
 	{
 	case MENU_NUM::メニュー:
-	
+	  
 		//DrawGraph(0, 0, _bg, TRUE);//常に背景が表示されるようにしたい
 
 		DrawGraph(135, 185, menu, TRUE);
@@ -1240,10 +1254,19 @@ void Quest::Quest_Render() {
 		//DrawBox(1800, 45, 1850, 90, GetColor(255, 0, 0), TRUE);  //戻るボタン
 		DrawGraph(396, 270, Q1GrHandle, TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
 		DrawGraph(830, 270, Q2GrHandle, TRUE);  //クエストスロット2
-		DrawGraph(1264, 270, Q3GrHandle, TRUE);	//クエストスロット3
+		DrawGraph(1264,270, Q3GrHandle, TRUE);	//クエストスロット3
 		DrawGraph(396, 640, Q4GrHandle, TRUE);	//クエストスロット4
 		DrawGraph(830, 640, Q5GrHandle, TRUE);	//クエストスロット5
-		DrawGraph(1264, 640, Q6GrHandle, TRUE);	//クエストスロット6
+		DrawGraph(1264,640, Q6GrHandle, TRUE);	//クエストスロット6
+
+		//DrawGraph(396, 270, QGraHandle[i], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
+		//DrawGraph(830, 270, QGraHandle[i], TRUE);  //クエストスロット2
+		//DrawGraph(1264,270, QGraHandle[i], TRUE);	//クエストスロット3
+		//DrawGraph(396, 640, QGraHandle[i], TRUE);	//クエストスロット4
+		//DrawGraph(830, 640, QGraHandle[i], TRUE);	//クエストスロット5
+		//DrawGraph(1264,640, QGraHandle[i], TRUE);	//クエストスロット6
+
+
 		DrawGraph(1750, 20, Back, TRUE);
 		break;
 

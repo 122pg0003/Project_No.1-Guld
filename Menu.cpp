@@ -102,7 +102,12 @@ void Menu::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_
 
 //入力
 void Menu::Menu_Input() {
+	int keyold = _mouse;
+	_mouse = (GetMouseInput() & MOUSE_INPUT_LEFT);
+	_mousetrg = (_mouse ^ keyold) & _mouse;
 	int max_x, min_x, max_y, min_y;
+	int mouse_x = _game.GetMouseX();
+	int mouse_y = _game.GetMouseY();
 	
 
 	GetMenuPosition(MENU_NUM::クエスト, max_x, min_x, max_y, min_y);
@@ -172,7 +177,7 @@ void Menu::Menu_Input() {
 	}
 	GetMenuPosition(MENU_NUM::次のターン, max_x, min_x, max_y, min_y);
 
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
+	if ((_mousetrg != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
