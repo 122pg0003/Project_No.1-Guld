@@ -66,8 +66,8 @@ void Guild::Guild_Input() {
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
-
-		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
+		math.Guild_B();
+		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 
 	}
 	

@@ -65,8 +65,9 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	//random = 0;
 
 
-	questData1.SetQuestParam(5);
-	questData2.SetQuestParam(0);
+	//questData1.SetQuestParam(5);
+	//questData2.SetQuestParam(0);
+
 }
 
 //デストラクタ
@@ -74,19 +75,31 @@ Quest::~Quest() {
 
 }
 
+
+
 void QuestData::SetQuestParam(int questIndex) 
 {
-	ClearTotalAttack = QuestClearAttacks[questIndex];  //クエストの達成に必要なパーティーのAttackの総合値
-	ClearTotalDefence = QuestClearDefence[questIndex];  //クエストの達成に必要なパーティーのDefenceの総合値
-	ClearTotalSkill = QuestClearSkill[questIndex];  //クエストの達成に必要なパーティーのSkillの総合値
-	ClearTotalKnow = QuestClearKnow[questIndex];  //クエストの達成に必要なパーティーのKnowの総合値
+	//int questIndex;
+	questcontent.QuestEtc(questIndex, ClearTotalAttack,
+		 ClearTotalDefence,
+		 ClearTotalSkill,
+		 ClearTotalKnow);
+	 //ClearTotalAttack = QuestClearAttacks[questIndex];  //クエストの達成に必要なパーティーのAttackの総合値
+	 //ClearTotalDefence = QuestClearDefence[questIndex];  //クエストの達成に必要なパーティーのDefenceの総合値
+	 //ClearTotalSkill = QuestClearSkill[questIndex];  //クエストの達成に必要なパーティーのSkillの総合値
+	 //ClearTotalKnow = QuestClearKnow[questIndex];  //クエストの達成に必要なパーティーのKnowの総合値
+
 }
 
+
 void Quest::Quest_Result() {  //クエストの結果を表示する
-	
-	
+	questData1.SetQuestParam(random);
 	if (End == TRUE) {
-		math.Judgement(questData1.ClearTotalAttack, questData1.ClearTotalDefence, questData1.ClearTotalSkill, questData1.ClearTotalKnow, TotalAttack, TotalDefence, TotalSkill, TotalKnow);
+		math.Judgement(questData1.ClearTotalAttack,
+			questData1.ClearTotalDefence,
+			questData1.ClearTotalSkill,
+			questData1.ClearTotalKnow,
+			TotalAttack, TotalDefence, TotalSkill, TotalKnow);
 		if (math._questresult == 1) {
 			ClearDrawScreen();
 			DrawGraph(600, 390, clear, TRUE);
@@ -319,6 +332,7 @@ void Quest::Quest_Input() {
 			//DrawGraph(0, 0, _cg1, TRUE);
 		    //scene;
 			Random_Quest();
+			questData1.SetQuestParam(random);
 			//q = Q::Qメニュー;
 			//scene = MENU_NUM::クエスト1;
 
@@ -335,6 +349,7 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			Random_Quest();
+			questData1.SetQuestParam(random);
 			//scene = MENU_NUM::クエスト2;
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Adventurer);
 		}
@@ -348,6 +363,7 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			Random_Quest();
+			questData1.SetQuestParam(random);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Guild);
 		}
 
@@ -360,6 +376,7 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			Random_Quest();
+			questData1.SetQuestParam(random);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Trede);
 		}
 
@@ -372,6 +389,7 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			Random_Quest();
+			questData1.SetQuestParam(random);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Investment);
 		}
 
@@ -384,6 +402,7 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			Random_Quest();
+			questData1.SetQuestParam(random);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::NextMonth);
 		}
 		break;
@@ -1281,6 +1300,11 @@ void Quest::Quest_Render() {
 		//DrawBox(760, 330, 1050, 390, GetColor(0, 0, 255), TRUE);
 		//DrawBox(1500, 900, 1700, 1000, GetColor(0, 0, 255), TRUE); //クエスト出撃
 		DrawString(100, 100, "クエスト1", TRUE);
+		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
+		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
+		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+
 		break;
 
 	case MENU_NUM::クエスト2:
@@ -1374,12 +1398,19 @@ void Quest::Quest_Render() {
 	}
 	if (q != Q::Q初期値)
 	{
+
+
+
 		int FontHandle = CreateFontToHandle(NULL, 40, 3);
 		DrawFormatStringToHandle(880, 680, GetColor(0, 0, 0), FontHandle, "攻%d", TotalAttack);
 		DrawFormatStringToHandle(880, 760, GetColor(0, 0, 0), FontHandle, "守%d", TotalDefence);
 		DrawFormatStringToHandle(880, 840, GetColor(0, 0, 0), FontHandle, "技%d", TotalSkill);
 		DrawFormatStringToHandle(880, 920, GetColor(0, 0, 0), FontHandle, "知%d", TotalKnow);
+		DrawFormatString(1000, 680, GetColor(0, 0, 0), "成功率%d", math.SuccessRate);
 		DeleteFontToHandle(FontHandle);
+
+		/*if (TotalAttack >= questData1.ClearTotalAttack)
+			math.SuccessRate += 25;*/
 	}
 
 	switch (q)

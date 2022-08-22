@@ -24,14 +24,8 @@ int mymoney = 10000;
 int reward = 10000;
 int cost =1000;
 
-///クエスト判定
-bool Math::Judgement(int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow) {
-	//成功率をパーティーのトータルステータスで決めている
-	//ClearTotalAttack = 
-
-
-
-
+void Math::Success(int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow) {
+	
 	if (TotalAttack >= ClearTotalAttack) {
 		SuccessRate += AddSuccessrate;
 	}
@@ -44,9 +38,34 @@ bool Math::Judgement(int ClearTotalAttack, int ClearTotalDefence, int ClearTotal
 		SuccessRate += AddSuccessrate;
 	}
 
-	if (TotalKnow >= ClearTotalKnow) {  
+	if (TotalKnow >= ClearTotalKnow) {
 		SuccessRate += AddSuccessrate;
 	}
+
+}
+///クエスト判定
+bool Math::Judgement(int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow) {
+	//成功率をパーティーのトータルステータスで決めている
+	//ClearTotalAttack = 
+	Success( ClearTotalAttack,  ClearTotalDefence,  ClearTotalSkill,  ClearTotalKnow,  TotalAttack,  TotalDefence,  TotalSkill,  TotalKnow);
+
+
+
+	//if (TotalAttack >= ClearTotalAttack) {
+	//	SuccessRate += AddSuccessrate;
+	//}
+	//
+	//if (TotalDefence >= ClearTotalDefence) {
+	//	SuccessRate += AddSuccessrate;
+	//}
+	//
+	//if (TotalSkill >= ClearTotalSkill) {
+	//	SuccessRate += AddSuccessrate;
+	//}
+	//
+	//if (TotalKnow >= ClearTotalKnow) {  
+	//	SuccessRate += AddSuccessrate;
+	//}
 
 	no = rand() %  SuccessRate + 45 ;
 	//no = rand() % 100 + 1;
@@ -72,6 +91,10 @@ bool Math::Judgement(int ClearTotalAttack, int ClearTotalDefence, int ClearTotal
 
 void Math::Math_Update() {
 
+}
+
+void Math::Guild_B() {
+	mymoney -= 1000;
 }
 
 void Math::Math_Render() {

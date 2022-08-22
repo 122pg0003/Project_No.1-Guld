@@ -1,4 +1,5 @@
 #pragma once
+#include"Math.h"
 
 class SceneMgr;
 class Game;
@@ -14,6 +15,7 @@ public:
 protected:
 	Game& _game;
 	SceneMgr& _scenemgr;
+	Math math;
 
 private:
 	enum class MENU_NUM {

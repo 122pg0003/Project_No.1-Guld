@@ -10,6 +10,8 @@ class Game;
 
 class QuestData {
 public:
+	
+
 	int ClearTotalAttack;  //クエストの達成に必要なパーティーのAttackの総合値
 	int ClearTotalDefence;  //クエストの達成に必要なパーティーのDefenceの総合値
 	int ClearTotalSkill;  //クエストの達成に必要なパーティーのSkillの総合値
@@ -21,7 +23,9 @@ public:
 	const int Reward[12] = { 10,10,25,20,10,10,30,20,20,30,20,50 };  //クエストごとに得られる報酬
 	const int Fame[12] = { 10,10,10,10,10,10,10,10,10,10,10,50 };  //クエストごとに得られる名声値
 
+
 	void SetQuestParam(int questIndex);
+	QuestContent questcontent;
 };
 
 class Quest {
@@ -58,7 +62,7 @@ protected:
 	QuestData questdata3;
 	Adventurer_Status AdventurerStatus;
 	TurnNumber turnnumber;
-	QuestContent questcontent;
+	//QuestContent questcontent;
 
 private:
 	void Menu_Back_Button();                    //メニューに戻る

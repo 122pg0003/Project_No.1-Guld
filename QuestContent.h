@@ -26,7 +26,11 @@ public:
 	const int QuestNumber[12] = {0,1,2,3,4,5,6,7,8,9,10,11 };  //クエストごとに割り振られる番号
 	int no;
 	int QuestIconGrHandle[12] = { -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 };
-	void QuestEtc();
+	void QuestEtc(int questIndex,
+		int& ClearTotalAttack,
+		int& ClearTotalDefence,
+		int& ClearTotalSkill,
+		int& ClearTotalKnow );
   
 	const int QuestClearAttacks1[9] = { 100,50,50,0,150,50,50,150,50 };  //★1クエストごとのクリアに必要なAttack
 	const int QuestClearDefence1[9] = { 50,50,50,0,50,50,150,100,100 };  //★1クエストごとのクリアに必要なDefence

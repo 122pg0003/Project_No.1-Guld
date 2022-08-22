@@ -22,9 +22,14 @@ QuestContent::~QuestContent() {
 
 }
 
-void QuestContent::QuestEtc() {
-	no = QuestNo;
-	no = rand() % 12;
+void QuestContent::QuestEtc(int questIndex,
+	int& ClearTotalAttack,
+	int& ClearTotalDefence,
+	int& ClearTotalSkill,
+	int& ClearTotalKnow
+	) {
+	 QuestNo = questIndex;
+	//no = rand() % 12;
 
 	if (QuestNo == 0) {
 		ClearTotalAttack = QuestClearAttacks[0];
