@@ -1,7 +1,7 @@
 #pragma once
 #include "TurnNumber.h"
 #include "QuestContent.h"
-#include "Quest.h"
+#include"Quest.h"
 class TurnNumber;
 class SceneMgr;
 class Game;
@@ -17,7 +17,7 @@ public:
 
 protected:
 	Game& _game;
-	//Quest quest;
+ //Quest quest;
 	//QuestContent questcontent;
 private:
 

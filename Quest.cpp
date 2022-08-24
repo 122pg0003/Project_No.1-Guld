@@ -20,20 +20,20 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	_BIGrHandle = LoadGraph("images/Base-Illust.png");
 
 
-	Q1GrHandle = LoadGraph("images/to-batu_s1.png");  //クエスト1スロット
-	Q2GrHandle = LoadGraph("images/bo-ei_s1.png");  //クエスト2スロット
-	Q3GrHandle = LoadGraph("images/saishu_s1.png");  //クエスト3スロット
-	Q4GrHandle = LoadGraph("images/others_s1.png");  //クエスト4スロット
-	Q5GrHandle = LoadGraph("images/to-batu_s1.png");  //クエスト5スロット
-	Q6GrHandle = LoadGraph("images/bo-ei_s1.png");  //クエスト6スロット
+	//Q1GrHandle = LoadGraph("images/to-batu_s1.png");  //クエスト1スロット
+	//Q2GrHandle = LoadGraph("images/bo-ei_s1.png");  //クエスト2スロット
+	//Q3GrHandle = LoadGraph("images/saishu_s1.png");  //クエスト3スロット
+	//Q4GrHandle = LoadGraph("images/others_s1.png");  //クエスト4スロット
+	//Q5GrHandle = LoadGraph("images/to-batu_s1.png");  //クエスト5スロット
+	//Q6GrHandle = LoadGraph("images/bo-ei_s1.png");  //クエスト6スロット
 
 
-	//QGraHandle[0] = LoadGraph("images/to-batu_s1.png");  //クエスト1スロット
-	//QGraHandle[1] = LoadGraph("images/bo-ei_s1.png");  //クエスト2スロット
-	//QGraHandle[2] =	LoadGraph("images/saishu_s1.png");  //クエスト3スロット
-	//QGraHandle[3] =	LoadGraph("images/others_s1.png");  //クエスト4スロット
-	//QGraHandle[4] =	LoadGraph("images/to-batu_s1.png");  //クエスト5スロット
-	//QGraHandle[5] =	LoadGraph("images/bo-ei_s1.png");  //クエスト6スロット
+	QGrHandle[0] = LoadGraph("images/to-batu_s1.png");  //クエスト1スロット　討伐
+	QGrHandle[1] = LoadGraph("images/bo-ei_s1.png");  //クエスト2スロット　　防衛
+	QGrHandle[2] =	LoadGraph("images/saishu_s1.png");  //クエスト3スロット　採取
+	QGrHandle[3] =	LoadGraph("images/others_s1.png");  //クエスト4スロット　他
+	QGrHandle[4] =	LoadGraph("images/to-batu_s1.png");  //クエスト5スロット 討伐
+	QGrHandle[5] =	LoadGraph("images/bo-ei_s1.png");  //クエスト6スロット   防衛
 	
 
 
@@ -57,6 +57,7 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	TotalSkill = 0;
 	TotalKnow = 0;
 	AdventurerGood = 0;
+	a = -1;
 
 
 	Click1 = false;
@@ -85,29 +86,47 @@ void QuestData::SetQuestParam(int questIndex)
 		 ClearTotalDefence,
 		 ClearTotalSkill,
 		 ClearTotalKnow);
-	 //ClearTotalAttack = QuestClearAttacks[questIndex];  //クエストの達成に必要なパーティーのAttackの総合値
-	 //ClearTotalDefence = QuestClearDefence[questIndex];  //クエストの達成に必要なパーティーのDefenceの総合値
-	 //ClearTotalSkill = QuestClearSkill[questIndex];  //クエストの達成に必要なパーティーのSkillの総合値
-	 //ClearTotalKnow = QuestClearKnow[questIndex];  //クエストの達成に必要なパーティーのKnowの総合値
 
 }
 
-
+///ステータスの総合値の追加
 void Quest::Add_Quest_Adventurer_Status(int AdventurerNo) {
-	TotalAttack +=   AdventurerStatus.Attack[AdventurerNo];
-	TotalDefence += AdventurerStatus.Defence[AdventurerNo];
-	TotalSkill +=     AdventurerStatus.Skill[AdventurerNo];
-	TotalKnow +=       AdventurerStatus.Know[AdventurerNo];
 	AdventurerGood +=  AdventurerStatus.good[AdventurerNo];
+	if (scene == Quest::MENU_NUM::クエスト1 && AdventurerNo == 1) {
+		TotalAttack += AdventurerStatus.Attack[AdventurerNo] * 2;
+		TotalDefence += AdventurerStatus.Defence[AdventurerNo] * 2;
+		TotalSkill += AdventurerStatus.Skill[AdventurerNo] * 2;
+		TotalKnow += AdventurerStatus.Know[AdventurerNo] * 2;
+	}
+	else {
+		TotalAttack += AdventurerStatus.Attack[AdventurerNo];
+		TotalDefence += AdventurerStatus.Defence[AdventurerNo];
+		TotalSkill += AdventurerStatus.Skill[AdventurerNo];
+		TotalKnow += AdventurerStatus.Know[AdventurerNo];
+	}
 }
 
+
+///ステータスの総合値の削除
 void Quest::Delete_Quest_Adventurer_Status(int AdventurerNo) {
-	TotalAttack -=   AdventurerStatus.Attack[AdventurerNo];
-	TotalDefence -= AdventurerStatus.Defence[AdventurerNo];
-	TotalSkill -=     AdventurerStatus.Skill[AdventurerNo];
-	TotalKnow -=       AdventurerStatus.Know[AdventurerNo];
-	AdventurerGood -=  AdventurerStatus.good[AdventurerNo];
+	if (scene == Quest::MENU_NUM::クエスト1 && AdventurerNo == 1) {
+		TotalAttack -= AdventurerStatus.Attack[AdventurerNo] * 2;
+		TotalDefence -= AdventurerStatus.Defence[AdventurerNo] * 2;
+		TotalSkill -= AdventurerStatus.Skill[AdventurerNo] * 2;
+		TotalKnow -= AdventurerStatus.Know[AdventurerNo] * 2;
+		AdventurerGood -= AdventurerStatus.good[AdventurerNo];
+	}
+	else {
+		TotalAttack -= AdventurerStatus.Attack[AdventurerNo];
+		TotalDefence -= AdventurerStatus.Defence[AdventurerNo];
+		TotalSkill -= AdventurerStatus.Skill[AdventurerNo];
+		TotalKnow -= AdventurerStatus.Know[AdventurerNo];
+		AdventurerGood -= AdventurerStatus.good[AdventurerNo];
+	}
 }
+
+
+
 
 
 void Quest::Quest_Result() {  //クエストの結果を表示する
@@ -240,61 +259,47 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 
 ///クエストのランダム出現
 void Quest::Random_Quest() {
-	random = GetRand(2) + 1;
-	 scene = static_cast<MENU_NUM>(random);
+		//random = 1;
+		//scene = static_cast<MENU_NUM>(random);
+	if (a == -1) {
+		random =  GetRand(4) + 1;
+		i = random;					 
+		random1 = GetRand(4) + 1;
+		b = random1;				 
+		random2 = GetRand(4) + 1;
+		c = random2;				 
+		random3 = GetRand(4) + 1;
+		d = random3;				 
+		random4 = GetRand(4) + 1;
+		e = random4;				 
+		random5 = GetRand(4) + 1;
+		g = random5;
 
-	//GetRand(Quest::MENU_NUM);
-
-
-}
-
-
-
-///メニューに戻る関数
-void Quest::Menu_Back_Button() {
-	int keyold = _mouse;
-	_mouse = (GetMouseInput() & MOUSE_INPUT_LEFT);
-	_mousetrg = (_mouse ^ keyold) & _mouse;
-	int max_x, min_x, max_y, min_y;
-	int mouse_x = _game.GetMouseX();
-	int mouse_y = _game.GetMouseY();
-	GetMenuPosition(MENU_NUM::メニュー, max_x, min_x, max_y, min_y);
-
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((mouse_x < max_x) &&
-			(mouse_x > min_x)) &&
-		(mouse_y < max_y) &&
-		(mouse_y > min_y)) {
-
-		//scene = MENU_NUM::メニュー;
-		q = Q::Q初期値;
-		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 		
+		a = 0;
 	}
+	//random = static_cast<int>(quest_graph);
+	//quest_graph = static_cast<Quest_Graph>(random);
+	  //a = static_cast<int>(quest_graph);
+	 
 }
 
-///一つ前に戻る
-void Quest::Back_Button() {
-	int keyold = _mouse;
-	_mouse = (GetMouseInput() & MOUSE_INPUT_LEFT);
-	_mousetrg = (_mouse ^ keyold) & _mouse;
-	int max_x, min_x, max_y, min_y;
-	int mouse_x = _game.GetMouseX();
-	int mouse_y = _game.GetMouseY();
-	GetMenuPosition(MENU_NUM::メニュー, max_x, min_x, max_y, min_y);
+void Quest::RANDOM_Q(int random ,
+	int random1,
+	int random2,
+	int random3,
+	int random4,
+	int random5) {
+	scene = static_cast<MENU_NUM>(random);
+	scene = static_cast<MENU_NUM>(random1);
+	scene = static_cast<MENU_NUM>(random2);
+	scene = static_cast<MENU_NUM>(random3);
+	scene = static_cast<MENU_NUM>(random4);
+	scene = static_cast<MENU_NUM>(random5);
 
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((mouse_x < max_x) &&
-			(mouse_x > min_x)) &&
-		(mouse_y < max_y) &&
-		(mouse_y > min_y)) {
-
-		scene = MENU_NUM::メニュー;
-		q = Q::Q初期値;
-		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		WaitKey();
-	}
 }
+
+
 
 //入力
 void Quest::Quest_Input() {
@@ -304,35 +309,32 @@ void Quest::Quest_Input() {
 	int max_x, min_x, max_y, min_y;
 	int mouse_x = _game.GetMouseX();
 	int mouse_y = _game.GetMouseY();
-	//auto trg = key_trg.second;
 	GetMenuPosition(MENU_NUM::メニュー, max_x, min_x, max_y, min_y);
-	//GetMenuPosition(MENU_NUM::QInside, max_x, min_x, max_y, min_y);
-
-	//メニューボタン
-	/*if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((mouse_x < max_x) &&
-			(mouse_x > min_x)) &&
-		(mouse_y < max_y) &&
-		(mouse_y > min_y)) {
-
-		scene = MENU_NUM::メニュー;
-		q = Q::Q初期値;
-		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		WaitKey();
-	}*/
-
+		//a = -1;
+	
+	switch (q)
+	{
+	
+	case Quest::Q::Q初期値:
+		TotalAttack = 0;
+		TotalDefence = 0;
+		TotalSkill = 0;
+		TotalKnow = 0;
+		AdventurerGood = 0;
+		break;
+	
+	}
 	switch (scene)
 	{
 
 	case Quest::MENU_NUM::メニュー:
-		//Random_Quest();
-		//Menu_Back_Button();
+	Random_Quest();
 		if ((_mousetrg != 0) &&
 			((mouse_x < max_x) &&
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-
+			a = -1;
 			scene = MENU_NUM::メニュー;
 			q = Q::Q初期値;
 			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
@@ -341,19 +343,17 @@ void Quest::Quest_Input() {
 
 		//クエスト1
 		GetMenuPosition(MENU_NUM::クエスト1, max_x, min_x, max_y, min_y);
-		//Random_Quest();
+		
 		if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 			((mouse_x < max_x) &&
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-			//DrawGraph(0, 0, _cg1, TRUE);
-		    //scene;
-			Random_Quest();
+			RANDOM_Q(random,random1,random2,random3,random4,random5);
+			scene = static_cast<MENU_NUM>(random);
 			questData1.SetQuestParam(random);
-			//q = Q::Qメニュー;
-			//scene = MENU_NUM::クエスト1;
-
+			//Random_Quest();
+			
 
 
 		}
@@ -366,8 +366,10 @@ void Quest::Quest_Input() {
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-			Random_Quest();
-			questData1.SetQuestParam(random);
+			//Random_Quest();
+			RANDOM_Q(random, random1, random2, random3, random4, random5);
+			scene = static_cast<MENU_NUM>(random1);
+			questData1.SetQuestParam(random1);
 			//scene = MENU_NUM::クエスト2;
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Adventurer);
 		}
@@ -380,8 +382,9 @@ void Quest::Quest_Input() {
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-			Random_Quest();
-			questData1.SetQuestParam(random);
+			RANDOM_Q(random, random1, random2, random3, random4, random5);
+			scene = static_cast<MENU_NUM>(random2);
+			questData1.SetQuestParam(random2);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Guild);
 		}
 
@@ -393,8 +396,9 @@ void Quest::Quest_Input() {
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-			Random_Quest();
-			questData1.SetQuestParam(random);
+			RANDOM_Q(random, random1, random2, random3, random4, random5);
+			scene = static_cast<MENU_NUM>(random3);
+			questData1.SetQuestParam(random3);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Trede);
 		}
 
@@ -406,8 +410,9 @@ void Quest::Quest_Input() {
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-			Random_Quest();
-			questData1.SetQuestParam(random);
+			RANDOM_Q(random, random1, random2, random3, random4, random5);
+			scene = static_cast<MENU_NUM>(random4);
+			questData1.SetQuestParam(random4);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Investment);
 		}
 
@@ -419,8 +424,9 @@ void Quest::Quest_Input() {
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-			Random_Quest();
-			questData1.SetQuestParam(random);
+			RANDOM_Q(random, random1, random2, random3, random4, random5);
+			scene = static_cast<MENU_NUM>(random5);
+			questData1.SetQuestParam(random5);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::NextMonth);
 		}
 		break;
@@ -459,20 +465,12 @@ void Quest::Quest_Input() {
 			if (Click1 == false) {
 				Click1 = true;
 
-				TotalAttack += AdventurerStatus.Attack[0];
-				TotalDefence += AdventurerStatus.Defence[0];
-				TotalSkill += AdventurerStatus.Skill[0];
-				TotalKnow += AdventurerStatus.Know[0];
-				//TotalCost += AdventurerCost[0];
+				Add_Quest_Adventurer_Status(0);
 			}
 
 			else if (Click1 == true) {
 				Click1 = false;
-				TotalAttack -= AdventurerStatus.Attack[0];
-				TotalDefence -= AdventurerStatus.Defence[0];
-				TotalSkill -= AdventurerStatus.Skill[0];
-				TotalKnow -= AdventurerStatus.Know[0];
-				//TotalCost -= AdventurerCost[0];
+				Delete_Quest_Adventurer_Status(0);
 			}
 			//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
 		}
@@ -492,21 +490,13 @@ void Quest::Quest_Input() {
 			if (Click2 == false) {
 				Click2 = true;
 				Add_Quest_Adventurer_Status(1);
-				//TotalAttack += AdventurerStatus.Attack[1];
-				//TotalDefence += AdventurerStatus.Defence[1];
-				//TotalSkill += AdventurerStatus.Skill[1];
-				//TotalKnow += AdventurerStatus.Know[1];
-				//AdventurerGood += AdventurerStatus.good[1];
+				
 			}
 
 			else if (Click2 == true) {
 				Click2 = false;
-				Delete_Quest_Adventurer_Status(1);
-				//TotalAttack -= AdventurerStatus.Attack[1];
-				//TotalDefence -= AdventurerStatus.Defence[1];
-				//TotalSkill -= AdventurerStatus.Skill[1];
-				//TotalKnow -= AdventurerStatus.Know[1];
-				//AdventurerGood -= AdventurerStatus.good[1];
+					Delete_Quest_Adventurer_Status(1);
+				
 			}
 
 		}
@@ -524,18 +514,12 @@ void Quest::Quest_Input() {
 			//星2冒険者３
 			if (Click3 == false) {
 				Click3 = true;
-				TotalAttack += AdventurerStatus.Attack[2];
-				TotalDefence += AdventurerStatus.Defence[2];
-				TotalSkill += AdventurerStatus.Skill[2];
-				TotalKnow += AdventurerStatus.Know[2];
+				Add_Quest_Adventurer_Status(2);
 			}
 
 			else if (Click3 == true) {
 				Click3 = false;
-				TotalAttack -= AdventurerStatus.Attack[2];
-				TotalDefence -= AdventurerStatus.Defence[2];
-				TotalSkill -= AdventurerStatus.Skill[2];
-				TotalKnow -= AdventurerStatus.Know[2];
+				Delete_Quest_Adventurer_Status(2);
 			}
 		}
 
@@ -601,21 +585,12 @@ void Quest::Quest_Input() {
 				//星１冒険者１
 				if (Click1 == false) {
 					Click1 = true;
-
-					TotalAttack += AdventurerStatus.Attack[0];
-					TotalDefence += AdventurerStatus.Defence[0];
-					TotalSkill += AdventurerStatus.Skill[0];
-					TotalKnow += AdventurerStatus.Know[0];
-					//TotalCost += AdventurerCost[0];
+					Add_Quest_Adventurer_Status(0);
 				}
 
 				else if (Click1 == true) {
 					Click1 = false;
-					TotalAttack -= AdventurerStatus.Attack[0];
-					TotalDefence -= AdventurerStatus.Defence[0];
-					TotalSkill -= AdventurerStatus.Skill[0];
-					TotalKnow -= AdventurerStatus.Know[0];
-					//TotalCost -= AdventurerCost[0];
+					Delete_Quest_Adventurer_Status(0);
 				}
 				//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
 			}
@@ -634,18 +609,12 @@ void Quest::Quest_Input() {
 				//星１冒険者２
 				if (Click2 == false) {
 					Click2 = true;
-					TotalAttack += AdventurerStatus.Attack[1];
-					TotalDefence += AdventurerStatus.Defence[1];
-					TotalSkill += AdventurerStatus.Skill[1];
-					TotalKnow += AdventurerStatus.Know[1];
+					Add_Quest_Adventurer_Status(1);
 				}
 
 				else if (Click2 == true) {
 					Click2 = false;
-					TotalAttack -= AdventurerStatus.Attack[1];
-					TotalDefence -= AdventurerStatus.Defence[1];
-					TotalSkill -= AdventurerStatus.Skill[1];
-					TotalKnow -= AdventurerStatus.Know[1];
+					Delete_Quest_Adventurer_Status(1);
 				}
 
 			}
@@ -663,18 +632,12 @@ void Quest::Quest_Input() {
 				//星2冒険者３
 				if (Click3 == false) {
 					Click3 = true;
-					TotalAttack += AdventurerStatus.Attack[2];
-					TotalDefence += AdventurerStatus.Defence[2];
-					TotalSkill += AdventurerStatus.Skill[2];
-					TotalKnow += AdventurerStatus.Know[2];
+					Add_Quest_Adventurer_Status(2);
 				}
 
 				else if (Click3 == true) {
 					Click3 = false;
-					TotalAttack -= AdventurerStatus.Attack[2];
-					TotalDefence -= AdventurerStatus.Defence[2];
-					TotalSkill -= AdventurerStatus.Skill[2];
-					TotalKnow -= AdventurerStatus.Know[2];
+					Delete_Quest_Adventurer_Status(2);
 				}
 			}
 
@@ -742,20 +705,12 @@ void Quest::Quest_Input() {
 					if (Click1 == false) {
 						Click1 = true;
 
-						TotalAttack += AdventurerStatus.Attack[0];
-						TotalDefence += AdventurerStatus.Defence[0];
-						TotalSkill += AdventurerStatus.Skill[0];
-						TotalKnow += AdventurerStatus.Know[0];
-						//TotalCost += AdventurerCost[0];
+						Add_Quest_Adventurer_Status(0);
 					}
 
 					else if (Click1 == true) {
 						Click1 = false;
-						TotalAttack -= AdventurerStatus.Attack[0];
-						TotalDefence -= AdventurerStatus.Defence[0];
-						TotalSkill -= AdventurerStatus.Skill[0];
-						TotalKnow -= AdventurerStatus.Know[0];
-						//TotalCost -= AdventurerCost[0];
+						Delete_Quest_Adventurer_Status(0);
 					}
 					//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
 				}
@@ -774,18 +729,12 @@ void Quest::Quest_Input() {
 					//星１冒険者２
 					if (Click2 == false) {
 						Click2 = true;
-						TotalAttack += AdventurerStatus.Attack[1];
-						TotalDefence += AdventurerStatus.Defence[1];
-						TotalSkill += AdventurerStatus.Skill[1];
-						TotalKnow += AdventurerStatus.Know[1];
+						Add_Quest_Adventurer_Status(1);
 					}
 
 					else if (Click2 == true) {
 						Click2 = false;
-						TotalAttack -= AdventurerStatus.Attack[1];
-						TotalDefence -= AdventurerStatus.Defence[1];
-						TotalSkill -= AdventurerStatus.Skill[1];
-						TotalKnow -= AdventurerStatus.Know[1];
+						Delete_Quest_Adventurer_Status(1);
 					}
 
 				}
@@ -803,18 +752,12 @@ void Quest::Quest_Input() {
 					//星2冒険者３
 					if (Click3 == false) {
 						Click3 = true;
-						TotalAttack += AdventurerStatus.Attack[2];
-						TotalDefence += AdventurerStatus.Defence[2];
-						TotalSkill += AdventurerStatus.Skill[2];
-						TotalKnow += AdventurerStatus.Know[2];
+						Add_Quest_Adventurer_Status(2);
 					}
 
 					else if (Click3 == true) {
 						Click3 = false;
-						TotalAttack -= AdventurerStatus.Attack[2];
-						TotalDefence -= AdventurerStatus.Defence[2];
-						TotalSkill -= AdventurerStatus.Skill[2];
-						TotalKnow -= AdventurerStatus.Know[2];
+						Delete_Quest_Adventurer_Status(2);
 					}
 				}
 
@@ -881,20 +824,12 @@ void Quest::Quest_Input() {
 						if (Click1 == false) {
 							Click1 = true;
 
-							TotalAttack += AdventurerStatus.Attack[0];
-							TotalDefence += AdventurerStatus.Defence[0];
-							TotalSkill += AdventurerStatus.Skill[0];
-							TotalKnow += AdventurerStatus.Know[0];
-							//TotalCost += AdventurerCost[0];
+							Add_Quest_Adventurer_Status(0);
 						}
 
 						else if (Click1 == true) {
 							Click1 = false;
-							TotalAttack -= AdventurerStatus.Attack[0];
-							TotalDefence -= AdventurerStatus.Defence[0];
-							TotalSkill -= AdventurerStatus.Skill[0];
-							TotalKnow -= AdventurerStatus.Know[0];
-							//TotalCost -= AdventurerCost[0];
+							Delete_Quest_Adventurer_Status(0);
 						}
 						//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
 					}
@@ -913,18 +848,12 @@ void Quest::Quest_Input() {
 						//星１冒険者２
 						if (Click2 == false) {
 							Click2 = true;
-							TotalAttack += AdventurerStatus.Attack[1];
-							TotalDefence += AdventurerStatus.Defence[1];
-							TotalSkill += AdventurerStatus.Skill[1];
-							TotalKnow += AdventurerStatus.Know[1];
+							Add_Quest_Adventurer_Status(1);
 						}
 
 						else if (Click2 == true) {
 							Click2 = false;
-							TotalAttack -= AdventurerStatus.Attack[1];
-							TotalDefence -= AdventurerStatus.Defence[1];
-							TotalSkill -= AdventurerStatus.Skill[1];
-							TotalKnow -= AdventurerStatus.Know[1];
+							Delete_Quest_Adventurer_Status(1);
 						}
 
 					}
@@ -942,18 +871,12 @@ void Quest::Quest_Input() {
 						//星2冒険者３
 						if (Click3 == false) {
 							Click3 = true;
-							TotalAttack += AdventurerStatus.Attack[2];
-							TotalDefence += AdventurerStatus.Defence[2];
-							TotalSkill += AdventurerStatus.Skill[2];
-							TotalKnow += AdventurerStatus.Know[2];
+							Add_Quest_Adventurer_Status(2);
 						}
 
 						else if (Click3 == true) {
 							Click3 = false;
-							TotalAttack -= AdventurerStatus.Attack[2];
-							TotalDefence -= AdventurerStatus.Defence[2];
-							TotalSkill -= AdventurerStatus.Skill[2];
-							TotalKnow -= AdventurerStatus.Know[2];
+							Delete_Quest_Adventurer_Status(2);
 						}
 					}
 
@@ -1020,20 +943,12 @@ void Quest::Quest_Input() {
 							if (Click1 == false) {
 								Click1 = true;
 
-								TotalAttack += AdventurerStatus.Attack[0];
-								TotalDefence += AdventurerStatus.Defence[0];
-								TotalSkill += AdventurerStatus.Skill[0];
-								TotalKnow += AdventurerStatus.Know[0];
-								//TotalCost += AdventurerCost[0];
+								Add_Quest_Adventurer_Status(0);
 							}
 
 							else if (Click1 == true) {
 								Click1 = false;
-								TotalAttack -= AdventurerStatus.Attack[0];
-								TotalDefence -= AdventurerStatus.Defence[0];
-								TotalSkill -= AdventurerStatus.Skill[0];
-								TotalKnow -= AdventurerStatus.Know[0];
-								//TotalCost -= AdventurerCost[0];
+								Delete_Quest_Adventurer_Status(0);
 							}
 							//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
 						}
@@ -1052,18 +967,12 @@ void Quest::Quest_Input() {
 							//星１冒険者２
 							if (Click2 == false) {
 								Click2 = true;
-								TotalAttack += AdventurerStatus.Attack[1];
-								TotalDefence += AdventurerStatus.Defence[1];
-								TotalSkill += AdventurerStatus.Skill[1];
-								TotalKnow += AdventurerStatus.Know[1];
+								Add_Quest_Adventurer_Status(1);
 							}
 
 							else if (Click2 == true) {
 								Click2 = false;
-								TotalAttack -= AdventurerStatus.Attack[1];
-								TotalDefence -= AdventurerStatus.Defence[1];
-								TotalSkill -= AdventurerStatus.Skill[1];
-								TotalKnow -= AdventurerStatus.Know[1];
+								Delete_Quest_Adventurer_Status(1);
 							}
 
 						}
@@ -1081,18 +990,12 @@ void Quest::Quest_Input() {
 							//星2冒険者３
 							if (Click3 == false) {
 								Click3 = true;
-								TotalAttack += AdventurerStatus.Attack[2];
-								TotalDefence += AdventurerStatus.Defence[2];
-								TotalSkill += AdventurerStatus.Skill[2];
-								TotalKnow += AdventurerStatus.Know[2];
+								Add_Quest_Adventurer_Status(2);
 							}
 
 							else if (Click3 == true) {
 								Click3 = false;
-								TotalAttack -= AdventurerStatus.Attack[2];
-								TotalDefence -= AdventurerStatus.Defence[2];
-								TotalSkill -= AdventurerStatus.Skill[2];
-								TotalKnow -= AdventurerStatus.Know[2];
+								Delete_Quest_Adventurer_Status(2);
 							}
 						}
 
@@ -1159,20 +1062,12 @@ void Quest::Quest_Input() {
 								if (Click1 == false) {
 									Click1 = true;
 
-									TotalAttack += AdventurerStatus.Attack[0];
-									TotalDefence += AdventurerStatus.Defence[0];
-									TotalSkill += AdventurerStatus.Skill[0];
-									TotalKnow += AdventurerStatus.Know[0];
-									//TotalCost += AdventurerCost[0];
+									Add_Quest_Adventurer_Status(0);
 								}
 
 								else if (Click1 == true) {
 									Click1 = false;
-									TotalAttack -= AdventurerStatus.Attack[0];
-									TotalDefence -= AdventurerStatus.Defence[0];
-									TotalSkill -= AdventurerStatus.Skill[0];
-									TotalKnow -= AdventurerStatus.Know[0];
-									//TotalCost -= AdventurerCost[0];
+									Delete_Quest_Adventurer_Status(0);
 								}
 								//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
 							}
@@ -1191,18 +1086,12 @@ void Quest::Quest_Input() {
 								//星１冒険者２
 								if (Click2 == false) {
 									Click2 = true;
-									TotalAttack += AdventurerStatus.Attack[1];
-									TotalDefence += AdventurerStatus.Defence[1];
-									TotalSkill += AdventurerStatus.Skill[1];
-									TotalKnow += AdventurerStatus.Know[1];
+									Add_Quest_Adventurer_Status(1);
 								}
 
 								else if (Click2 == true) {
 									Click2 = false;
-									TotalAttack -= AdventurerStatus.Attack[1];
-									TotalDefence -= AdventurerStatus.Defence[1];
-									TotalSkill -= AdventurerStatus.Skill[1];
-									TotalKnow -= AdventurerStatus.Know[1];
+									Delete_Quest_Adventurer_Status(1);
 								}
 
 							}
@@ -1220,18 +1109,12 @@ void Quest::Quest_Input() {
 								//星2冒険者３
 								if (Click3 == false) {
 									Click3 = true;
-									TotalAttack += AdventurerStatus.Attack[2];
-									TotalDefence += AdventurerStatus.Defence[2];
-									TotalSkill += AdventurerStatus.Skill[2];
-									TotalKnow += AdventurerStatus.Know[2];
+									Add_Quest_Adventurer_Status(2);
 								}
 
 								else if (Click3 == true) {
 									Click3 = false;
-									TotalAttack -= AdventurerStatus.Attack[2];
-									TotalDefence -= AdventurerStatus.Defence[2];
-									TotalSkill -= AdventurerStatus.Skill[2];
-									TotalKnow -= AdventurerStatus.Know[2];
+									Delete_Quest_Adventurer_Status(2);
 								}
 							}
 
@@ -1293,19 +1176,132 @@ void Quest::Quest_Render() {
 		DrawGraph(135, 185, menu, TRUE);
 		//DrawGraph(400, 200, _cg, TRUE);
 		//DrawBox(1800, 45, 1850, 90, GetColor(255, 0, 0), TRUE);  //戻るボタン
-		DrawGraph(396, 270, Q1GrHandle, TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
-		DrawGraph(830, 270, Q2GrHandle, TRUE);  //クエストスロット2
-		DrawGraph(1264,270, Q3GrHandle, TRUE);	//クエストスロット3
-		DrawGraph(396, 640, Q4GrHandle, TRUE);	//クエストスロット4
-		DrawGraph(830, 640, Q5GrHandle, TRUE);	//クエストスロット5
-		DrawGraph(1264,640, Q6GrHandle, TRUE);	//クエストスロット6
 
-		//DrawGraph(396, 270, QGraHandle[i], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
-		//DrawGraph(830, 270, QGraHandle[i], TRUE);  //クエストスロット2
-		//DrawGraph(1264,270, QGraHandle[i], TRUE);	//クエストスロット3
-		//DrawGraph(396, 640, QGraHandle[i], TRUE);	//クエストスロット4
-		//DrawGraph(830, 640, QGraHandle[i], TRUE);	//クエストスロット5
-		//DrawGraph(1264,640, QGraHandle[i], TRUE);	//クエストスロット6
+		//DrawGraph(396, 270, Q1GrHandle, TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
+		//DrawGraph(830, 270, Q2GrHandle, TRUE);  //クエストスロット2
+		//DrawGraph(1264,270, Q3GrHandle, TRUE);	//クエストスロット3
+		//DrawGraph(396, 640, Q4GrHandle, TRUE);	//クエストスロット4
+		//DrawGraph(830, 640, Q5GrHandle, TRUE);	//クエストスロット5
+		//DrawGraph(1264,640, Q6GrHandle, TRUE);	//クエストスロット6
+		if (i == 0) {
+
+		DrawGraph(396, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
+		}
+		if (i == 1) {
+			DrawGraph(396, 270, QGrHandle[1], TRUE);  //クエストスロット2
+		}
+		if (i == 2) {
+		DrawGraph(396,270, QGrHandle[2], TRUE);	//クエストスロット3
+		}
+		if (i == 3) {
+		DrawGraph(396, 270, QGrHandle[3], TRUE);	//クエストスロット4
+		}
+		if (i == 4) {
+		DrawGraph(396, 270, QGrHandle[4], TRUE);	//クエストスロット5
+		}
+		if (i == 5) {
+		DrawGraph(396, 270, QGrHandle[5], TRUE);	//クエストスロット6
+		}
+
+		if (b == 0) {
+
+			DrawGraph(830, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
+		}
+		if (b == 1) {
+			DrawGraph(830, 270, QGrHandle[1], TRUE);  //クエストスロット2
+		}
+		if (b == 2) {
+			DrawGraph(830, 270, QGrHandle[2], TRUE);	//クエストスロット3
+		}
+		if (b == 3) {
+			DrawGraph(830, 270, QGrHandle[3], TRUE);	//クエストスロット4
+		}
+		if (b == 4) {
+			DrawGraph(830, 270, QGrHandle[4], TRUE);	//クエストスロット5
+		}
+		if (b == 5) {
+			DrawGraph(830, 270, QGrHandle[5], TRUE);	//クエストスロット6
+		}
+
+		if (c == 0) {
+
+			DrawGraph(1264, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
+		}
+		if (c == 1) {
+			DrawGraph(1264, 270, QGrHandle[1], TRUE);  //クエストスロット2
+		}
+		if (c == 2) {
+			DrawGraph(1264, 270, QGrHandle[2], TRUE);	//クエストスロット3
+		}
+		if (c == 3) {
+			DrawGraph(1264, 270, QGrHandle[3], TRUE);	//クエストスロット4
+		}
+		if (c == 4) {
+			DrawGraph(1264, 270, QGrHandle[4], TRUE);	//クエストスロット5
+		}
+		if (c == 5) {
+			DrawGraph(1264, 270, QGrHandle[5], TRUE);	//クエストスロット6
+		}
+
+
+		if (d == 0) {
+			DrawGraph(396, 640, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
+		}
+		if (d == 1) {
+			DrawGraph(396, 640, QGrHandle[1], TRUE);  //クエストスロット2
+		}
+		if (d == 2) {
+			DrawGraph(396, 640, QGrHandle[2], TRUE);	//クエストスロット3
+		}
+		if (d == 3) {
+			DrawGraph(396, 640, QGrHandle[3], TRUE);	//クエストスロット4
+		}
+		if (d == 4) {
+			DrawGraph(396, 640, QGrHandle[4], TRUE);	//クエストスロット5
+		}
+		if (d == 5) {
+			DrawGraph(396, 640, QGrHandle[5], TRUE);	//クエストスロット6
+		}
+
+
+		if (e == 0) {
+			DrawGraph(830, 640, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
+		}
+		if (e == 1) {
+			DrawGraph(830, 640, QGrHandle[1], TRUE);  //クエストスロット2
+		}
+		if (e == 2) {
+			DrawGraph(830, 640, QGrHandle[2], TRUE);	//クエストスロット3
+		}
+		if (e == 3) {
+			DrawGraph(830, 640, QGrHandle[3], TRUE);	//クエストスロット4
+		}
+		if (e == 4) {
+			DrawGraph(830, 640, QGrHandle[4], TRUE);	//クエストスロット5
+		}
+		if (e == 5) {
+			DrawGraph(830, 640, QGrHandle[5], TRUE);	//クエストスロット6
+		}
+
+
+		if (g == 0) {
+			DrawGraph(1264, 640, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
+		}
+		if (g == 1) {
+			DrawGraph(1264, 640, QGrHandle[1], TRUE);  //クエストスロット2
+		}
+		if (g == 2) {
+			DrawGraph(1264, 640, QGrHandle[2], TRUE);	//クエストスロット3
+		}
+		if (g == 3) {
+			DrawGraph(1264, 640, QGrHandle[3], TRUE);	//クエストスロット4
+		}
+		if (g == 4) {
+			DrawGraph(1264, 640, QGrHandle[4], TRUE);	//クエストスロット5
+		}
+		if (g == 5) {
+			DrawGraph(1264, 640, QGrHandle[5], TRUE);	//クエストスロット6
+		}
 
 
 		DrawGraph(1750, 20, Back, TRUE);
@@ -1322,10 +1318,10 @@ void Quest::Quest_Render() {
 		//DrawBox(760, 330, 1050, 390, GetColor(0, 0, 255), TRUE);
 		//DrawBox(1500, 900, 1700, 1000, GetColor(0, 0, 255), TRUE); //クエスト出撃
 		DrawString(100, 100, "クエスト1", TRUE);
-		//DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
-		//DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
-		//DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
-		//DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
+		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
+		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
 		//DrawFormatString(1000, 980, GetColor(0, 0, 0), "得意不得意%d", questData1.ClearTotalKnow);
 
 		break;
@@ -1337,6 +1333,11 @@ void Quest::Quest_Render() {
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
 		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
+		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
+		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
 		DrawBox(760, 270, 1050, 330, GetColor(0, 255, 0), TRUE);
@@ -1352,6 +1353,11 @@ void Quest::Quest_Render() {
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
 		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
+		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
+		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
 		DrawBox(760, 270, 1050, 330, GetColor(0, 255, 0), TRUE);
@@ -1367,6 +1373,11 @@ void Quest::Quest_Render() {
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
 		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
+		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
+		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
 		DrawBox(760, 270, 1050, 330, GetColor(0, 255, 0), TRUE);
@@ -1382,6 +1393,11 @@ void Quest::Quest_Render() {
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
 		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
+		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
+		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
 		DrawBox(760, 270, 1050, 330, GetColor(0, 255, 0), TRUE);
@@ -1397,6 +1413,11 @@ void Quest::Quest_Render() {
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
 		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
+		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
+		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
 		DrawBox(760, 270, 1050, 330, GetColor(0, 255, 0), TRUE);

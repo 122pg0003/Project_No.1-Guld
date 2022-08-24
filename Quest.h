@@ -36,8 +36,10 @@ public:
 	void Quest_Result();                   //クエスト結果
 	void Quest_Update();                   //更新
 	void Quest_Render();                   //描画
-	void Add_Quest_Adventurer_Status(int AdventurerNo);
-	void Delete_Quest_Adventurer_Status(int AdventurerNo);
+	void Add_Quest_Adventurer_Status(int AdventurerNo);      //ステータスの総合値の追加
+	void Delete_Quest_Adventurer_Status(int AdventurerNo);   //ステータスの総合値の削除
+	void Random_Quest();                        //クエストのランダム出現
+	
 
 	int TotalAttack;  //パーティーのAttackの総合値
 	int TotalDefence;  //パーティーのDefenceの総合値
@@ -70,8 +72,19 @@ protected:
 private:
 	void Menu_Back_Button();                    //メニューに戻る
 	void Back_Button();                         //ひとつ前に戻る
-	void Random_Quest();                        //クエストのランダム出現
+	void RANDOM_Q(int random,
+		int random1,
+		int random2,
+		int random3,
+		int random4,
+		int random5);
 	int random;
+	int random1;
+	int random2;
+	int random3;
+	int random4;
+	int random5;
+
 
 	///クエスト選択画面
 	 enum class MENU_NUM {
@@ -103,8 +116,20 @@ private:
 		,Q初期値 = -1,
 	};
 
+	///クエストの画像ランダム
+	enum class Quest_Graph {
+		Q1GrHandle,
+		Q2GrHandle,
+		Q3GrHandle,
+		Q4GrHandle,
+		Q5GrHandle,
+		Q6GrHandle
+
+	};
+
 	Q q;
 	MENU_NUM scene{};
+	Quest_Graph quest_graph{};
 
 
 
@@ -117,7 +142,15 @@ private:
 	int Q4GrHandle;
 	int Q5GrHandle;
 	int Q6GrHandle;
-	//int QGraHandle[6];
+	int i;
+	int a;
+	int b;
+	int c;
+	int d;
+	int e;
+	int f;
+	int g;
+	int QGrHandle[6];
 	int _cg1;
 	int Q1;
 	int Q1_1;
