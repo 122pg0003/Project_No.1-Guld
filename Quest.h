@@ -33,15 +33,18 @@ public:
 	Quest(SceneMgr& scenemgr,Game& game);  //コンストラクタ
 	~Quest();                              //デストラクタ
 	void Quest_Input();                    //入力
-	void Quest_Result();
+	void Quest_Result();                   //クエスト結果
 	void Quest_Update();                   //更新
 	void Quest_Render();                   //描画
+	void Add_Quest_Adventurer_Status(int AdventurerNo);
+	void Delete_Quest_Adventurer_Status(int AdventurerNo);
 
 	int TotalAttack;  //パーティーのAttackの総合値
 	int TotalDefence;  //パーティーのDefenceの総合値
 	int TotalSkill;  //パーティーのSkillの総合値
 	int TotalKnow;  //パーティーのKnowの総合値
 	int TotalCost;  //パーティーのコストの総合値
+	int	AdventurerGood; //冒険者のクエストの得意不得意
 	//void GetMoney(int& i);
 	//int  _gmause;
 	//int _gTrg;

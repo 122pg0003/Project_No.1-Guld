@@ -56,6 +56,7 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	TotalDefence = 0;
 	TotalSkill = 0;
 	TotalKnow = 0;
+	AdventurerGood = 0;
 
 
 	Click1 = false;
@@ -89,6 +90,23 @@ void QuestData::SetQuestParam(int questIndex)
 	 //ClearTotalSkill = QuestClearSkill[questIndex];  //クエストの達成に必要なパーティーのSkillの総合値
 	 //ClearTotalKnow = QuestClearKnow[questIndex];  //クエストの達成に必要なパーティーのKnowの総合値
 
+}
+
+
+void Quest::Add_Quest_Adventurer_Status(int AdventurerNo) {
+	TotalAttack +=   AdventurerStatus.Attack[AdventurerNo];
+	TotalDefence += AdventurerStatus.Defence[AdventurerNo];
+	TotalSkill +=     AdventurerStatus.Skill[AdventurerNo];
+	TotalKnow +=       AdventurerStatus.Know[AdventurerNo];
+	AdventurerGood +=  AdventurerStatus.good[AdventurerNo];
+}
+
+void Quest::Delete_Quest_Adventurer_Status(int AdventurerNo) {
+	TotalAttack -=   AdventurerStatus.Attack[AdventurerNo];
+	TotalDefence -= AdventurerStatus.Defence[AdventurerNo];
+	TotalSkill -=     AdventurerStatus.Skill[AdventurerNo];
+	TotalKnow -=       AdventurerStatus.Know[AdventurerNo];
+	AdventurerGood -=  AdventurerStatus.good[AdventurerNo];
 }
 
 
@@ -222,7 +240,7 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 
 ///クエストのランダム出現
 void Quest::Random_Quest() {
-	random = GetRand(5) + 1;
+	random = GetRand(2) + 1;
 	 scene = static_cast<MENU_NUM>(random);
 
 	//GetRand(Quest::MENU_NUM);
@@ -473,18 +491,22 @@ void Quest::Quest_Input() {
 			//星１冒険者２
 			if (Click2 == false) {
 				Click2 = true;
-				TotalAttack += AdventurerStatus.Attack[1];
-				TotalDefence += AdventurerStatus.Defence[1];
-				TotalSkill += AdventurerStatus.Skill[1];
-				TotalKnow += AdventurerStatus.Know[1];
+				Add_Quest_Adventurer_Status(1);
+				//TotalAttack += AdventurerStatus.Attack[1];
+				//TotalDefence += AdventurerStatus.Defence[1];
+				//TotalSkill += AdventurerStatus.Skill[1];
+				//TotalKnow += AdventurerStatus.Know[1];
+				//AdventurerGood += AdventurerStatus.good[1];
 			}
 
 			else if (Click2 == true) {
 				Click2 = false;
-				TotalAttack -= AdventurerStatus.Attack[1];
-				TotalDefence -= AdventurerStatus.Defence[1];
-				TotalSkill -= AdventurerStatus.Skill[1];
-				TotalKnow -= AdventurerStatus.Know[1];
+				Delete_Quest_Adventurer_Status(1);
+				//TotalAttack -= AdventurerStatus.Attack[1];
+				//TotalDefence -= AdventurerStatus.Defence[1];
+				//TotalSkill -= AdventurerStatus.Skill[1];
+				//TotalKnow -= AdventurerStatus.Know[1];
+				//AdventurerGood -= AdventurerStatus.good[1];
 			}
 
 		}
@@ -1300,10 +1322,11 @@ void Quest::Quest_Render() {
 		//DrawBox(760, 330, 1050, 390, GetColor(0, 0, 255), TRUE);
 		//DrawBox(1500, 900, 1700, 1000, GetColor(0, 0, 255), TRUE); //クエスト出撃
 		DrawString(100, 100, "クエスト1", TRUE);
-		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
-		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
-		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
-		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+		//DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
+		//DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
+		//DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		//DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+		//DrawFormatString(1000, 980, GetColor(0, 0, 0), "得意不得意%d", questData1.ClearTotalKnow);
 
 		break;
 
@@ -1406,7 +1429,8 @@ void Quest::Quest_Render() {
 		DrawFormatStringToHandle(880, 760, GetColor(0, 0, 0), FontHandle, "守%d", TotalDefence);
 		DrawFormatStringToHandle(880, 840, GetColor(0, 0, 0), FontHandle, "技%d", TotalSkill);
 		DrawFormatStringToHandle(880, 920, GetColor(0, 0, 0), FontHandle, "知%d", TotalKnow);
-		DrawFormatString(1000, 680, GetColor(0, 0, 0), "成功率%d", math.SuccessRate);
+		DrawFormatStringToHandle(1000, 920, GetColor(0, 0, 0), FontHandle, "得意%d", AdventurerGood);
+		//DrawFormatString(1000, 680, GetColor(0, 0, 0), "成功率%d", math.SuccessRate);
 		DeleteFontToHandle(FontHandle);
 
 		/*if (TotalAttack >= questData1.ClearTotalAttack)

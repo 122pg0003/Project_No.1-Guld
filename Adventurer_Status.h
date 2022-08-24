@@ -12,6 +12,7 @@ public:
 	int Skill[3]{100,100,220};  //冒険者の技術
 	int Know[3]{50,100,150};  //冒険者の知識
 	int Physical[3]{3,3,4};  //冒険者の体力
+	int good[3]{ 1,2,3 };    //冒険者のクエストの得意不得意
 	const int AdventurerCost[3]{};  //冒険者に支払うコスト
 
 private:
