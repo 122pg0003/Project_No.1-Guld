@@ -91,8 +91,7 @@ void QuestData::SetQuestParam(int questIndex)
 
 ///ステータスの総合値の追加
 void Quest::Add_Quest_Adventurer_Status(int AdventurerNo) {
-	AdventurerGood +=  AdventurerStatus.good[AdventurerNo];
-	if (scene == Quest::MENU_NUM::クエスト1 && AdventurerNo == 1) {
+	if (scene == Quest::MENU_NUM::クエスト1 && AdventurerNo == 1 ) {
 		TotalAttack += AdventurerStatus.Attack[AdventurerNo] * 2;
 		TotalDefence += AdventurerStatus.Defence[AdventurerNo] * 2;
 		TotalSkill += AdventurerStatus.Skill[AdventurerNo] * 2;
