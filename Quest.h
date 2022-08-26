@@ -151,7 +151,17 @@ private:
 	int f;
 	int g;
 	int QGrHandle[6];
-	int _cg1;
+	int quest1_1;	
+	int quest1_2;	
+	int quest1_3;	
+	int quest1_4;	
+	int quest1_5;	
+	int quest1_6;	
+	int quest1_7;	
+	int quest1_8;	
+	int quest1_9;	
+	int quest1_10;	
+
 	int Q1;
 	int Q1_1;
 	int Q1Start;

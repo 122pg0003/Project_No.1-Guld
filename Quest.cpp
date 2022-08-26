@@ -15,8 +15,17 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	//,math(*this)
 	//,_math(*this,_game,_scenemgr)
 {
-	_cg = LoadGraph("images/Adventurer.jpg");
-	_cg1 = LoadGraph("images/クエスト画面2.png");
+	_cg = LoadGraph("images/quest1_1.jpg");
+	quest1_1 = LoadGraph("images/quest1_1.png");
+	quest1_2 = LoadGraph("images/quest1_2.png");
+    quest1_3 = LoadGraph("images/quest1_3.png");
+    quest1_4 = LoadGraph("images/quest1_4.png");
+    quest1_5 = LoadGraph("images/quest1_5.png");
+    quest1_6 = LoadGraph("images/quest1_6.png");
+    quest1_7 = LoadGraph("images/quest1_7.png");
+    quest1_8 = LoadGraph("images/quest1_8.png");
+    quest1_9 = LoadGraph("images/quest1_9.png");
+    quest1_10 = LoadGraph("images/quest1_10.png");
 	_BIGrHandle = LoadGraph("images/Base-Illust.png");
 
 
@@ -91,7 +100,8 @@ void QuestData::SetQuestParam(int questIndex)
 
 ///ステータスの総合値の追加
 void Quest::Add_Quest_Adventurer_Status(int AdventurerNo) {
-	if (scene == Quest::MENU_NUM::クエスト1 && AdventurerNo == 1 ) {
+	if (scene == Quest::MENU_NUM::クエスト1 && AdventurerNo == 1 &&
+		random == 1 || random == 3 ) {
 		TotalAttack += AdventurerStatus.Attack[AdventurerNo] * 2;
 		TotalDefence += AdventurerStatus.Defence[AdventurerNo] * 2;
 		TotalSkill += AdventurerStatus.Skill[AdventurerNo] * 2;
@@ -108,7 +118,8 @@ void Quest::Add_Quest_Adventurer_Status(int AdventurerNo) {
 
 ///ステータスの総合値の削除
 void Quest::Delete_Quest_Adventurer_Status(int AdventurerNo) {
-	if (scene == Quest::MENU_NUM::クエスト1 && AdventurerNo == 1) {
+	if (scene == Quest::MENU_NUM::クエスト1 && AdventurerNo == 1 &&
+		random == 1 || random == 3) {
 		TotalAttack -= AdventurerStatus.Attack[AdventurerNo] * 2;
 		TotalDefence -= AdventurerStatus.Defence[AdventurerNo] * 2;
 		TotalSkill -= AdventurerStatus.Skill[AdventurerNo] * 2;
@@ -1182,123 +1193,123 @@ void Quest::Quest_Render() {
 		//DrawGraph(396, 640, Q4GrHandle, TRUE);	//クエストスロット4
 		//DrawGraph(830, 640, Q5GrHandle, TRUE);	//クエストスロット5
 		//DrawGraph(1264,640, Q6GrHandle, TRUE);	//クエストスロット6
-		if (i == 0) {
+		if (random == 1) {
 
 		DrawGraph(396, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
 		}
-		if (i == 1) {
+		if (random == 2) {
 			DrawGraph(396, 270, QGrHandle[1], TRUE);  //クエストスロット2
 		}
-		if (i == 2) {
+		if (random == 3) {
 		DrawGraph(396,270, QGrHandle[2], TRUE);	//クエストスロット3
 		}
-		if (i == 3) {
+		if (random == 4) {
 		DrawGraph(396, 270, QGrHandle[3], TRUE);	//クエストスロット4
 		}
-		if (i == 4) {
+		if (random == 5) {
 		DrawGraph(396, 270, QGrHandle[4], TRUE);	//クエストスロット5
 		}
-		if (i == 5) {
+		if (random == 6) {
 		DrawGraph(396, 270, QGrHandle[5], TRUE);	//クエストスロット6
 		}
 
-		if (b == 0) {
+		if (random1 == 1) {
 
 			DrawGraph(830, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
 		}
-		if (b == 1) {
+		if (random1 == 2) {
 			DrawGraph(830, 270, QGrHandle[1], TRUE);  //クエストスロット2
 		}
-		if (b == 2) {
+		if (random1 == 3) {
 			DrawGraph(830, 270, QGrHandle[2], TRUE);	//クエストスロット3
 		}
-		if (b == 3) {
+		if (random1 == 4) {
 			DrawGraph(830, 270, QGrHandle[3], TRUE);	//クエストスロット4
 		}
-		if (b == 4) {
+		if (random1 == 5) {
 			DrawGraph(830, 270, QGrHandle[4], TRUE);	//クエストスロット5
 		}
-		if (b == 5) {
+		if (random1 == 6) {
 			DrawGraph(830, 270, QGrHandle[5], TRUE);	//クエストスロット6
 		}
 
-		if (c == 0) {
+		if (random2 == 1) {
 
 			DrawGraph(1264, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
 		}
-		if (c == 1) {
+		if (random2 == 2) {
 			DrawGraph(1264, 270, QGrHandle[1], TRUE);  //クエストスロット2
 		}
-		if (c == 2) {
+		if (random2 == 3) {
 			DrawGraph(1264, 270, QGrHandle[2], TRUE);	//クエストスロット3
 		}
-		if (c == 3) {
+		if (random2 == 4) {
 			DrawGraph(1264, 270, QGrHandle[3], TRUE);	//クエストスロット4
 		}
-		if (c == 4) {
+		if (random2 == 5) {
 			DrawGraph(1264, 270, QGrHandle[4], TRUE);	//クエストスロット5
 		}
-		if (c == 5) {
+		if (random2 == 6) {
 			DrawGraph(1264, 270, QGrHandle[5], TRUE);	//クエストスロット6
 		}
 
 
-		if (d == 0) {
+		if (random3 == 1) {
 			DrawGraph(396, 640, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
 		}
-		if (d == 1) {
+		if (random3 == 2) {
 			DrawGraph(396, 640, QGrHandle[1], TRUE);  //クエストスロット2
 		}
-		if (d == 2) {
+		if (random3 == 3) {
 			DrawGraph(396, 640, QGrHandle[2], TRUE);	//クエストスロット3
 		}
-		if (d == 3) {
+		if (random3 == 4) {
 			DrawGraph(396, 640, QGrHandle[3], TRUE);	//クエストスロット4
 		}
-		if (d == 4) {
+		if (random3 == 5) {
 			DrawGraph(396, 640, QGrHandle[4], TRUE);	//クエストスロット5
 		}
-		if (d == 5) {
+		if (random3 == 6) {
 			DrawGraph(396, 640, QGrHandle[5], TRUE);	//クエストスロット6
 		}
 
 
-		if (e == 0) {
+		if (random4 == 1) {
 			DrawGraph(830, 640, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
 		}
-		if (e == 1) {
+		if (random4 == 2) {
 			DrawGraph(830, 640, QGrHandle[1], TRUE);  //クエストスロット2
 		}
-		if (e == 2) {
+		if (random4 == 3) {
 			DrawGraph(830, 640, QGrHandle[2], TRUE);	//クエストスロット3
 		}
-		if (e == 3) {
+		if (random4 == 4) {
 			DrawGraph(830, 640, QGrHandle[3], TRUE);	//クエストスロット4
 		}
-		if (e == 4) {
+		if (random4 == 5) {
 			DrawGraph(830, 640, QGrHandle[4], TRUE);	//クエストスロット5
 		}
-		if (e == 5) {
+		if (random4 == 6) {
 			DrawGraph(830, 640, QGrHandle[5], TRUE);	//クエストスロット6
 		}
 
 
-		if (g == 0) {
+		if (random5 == 1) {
 			DrawGraph(1264, 640, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
 		}
-		if (g == 1) {
+		if (random5 == 2) {
 			DrawGraph(1264, 640, QGrHandle[1], TRUE);  //クエストスロット2
 		}
-		if (g == 2) {
+		if (random5 == 3) {
 			DrawGraph(1264, 640, QGrHandle[2], TRUE);	//クエストスロット3
 		}
-		if (g == 3) {
+		if (random5 == 4) {
 			DrawGraph(1264, 640, QGrHandle[3], TRUE);	//クエストスロット4
 		}
-		if (g == 4) {
+		if (random5 == 5) {
 			DrawGraph(1264, 640, QGrHandle[4], TRUE);	//クエストスロット5
 		}
-		if (g == 5) {
+		if (random5 == 6) {
 			DrawGraph(1264, 640, QGrHandle[5], TRUE);	//クエストスロット6
 		}
 
@@ -1307,15 +1318,33 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト1:
-		DrawGraph(0, 0, _cg1, TRUE); //背景
+		if (random == 1) {
+			DrawGraph(0, 0, quest1_1, TRUE); //背景
+		}
+		if (random == 2) {
+			DrawGraph(0, 0, quest1_2, TRUE); //背景
+		}
+		if (random == 3) {
+			DrawGraph(0, 0, quest1_3, TRUE); //背景
+		}
+		if (random == 4) {
+			DrawGraph(0, 0, quest1_4, TRUE); //背景
+		}
+		if (random == 5) {
+			DrawGraph(0, 0, quest1_5, TRUE); //背景
+		}
+		if (random == 6) {
+			DrawGraph(0, 0, quest1_6, TRUE); //背景
+		}
+		if (random == 7) {
+			DrawGraph(0, 0, quest1_7, TRUE); //背景
+		}
+		
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
 		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
-		//DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
-		//DrawBox(760, 270, 1050, 330, GetColor(0, 255, 0), TRUE);
-		//DrawBox(760, 330, 1050, 390, GetColor(0, 0, 255), TRUE);
-		//DrawBox(1500, 900, 1700, 1000, GetColor(0, 0, 255), TRUE); //クエスト出撃
+		
 		DrawString(100, 100, "クエスト1", TRUE);
 		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
 		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
@@ -1327,7 +1356,7 @@ void Quest::Quest_Render() {
 
 	case MENU_NUM::クエスト2:
 		//DrawBox(1000, 45, 1850, 90, GetColor(255, 0, 0), TRUE);
-		DrawGraph(0, 0, _cg1, TRUE); //背景
+		DrawGraph(0, 0, quest1_1, TRUE); //背景
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
@@ -1347,7 +1376,7 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト3:
-		DrawGraph(0, 0, _cg1, TRUE); //背景
+		DrawGraph(0, 0, quest1_1, TRUE); //背景
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
@@ -1367,7 +1396,7 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト4:
-		DrawGraph(0, 0, _cg1, TRUE); //背景
+		DrawGraph(0, 0, quest1_1, TRUE); //背景
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
@@ -1387,7 +1416,7 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト5:
-		DrawGraph(0, 0, _cg1, TRUE); //背景
+		DrawGraph(0, 0, quest1_1, TRUE); //背景
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
@@ -1407,7 +1436,7 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト6:
-		DrawGraph(0, 0, _cg1, TRUE); //背景
+		DrawGraph(0, 0, quest1_1, TRUE); //背景
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
