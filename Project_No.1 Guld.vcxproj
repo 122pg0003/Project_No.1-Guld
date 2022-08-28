@@ -156,6 +156,7 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Guild.cpp" />
     <ClCompile Include="Investment.cpp" />
     <ClCompile Include="Math.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Adventurer_Status.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="Guild.h" />
     <ClInclude Include="Investment.h" />
     <ClInclude Include="Math.h" />

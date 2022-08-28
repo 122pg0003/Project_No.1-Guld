@@ -3,6 +3,7 @@
 #include "Adventurer_Status.h"
 #include "TurnNumber.h"
 #include "QuestContent.h"
+#include"Graph.h"
 
 class SceneMgr;
 class Game;
@@ -67,9 +68,11 @@ protected:
 	QuestData questdata3;
 	Adventurer_Status AdventurerStatus;
 	TurnNumber turnnumber;
+	Graph graph;
 	//QuestContent questcontent;
 
 private:
+
 	void Menu_Back_Button();                    //ƒƒjƒ…[‚É–ß‚é
 	void Back_Button();                         //‚Ğ‚Æ‚Â‘O‚É–ß‚é
 	void RANDOM_Q(int random,
@@ -134,6 +137,7 @@ private:
 
 
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
+
 	int _cg;
 	int _BIGrHandle;
 	int Q1GrHandle;
@@ -144,12 +148,7 @@ private:
 	int Q6GrHandle;
 	int i;
 	int a;
-	int b;
-	int c;
-	int d;
-	int e;
-	int f;
-	int g;
+	
 	int QGrHandle[6];
 	int quest1_1;	
 	int quest1_2;	

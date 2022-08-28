@@ -5,6 +5,7 @@
 #include"Math.h"
 #include "Adventurer_Status.h"
 #include "TurnNumber.h"
+#include"Graph.h"
 
 
 
@@ -15,9 +16,10 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	//,math(*this)
 	//,_math(*this,_game,_scenemgr)
 {
-	_cg = LoadGraph("images/quest1_1.jpg");
-	quest1_1 = LoadGraph("images/quest1_1.png");
-	quest1_2 = LoadGraph("images/quest1_2.png");
+	   //_cg = LoadGraph("images/quest1_1.jpg");
+	///クエストの中身の画像
+	 /* quest1_1 = LoadGraph("images/quest1_1.png");
+	  quest1_2 = LoadGraph("images/quest1_2.png");
     quest1_3 = LoadGraph("images/quest1_3.png");
     quest1_4 = LoadGraph("images/quest1_4.png");
     quest1_5 = LoadGraph("images/quest1_5.png");
@@ -25,7 +27,7 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
     quest1_7 = LoadGraph("images/quest1_7.png");
     quest1_8 = LoadGraph("images/quest1_8.png");
     quest1_9 = LoadGraph("images/quest1_9.png");
-    quest1_10 = LoadGraph("images/quest1_10.png");
+    quest1_10 = LoadGraph("images/quest1_10.png");*/
 	_BIGrHandle = LoadGraph("images/Base-Illust.png");
 
 
@@ -36,10 +38,10 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	//Q5GrHandle = LoadGraph("images/to-batu_s1.png");  //クエスト5スロット
 	//Q6GrHandle = LoadGraph("images/bo-ei_s1.png");  //クエスト6スロット
 
-
+	///クエストのスロット
 	QGrHandle[0] = LoadGraph("images/to-batu_s1.png");  //クエスト1スロット　討伐
-	QGrHandle[1] = LoadGraph("images/bo-ei_s1.png");  //クエスト2スロット　　防衛
-	QGrHandle[2] =	LoadGraph("images/saishu_s1.png");  //クエスト3スロット　採取
+	QGrHandle[1] = LoadGraph("images/saishu_s1.png");  //クエスト2スロット　　採取
+	QGrHandle[2] =	LoadGraph("images/bo-ei_s1.png");  //クエスト3スロット　防衛
 	QGrHandle[3] =	LoadGraph("images/others_s1.png");  //クエスト4スロット　他
 	QGrHandle[4] =	LoadGraph("images/to-batu_s1.png");  //クエスト5スロット 討伐
 	QGrHandle[5] =	LoadGraph("images/bo-ei_s1.png");  //クエスト6スロット   防衛
@@ -273,17 +275,17 @@ void Quest::Random_Quest() {
 		//scene = static_cast<MENU_NUM>(random);
 	if (a == -1) {
 		random =  GetRand(4) + 1;
-		i = random;					 
+			 
 		random1 = GetRand(4) + 1;
-		b = random1;				 
+			 
 		random2 = GetRand(4) + 1;
-		c = random2;				 
+		 
 		random3 = GetRand(4) + 1;
-		d = random3;				 
+				 
 		random4 = GetRand(4) + 1;
-		e = random4;				 
+	 
 		random5 = GetRand(4) + 1;
-		g = random5;
+
 
 		
 		a = 0;
@@ -360,7 +362,8 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			RANDOM_Q(random,random1,random2,random3,random4,random5);
-			scene = static_cast<MENU_NUM>(random);
+			scene = MENU_NUM::クエスト1;
+			//scene = static_cast<MENU_NUM>(random);
 			questData1.SetQuestParam(random);
 			//Random_Quest();
 			
@@ -378,7 +381,7 @@ void Quest::Quest_Input() {
 			(mouse_y > min_y)) {
 			//Random_Quest();
 			RANDOM_Q(random, random1, random2, random3, random4, random5);
-			scene = static_cast<MENU_NUM>(random1);
+			scene = MENU_NUM::クエスト2;
 			questData1.SetQuestParam(random1);
 			//scene = MENU_NUM::クエスト2;
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Adventurer);
@@ -393,7 +396,7 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			RANDOM_Q(random, random1, random2, random3, random4, random5);
-			scene = static_cast<MENU_NUM>(random2);
+			scene = MENU_NUM::クエスト3;
 			questData1.SetQuestParam(random2);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Guild);
 		}
@@ -407,7 +410,7 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			RANDOM_Q(random, random1, random2, random3, random4, random5);
-			scene = static_cast<MENU_NUM>(random3);
+			scene = MENU_NUM::クエスト4;
 			questData1.SetQuestParam(random3);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Trede);
 		}
@@ -421,7 +424,7 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			RANDOM_Q(random, random1, random2, random3, random4, random5);
-			scene = static_cast<MENU_NUM>(random4);
+			scene = MENU_NUM::クエスト5;
 			questData1.SetQuestParam(random4);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Investment);
 		}
@@ -435,7 +438,7 @@ void Quest::Quest_Input() {
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
 			RANDOM_Q(random, random1, random2, random3, random4, random5);
-			scene = static_cast<MENU_NUM>(random5);
+			scene = MENU_NUM::クエスト6;
 			questData1.SetQuestParam(random5);
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::NextMonth);
 		}
@@ -1207,14 +1210,18 @@ void Quest::Quest_Render() {
 		DrawGraph(396, 270, QGrHandle[3], TRUE);	//クエストスロット4
 		}
 		if (random == 5) {
-		DrawGraph(396, 270, QGrHandle[4], TRUE);	//クエストスロット5
+		DrawGraph(396, 270, QGrHandle[0], TRUE);	//クエストスロット5
 		}
 		if (random == 6) {
-		DrawGraph(396, 270, QGrHandle[5], TRUE);	//クエストスロット6
+		DrawGraph(396, 270, QGrHandle[1], TRUE);	//クエストスロット6
+		}
+		if (random == 7) {
+			DrawGraph(396, 270, QGrHandle[2], TRUE);	//クエストスロット6
 		}
 
 		if (random1 == 1) {
 
+		//	graph.Graph_Render(Graph::QuestNo::Q2_1);
 			DrawGraph(830, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
 		}
 		if (random1 == 2) {
@@ -1234,7 +1241,6 @@ void Quest::Quest_Render() {
 		}
 
 		if (random2 == 1) {
-
 			DrawGraph(1264, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
 		}
 		if (random2 == 2) {
@@ -1318,28 +1324,7 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト1:
-		if (random == 1) {
-			DrawGraph(0, 0, quest1_1, TRUE); //背景
-		}
-		if (random == 2) {
-			DrawGraph(0, 0, quest1_2, TRUE); //背景
-		}
-		if (random == 3) {
-			DrawGraph(0, 0, quest1_3, TRUE); //背景
-		}
-		if (random == 4) {
-			DrawGraph(0, 0, quest1_4, TRUE); //背景
-		}
-		if (random == 5) {
-			DrawGraph(0, 0, quest1_5, TRUE); //背景
-		}
-		if (random == 6) {
-			DrawGraph(0, 0, quest1_6, TRUE); //背景
-		}
-		if (random == 7) {
-			DrawGraph(0, 0, quest1_7, TRUE); //背景
-		}
-		
+		graph.GraphQuest_Level1(random);  //クエストの中身
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
@@ -1355,8 +1340,9 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト2:
-		//DrawBox(1000, 45, 1850, 90, GetColor(255, 0, 0), TRUE);
-		DrawGraph(0, 0, quest1_1, TRUE); //背景
+		graph.GraphQuest_Level1(random1);
+		
+
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
@@ -1376,7 +1362,8 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト3:
-		DrawGraph(0, 0, quest1_1, TRUE); //背景
+		graph.GraphQuest_Level1(random2);
+
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
@@ -1396,7 +1383,8 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト4:
-		DrawGraph(0, 0, quest1_1, TRUE); //背景
+		graph.GraphQuest_Level1(random3);
+
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
@@ -1416,7 +1404,8 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト5:
-		DrawGraph(0, 0, quest1_1, TRUE); //背景
+		graph.GraphQuest_Level1(random4);
+
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
@@ -1436,7 +1425,8 @@ void Quest::Quest_Render() {
 		break;
 
 	case MENU_NUM::クエスト6:
-		DrawGraph(0, 0, quest1_1, TRUE); //背景
+		graph.GraphQuest_Level1(random5);
+
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
 		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
 		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
