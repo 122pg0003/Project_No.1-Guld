@@ -14,4 +14,5 @@ private:
 	Game& _game;
 	SceneMgr& _scenemgr;
 	int _cg;
+	int _cg1;
 };
