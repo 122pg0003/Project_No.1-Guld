@@ -14,6 +14,8 @@ SceneMgr::SceneMgr(Game& game)
   ,trede(*this, _game)
   ,investment(*this, _game)
   ,nextmonth(*this, _game)
+  ,title(*this,_game)
+  ,save(*this,_game)
   //,math(*this)
   
   
@@ -66,6 +68,9 @@ void SceneMgr::Scene_Input() {
 //çXêV
 void SceneMgr::Scene_Update() {
   switch (scene) {       
+  case eScene::Title:
+    title.Title_Update();
+    break;
   case eScene::Menu:   
     menu.Menu_Update();   
     break;
@@ -91,14 +96,14 @@ void SceneMgr::Scene_Update() {
 }
 
 void SceneMgr::Scene_Render() {
-  //int no;
-   //math.Math_Update();
-  //DrawFormatString(1000, 0, GetColor(255, 255, 255), "èäéùã‡%d\n",no);
-  DrawGraph(0, 0, _bg1, TRUE);
+ DrawGraph(0, 0, _bg1, TRUE);
   DrawGraph(0, 0, _bg2, TRUE);
   switch (scene) {
+  case eScene::Title:
+    title.Title_Render();
+      break;
   case eScene::Menu:
-  menu.Menu_Render();
+ menu.Menu_Render();
     break;
   case eScene::Quest:
     quest.Quest_Render();
@@ -110,10 +115,12 @@ void SceneMgr::Scene_Render() {
     guild.Guild_Render();
     break;
   case eScene::Trede:
-    trede.Trede_Render();
+    save.Info_Save();
+    //trede.Trede_Render();
     break;
   case eScene::Investment:
-    investment.Investment_Render();
+    save.Info_Load();
+    //investment.Investment_Render();
       break;
 
   }

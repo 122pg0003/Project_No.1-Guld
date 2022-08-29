@@ -14,7 +14,7 @@ public:
 	void Math_Update();
 	void Math_Render();
 	void Guild_B();
-	void Success(int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow);
+	void Success(int& SuccessRate, int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow);
 	int SuccessRate;//クエストの成功率　各ステータスが必要量まであったら＋２５、最低０で最高１００
 	int _questresult = -1;
 	

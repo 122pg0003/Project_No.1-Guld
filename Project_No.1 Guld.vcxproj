@@ -165,7 +165,9 @@
     <ClCompile Include="NextMonth.cpp" />
     <ClCompile Include="Quest.cpp" />
     <ClCompile Include="QuestContent.cpp" />
+    <ClCompile Include="Save.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="Trede.cpp" />
     <ClCompile Include="TurnNumber.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -184,7 +186,9 @@
     <ClInclude Include="NextMonth.h" />
     <ClInclude Include="Quest.h" />
     <ClInclude Include="QuestContent.h" />
+    <ClInclude Include="Save.h" />
     <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="Trede.h" />
     <ClInclude Include="TurnNumber.h" />
   </ItemGroup>

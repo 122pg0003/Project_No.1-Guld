@@ -4,6 +4,7 @@
 #include "TurnNumber.h"
 #include "QuestContent.h"
 #include"Graph.h"
+#include<vector>
 
 class SceneMgr;
 class Game;
@@ -148,6 +149,7 @@ private:
 	int Q6GrHandle;
 	int i;
 	int a;
+	int b;
 	
 	int QGrHandle[6];
 	int quest1_1;	

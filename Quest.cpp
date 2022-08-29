@@ -69,6 +69,7 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	TotalKnow = 0;
 	AdventurerGood = 0;
 	a = -1;
+	b = -1;
 
 
 	Click1 = false;
@@ -361,7 +362,7 @@ void Quest::Quest_Input() {
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-			RANDOM_Q(random,random1,random2,random3,random4,random5);
+			//RANDOM_Q(random,random1,random2,random3,random4,random5);
 			scene = MENU_NUM::クエスト1;
 			//scene = static_cast<MENU_NUM>(random);
 			questData1.SetQuestParam(random);
@@ -1183,143 +1184,13 @@ void Quest::Quest_Render() {
 	switch (scene)
 	{
 	case MENU_NUM::メニュー:
-	  
-		//DrawGraph(0, 0, _bg, TRUE);//常に背景が表示されるようにしたい
-
 		DrawGraph(135, 185, menu, TRUE);
-		//DrawGraph(400, 200, _cg, TRUE);
-		//DrawBox(1800, 45, 1850, 90, GetColor(255, 0, 0), TRUE);  //戻るボタン
-
-		//DrawGraph(396, 270, Q1GrHandle, TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
-		//DrawGraph(830, 270, Q2GrHandle, TRUE);  //クエストスロット2
-		//DrawGraph(1264,270, Q3GrHandle, TRUE);	//クエストスロット3
-		//DrawGraph(396, 640, Q4GrHandle, TRUE);	//クエストスロット4
-		//DrawGraph(830, 640, Q5GrHandle, TRUE);	//クエストスロット5
-		//DrawGraph(1264,640, Q6GrHandle, TRUE);	//クエストスロット6
-		if (random == 1) {
-
-		DrawGraph(396, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
-		}
-		if (random == 2) {
-			DrawGraph(396, 270, QGrHandle[1], TRUE);  //クエストスロット2
-		}
-		if (random == 3) {
-		DrawGraph(396,270, QGrHandle[2], TRUE);	//クエストスロット3
-		}
-		if (random == 4) {
-		DrawGraph(396, 270, QGrHandle[3], TRUE);	//クエストスロット4
-		}
-		if (random == 5) {
-		DrawGraph(396, 270, QGrHandle[0], TRUE);	//クエストスロット5
-		}
-		if (random == 6) {
-		DrawGraph(396, 270, QGrHandle[1], TRUE);	//クエストスロット6
-		}
-		if (random == 7) {
-			DrawGraph(396, 270, QGrHandle[2], TRUE);	//クエストスロット6
-		}
-
-		if (random1 == 1) {
-
-		//	graph.Graph_Render(Graph::QuestNo::Q2_1);
-			DrawGraph(830, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
-		}
-		if (random1 == 2) {
-			DrawGraph(830, 270, QGrHandle[1], TRUE);  //クエストスロット2
-		}
-		if (random1 == 3) {
-			DrawGraph(830, 270, QGrHandle[2], TRUE);	//クエストスロット3
-		}
-		if (random1 == 4) {
-			DrawGraph(830, 270, QGrHandle[3], TRUE);	//クエストスロット4
-		}
-		if (random1 == 5) {
-			DrawGraph(830, 270, QGrHandle[4], TRUE);	//クエストスロット5
-		}
-		if (random1 == 6) {
-			DrawGraph(830, 270, QGrHandle[5], TRUE);	//クエストスロット6
-		}
-
-		if (random2 == 1) {
-			DrawGraph(1264, 270, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
-		}
-		if (random2 == 2) {
-			DrawGraph(1264, 270, QGrHandle[1], TRUE);  //クエストスロット2
-		}
-		if (random2 == 3) {
-			DrawGraph(1264, 270, QGrHandle[2], TRUE);	//クエストスロット3
-		}
-		if (random2 == 4) {
-			DrawGraph(1264, 270, QGrHandle[3], TRUE);	//クエストスロット4
-		}
-		if (random2 == 5) {
-			DrawGraph(1264, 270, QGrHandle[4], TRUE);	//クエストスロット5
-		}
-		if (random2 == 6) {
-			DrawGraph(1264, 270, QGrHandle[5], TRUE);	//クエストスロット6
-		}
-
-
-		if (random3 == 1) {
-			DrawGraph(396, 640, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
-		}
-		if (random3 == 2) {
-			DrawGraph(396, 640, QGrHandle[1], TRUE);  //クエストスロット2
-		}
-		if (random3 == 3) {
-			DrawGraph(396, 640, QGrHandle[2], TRUE);	//クエストスロット3
-		}
-		if (random3 == 4) {
-			DrawGraph(396, 640, QGrHandle[3], TRUE);	//クエストスロット4
-		}
-		if (random3 == 5) {
-			DrawGraph(396, 640, QGrHandle[4], TRUE);	//クエストスロット5
-		}
-		if (random3 == 6) {
-			DrawGraph(396, 640, QGrHandle[5], TRUE);	//クエストスロット6
-		}
-
-
-		if (random4 == 1) {
-			DrawGraph(830, 640, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
-		}
-		if (random4 == 2) {
-			DrawGraph(830, 640, QGrHandle[1], TRUE);  //クエストスロット2
-		}
-		if (random4 == 3) {
-			DrawGraph(830, 640, QGrHandle[2], TRUE);	//クエストスロット3
-		}
-		if (random4 == 4) {
-			DrawGraph(830, 640, QGrHandle[3], TRUE);	//クエストスロット4
-		}
-		if (random4 == 5) {
-			DrawGraph(830, 640, QGrHandle[4], TRUE);	//クエストスロット5
-		}
-		if (random4 == 6) {
-			DrawGraph(830, 640, QGrHandle[5], TRUE);	//クエストスロット6
-		}
-
-
-		if (random5 == 1) {
-			DrawGraph(1264, 640, QGrHandle[0], TRUE);  //クエストスロット1   画像サイズ　幅260　高さ310　以下同じ
-		}
-		if (random5 == 2) {
-			DrawGraph(1264, 640, QGrHandle[1], TRUE);  //クエストスロット2
-		}
-		if (random5 == 3) {
-			DrawGraph(1264, 640, QGrHandle[2], TRUE);	//クエストスロット3
-		}
-		if (random5 == 4) {
-			DrawGraph(1264, 640, QGrHandle[3], TRUE);	//クエストスロット4
-		}
-		if (random5 == 5) {
-			DrawGraph(1264, 640, QGrHandle[4], TRUE);	//クエストスロット5
-		}
-		if (random5 == 6) {
-			DrawGraph(1264, 640, QGrHandle[5], TRUE);	//クエストスロット6
-		}
-
-
+		graph.Quest_Slot_Level1(random);
+		graph.Quest_Slot_Level1_2(random1);
+		graph.Quest_Slot_Level1_3(random2);
+		graph.Quest_Slot_Level1_4(random3);
+		graph.Quest_Slot_Level1_5(random4);
+		graph.Quest_Slot_Level1_6(random5);
 		DrawGraph(1750, 20, Back, TRUE);
 		break;
 

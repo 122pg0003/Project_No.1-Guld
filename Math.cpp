@@ -24,7 +24,7 @@ int mymoney = 10000;
 int reward = 10000;
 int cost =1000;
 
-void Math::Success(int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow) {
+void Math::Success(int& SuccessRate, int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow) {
 	
 	if (TotalAttack >= ClearTotalAttack) {
 		SuccessRate += AddSuccessrate;
@@ -47,7 +47,7 @@ void Math::Success(int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSk
 bool Math::Judgement(int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow) {
 	//成功率をパーティーのトータルステータスで決めている
 	//ClearTotalAttack = 
-	Success( ClearTotalAttack,  ClearTotalDefence,  ClearTotalSkill,  ClearTotalKnow,  TotalAttack,  TotalDefence,  TotalSkill,  TotalKnow);
+	Success( SuccessRate, ClearTotalAttack,  ClearTotalDefence,  ClearTotalSkill,  ClearTotalKnow,  TotalAttack,  TotalDefence,  TotalSkill,  TotalKnow);
 
 
 

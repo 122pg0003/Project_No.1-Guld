@@ -8,6 +8,8 @@
 #include"NextMonth.h"
 #include"Math.h"
 #include "TurnNumber.h"
+#include"Title.h"
+#include"Save.h"
 
 
 class Game;
@@ -15,6 +17,7 @@ class Game;
 class SceneMgr{
 public:
 	enum class eScene {
+		Title,           //タイトル
 		Menu,         //メニュー
 		Quest,         //クエスト
 		QuestEnd,      //クエスト完了
@@ -32,7 +35,7 @@ public:
 	virtual void Scene_Render();
 	virtual void SceneMgr_ChangeScene(eScene nextScene);
  
-	eScene scene{ eScene::Menu };
+	eScene scene{ eScene::Title };
 protected:
 	Game& _game;
 	Menu  menu;
@@ -44,6 +47,8 @@ protected:
 	NextMonth nextmonth;
 	Math math;
 	TurnNumber turnnumber;  
+	Title title;
+	Save save;
 
 private:
 	int _bg;

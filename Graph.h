@@ -1,9 +1,17 @@
 #pragma once
 
+
 class Graph {
 public:
 	Graph();
 	~Graph();
+	void Quest_Slot_Level1(int random);
+	void Quest_Slot_Level1_2(int random1);
+	void Quest_Slot_Level1_3(int random2);
+	void Quest_Slot_Level1_4(int random3);
+	void Quest_Slot_Level1_5(int random4);
+	void Quest_Slot_Level1_6(int random5);
+
 	void GraphQuest_Level1(int random);
 	void GraphQuest_Level2(int random1);
 	enum class QuestLevel1 {
@@ -33,11 +41,10 @@ public:
 		Q2_11,///他
 	};
 
-
-	
-	void Graph_Render_Level1(QuestLevel1 index);
 	void Graph_Render_Level2(QuestLevel2 index );
 private:
-	int quest1[10];
-	int quest2[12];
+	
+	int Quest_Slot[5];
+	int quest1[10];///クエストレベル1
+	int quest2[12];///クエストレベル2
 };
