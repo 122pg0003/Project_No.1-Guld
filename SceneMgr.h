@@ -35,7 +35,7 @@ public:
 	virtual void Scene_Render();
 	virtual void SceneMgr_ChangeScene(eScene nextScene);
  
-	eScene scene{ eScene::Title };
+	eScene scene{ eScene::Menu };
 protected:
 	Game& _game;
 	Menu  menu;

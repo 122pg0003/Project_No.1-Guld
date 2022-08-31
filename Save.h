@@ -1,4 +1,6 @@
 #pragma once
+#include"Math.h"
+
 
 class SceneMgr;
 class Game;
@@ -12,5 +14,6 @@ public:
 private:
 	Game& _game;
 	SceneMgr& _scenemgr;
+	Math math;
 
 };

@@ -1,5 +1,5 @@
 #pragma once
-#include"Adventurer_Status.h"
+
 
 //#include"Quest.h"
 
@@ -9,14 +9,17 @@ class Game;
 
 class Math{
 public:
-	Math(/*Quest& quest, SceneMgr& scenemgr, Game& game*/ );     //コンストラクタ
+	Math();     //コンストラクタ
 	~Math();   //デストラクタ
+  int mymoney;
 	void Math_Update();
 	void Math_Render();
 	void Guild_B();
 	void Success(int& SuccessRate, int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow);
 	int SuccessRate;//クエストの成功率　各ステータスが必要量まであったら＋２５、最低０で最高１００
 	int _questresult = -1;
+	//int reward;
+	//int cost;
 	
 
 

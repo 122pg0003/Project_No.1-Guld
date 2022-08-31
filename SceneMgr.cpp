@@ -115,7 +115,7 @@ void SceneMgr::Scene_Render() {
     guild.Guild_Render();
     break;
   case eScene::Trede:
-    save.Info_Save();
+   save.Info_Save();
     //trede.Trede_Render();
     break;
   case eScene::Investment:
@@ -124,6 +124,7 @@ void SceneMgr::Scene_Render() {
       break;
 
   }
+
  math.Math_Render();
  menu.HomeMenu_Render();
 }

@@ -26,7 +26,6 @@ int WINAPI WinMain(
     game->Input();    // 入力
     game->Update();   // 更新
     game->Render();   // 描画
-    //ScreenFlip();
   }
 
   // Dxライブラリ終了
