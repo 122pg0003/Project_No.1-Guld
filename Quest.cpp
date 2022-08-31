@@ -2,7 +2,6 @@
 #include"DxLib.h"
 #include"SceneMgr.h"
 #include"Game.h"
-#include"Math.h"
 #include "Adventurer_Status.h"
 #include "TurnNumber.h"
 #include"Graph.h"
@@ -145,7 +144,7 @@ void Quest::Delete_Quest_Adventurer_Status(int AdventurerNo) {
 void Quest::Quest_Result() {  //クエストの結果を表示する
 	questData1.SetQuestParam(random);
 	if (End == TRUE) {
-		math.Judgement(questData1.ClearTotalAttack,
+	    math.Judgement(questData1.ClearTotalAttack,
 			questData1.ClearTotalDefence,
 			questData1.ClearTotalSkill,
 			questData1.ClearTotalKnow,

@@ -2,6 +2,8 @@
 #include "TurnNumber.h"
 #include "QuestContent.h"
 #include"Quest.h"
+
+
 class TurnNumber;
 class SceneMgr;
 class Game;
@@ -36,6 +38,7 @@ private:
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	SceneMgr& _scenemgr;
 	TurnNumber _turnnumber;
+
 	
 	int _bg;
 	int QGrHandle;

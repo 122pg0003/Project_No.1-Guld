@@ -1,6 +1,5 @@
 #include"SceneMgr.h"
 #include"DxLib.h"
-//#include"Math.h"
 
 
 
@@ -16,7 +15,7 @@ SceneMgr::SceneMgr(Game& game)
   ,nextmonth(*this, _game)
   ,title(*this,_game)
   ,save(*this,_game)
-  //,math(*this)
+ ,math(*this,_game)
   
   
 {
@@ -124,7 +123,7 @@ void SceneMgr::Scene_Render() {
       break;
 
   }
-
+ 
  math.Math_Render();
  menu.HomeMenu_Render();
 }
