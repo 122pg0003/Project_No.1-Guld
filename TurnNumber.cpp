@@ -8,7 +8,6 @@ TurnNumber::TurnNumber(){
 	//Start = FALSE;
 }
 
-
 TurnNumber::~TurnNumber() {
 
 }

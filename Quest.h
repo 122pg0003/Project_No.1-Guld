@@ -1,4 +1,5 @@
 #pragma once
+#include"Math.h"
 #include "Adventurer_Status.h"
 #include "TurnNumber.h"
 #include "QuestContent.h"
@@ -62,6 +63,7 @@ public:
 protected:
 	Game& _game;
 	SceneMgr& _scenemgr;
+	Math math;
 	QuestData questData1;
 	QuestData questData2;
 	QuestData questdata3;

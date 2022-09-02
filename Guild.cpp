@@ -3,13 +3,10 @@
 #include"SceneMgr.h"
 #include"Game.h"
 
-
 //コンストラクタ
 Guild::Guild(SceneMgr& scenemgr, Game& game) :
 	_scenemgr(scenemgr)
-	, _game(game) 
-
-{
+	, _game(game) {
 	_BIGrHandle = LoadGraph("images/Base-Illust.png");
 	_BuildingSlotGrHandle = LoadGraph("images/building.png");
 	_BuildingGrHandle = LoadGraph("images/List.png");
@@ -69,7 +66,7 @@ void Guild::Guild_Input() {
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
-	
+		math.Guild_B();
 		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 
 	}

@@ -4,7 +4,6 @@
 #include"SceneMgr.h"
 
 
-
 Save::Save(SceneMgr& scenemgr,Game& game): 
 	_scenemgr(scenemgr),
 		_game(game)
@@ -27,7 +26,7 @@ void Save::Info_Save() {
 	if (fp == NULL) { // NULLが返ってきたらエラー発生
 		return ;
 	}
-	//fwrite(&math.mymoney, sizeof(int), 1, fp); // ファイルにmoneyの値を出力する
+	fwrite(&math.mymoney, sizeof(int), 1, fp); // ファイルにmoneyの値を出力する
 	fclose(fp); //ファイルを閉じる
 	
 }
@@ -42,9 +41,9 @@ void Save::Info_Load() {
 		printf("ファイルを開けませんでした");
 	}
 	
-//	fread(&math.mymoney, sizeof(int),1, fp);
+	fread(&math.mymoney, sizeof(int),1, fp);
 		fclose(fp);
 //	DrawFormatString(1000, 45, GetColor(255, 255, 255), "%s\n",ch);
-	//DrawFormatString(1000, 100, GetColor(255, 255, 255), "%d\n",math.mymoney);
+	DrawFormatString(1000, 100, GetColor(255, 255, 255), "%d\n",math.mymoney);
 	//printf("書き込まれた文字は→%s\n", ch);
 }

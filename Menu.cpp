@@ -8,7 +8,6 @@
 Menu::Menu(SceneMgr& scenemgr, Game& game)
 :_scenemgr(scenemgr)
 , _game(game)
-
 //,quest(scenemgr.quest)
 {
 	_bg = LoadGraph("images/gi_001.png");  //ƒz[ƒ€‰æ–Ê
