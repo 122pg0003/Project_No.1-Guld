@@ -14,10 +14,10 @@
 
 class Game;
 
-class SceneMgr{
+class SceneMgr {
 public:
 	enum class eScene {
-		Title,           //タイトル
+		//Title,           //タイトル
 		Menu,         //メニュー
 		Quest,         //クエスト
 		QuestEnd,      //クエスト完了
@@ -26,6 +26,7 @@ public:
 		Trede,        //交易
 		Investment,   //投資
 		NextMonth,    //次の月
+		None = -1,
 	};
 
 	SceneMgr(Game& game);
@@ -34,7 +35,7 @@ public:
 	virtual void Scene_Update();
 	virtual void Scene_Render();
 	virtual void SceneMgr_ChangeScene(eScene nextScene);
- 
+
 	eScene scene{ eScene::Menu };
 protected:
 	Game& _game;
@@ -46,8 +47,7 @@ protected:
 	Investment investment;
 	NextMonth nextmonth;
 	Math math;
-	TurnNumber turnnumber;  
-	Title title;
+	TurnNumber turnnumber;
 	Save save;
 
 private:

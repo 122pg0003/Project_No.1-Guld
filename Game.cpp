@@ -10,7 +10,7 @@ Game::Game() :
 	,background(*this)
 	
 {
-
+	Audio_Check = false;
 }
 
 //デストラクタ
@@ -31,11 +31,27 @@ void Game::Update() {
 
 }
 
+//配列の初期化
+void Game::Clear() {
+	AABBDraw::Clear();
+}
+
+
 //描画
 void Game::Render() {
+	if (Audio_Check == false) {
+		audio.Main_Audio();
+		Audio_Check = true;
+	}
 	ClearDrawScreen();
 	mouse.M();
 	scenemgr.Scene_Render();
 	ScreenFlip();
 	//background.BackGround_Render();
+}
+
+
+//触れているかのチェック
+void Game::Check() {
+	AABBDraw::TouchCheck();
 }

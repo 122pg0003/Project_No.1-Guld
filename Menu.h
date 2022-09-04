@@ -39,6 +39,8 @@ private:
 		,Guild
 	};
 
+	NOW_SELECT now_select;
+
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	SceneMgr& _scenemgr;
 	TurnNumber _turnnumber;
@@ -51,6 +53,7 @@ private:
 	int IGrHandle;
 	int	NGrHandle;
 	int QGGrHandle;  //クエスト中
+	int Quest;
 	int NextGrHandle;  //次の月へ
 	int NextTurnGrHandle;
 	int _mouse, _mousetrg;

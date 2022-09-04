@@ -3,12 +3,18 @@
 #include"Game.h"
 #include"SceneMgr.h"
 
-Title::Title(SceneMgr& scenemgr, Game& game):
-_scenemgr(scenemgr),
-_game(game)
+Title::Title(Game& game) :
+	_game(game)
 {
 	_cg = LoadGraph("images/gi_002.png");
-	_cg1 = LoadGraph("images/gi_003.png");
+	AMGGrHandle = LoadGraph("images/AMG-LOGO.png");
+	RogoGrHandle = LoadGraph("images/rogo.png");
+	TitleGrHandle = LoadGraph("images/title.png");
+
+	_imageAlpha = 0;
+	_alphaLoopCount = 0;
+	_isSelectGameMode = false;
+	_waitTitleCount = 0;
 }
 
 Title::~Title() {
@@ -16,57 +22,181 @@ Title::~Title() {
 }
 
 
-void Title::Title_Update() {
-	
+int Title::Title_Update() {
+
+	if (_alphaLoopCount < 2)
+	{
+		if (GetMouseInput() & MOUSE_INPUT_LEFT) // 実際にはモード選択が行われたら、にする
+		{
+			_imageAlpha = 0;
+			_waitTitleCount = 0;
+			_alphaLoopCount = 2;
+		}
+	}
+
+	if (_imageAlpha < 256 * 2)
+	{
+		if (_imageAlpha > 256)
+		{
+			_waitTitleCount++;
+			if (_waitTitleCount > _waitMaxAlphaFrame || _alphaLoopCount == 2)
+			{
+				_imageAlpha += _imageAlphaSpeed;
+			}
+			else
+			{
+				_imageAlpha = 256;
+			}
+		}
+		else
+		{
+			_imageAlpha += _imageAlphaSpeed;
+		}
+
+		if (!_isSelectGameMode && _alphaLoopCount == 2 && _imageAlpha > 256)
+		{
+			_imageAlpha = 256;
+			// タイトル画面での入力待ちをする
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) // 実際にはモード選択が行われたら、にする
+			{
+				_isSelectGameMode = true;
+			}
+		}
+	}
+	else
+	{
+		_imageAlpha = 0;
+		_waitTitleCount = 0;
+		_alphaLoopCount++;
+		if (_alphaLoopCount == 3)
+		{
+			return 1;
+			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
+		}
+	}
+
+	return 0;
 }
 
+bool Title::skip() {
+	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+		return true;
+	}
+	return false;
+}
 
 void Title::Title_Render() {
-	WaitTimer(1000);
-	for (auto i = 0; i < 255; i++)
+	ClearDrawScreen();
+
+	int drawAlpha = _imageAlpha;
+	if (drawAlpha > 256)
 	{
-		// 描画輝度をセット
-		SetDrawBright(i, i, i);
-
-		// グラフィックを描画
-		DrawGraph(0, 0, _cg, FALSE);
-		ScreenFlip();
+		drawAlpha = 256 * 2 - _imageAlpha;
 	}
-	for (auto i = 0; i < 255; i++)
+
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, drawAlpha);
+
+	switch (_alphaLoopCount)
 	{
-		// 描画輝度をセット
-		SetDrawBright(255-i,255- i,255- i);
+	case 0:
+		DrawGraph(0, 0, AMGGrHandle, TRUE);
+		break;
+	case 1:
+		DrawGraph(560, 140, RogoGrHandle, TRUE);
+		break;
+	case 2:
+		DrawGraph(0, 0, _cg, TRUE);
+		DrawGraph(0, 0, TitleGrHandle, TRUE);
+		break;
 
-		// グラフィックを描画
-		DrawGraph(0, 0, _cg, FALSE);
-		ScreenFlip();
+	default:
+		break;
 	}
 
-	for (auto i = 0; i < 255; i++)
-	{
-		// 描画輝度をセット
-		SetDrawBright(i, i, i);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	ScreenFlip();
 
-		// グラフィックを描画
-		DrawGraph(0, 0, _cg1, FALSE);
-		ScreenFlip();
+	/*
+	while (ProcessMessage() != -1) {
+
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+			break;
+		}
+
+		WaitTimer(1000);
+		for (auto i = 0; i < 255; i++)
+		{
+			// 描画輝度をセット
+			SetDrawBright(i, i, i);
+
+			// グラフィックを描画
+			ClearDrawScreen();
+			DrawGraph(0, 0, AMGGrHandle, TRUE);
+			ScreenFlip();
+		}
+
+		WaitTimer(2000);
+
+		for (auto i = 255; i > 0; i--)
+		{
+			// 描画輝度をセット
+			SetDrawBright(i, i, i);
+
+			// グラフィックを描画
+			ClearDrawScreen();
+			DrawGraph(0, 0, AMGGrHandle, TRUE);
+			ScreenFlip();
+		}
+
+		for (auto i = 0; i < 255; i++)
+		{
+			// 描画輝度をセット
+			SetDrawBright(i, i, i);
+
+			// グラフィックを描画
+			ClearDrawScreen();
+			DrawGraph(560, 140, RogoGrHandle, TRUE);
+			ScreenFlip();
+		}
+
+		WaitTimer(2000);
+
+		for (auto i = 255; i > 0; i--)
+		{
+			// 描画輝度をセット
+			SetDrawBright(i, i, i);
+
+			// グラフィックを描画
+			ClearDrawScreen();
+			DrawGraph(560, 140, RogoGrHandle, TRUE);
+			ScreenFlip();
+		}
+
+		for (auto i = 0; i < 255; i++)
+		{
+			// 描画輝度をセット
+			SetDrawBright(i, i, i);
+
+			// グラフィックを描画
+			DrawGraph(0, 0, _cg, TRUE);
+			DrawGraph(0, 0, TitleGrHandle, TRUE);
+			ScreenFlip();
+		}
+		break;
 	}
-	for (auto i = 0; i < 255; i++)
-	{
-		// 描画輝度をセット
-		SetDrawBright(255 - i, 255 - i, 255 - i);
 
-		// グラフィックを描画
-		DrawGraph(0, 0, _cg1, FALSE);
+	while(ProcessMessage() != -1) {
+
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+			break;
+		}
+
+		DrawGraph(0, 0, _cg, TRUE);
+		DrawGraph(0, 0, TitleGrHandle, TRUE);
+		DrawString(850,960, "クリックして開始", GetColor(255, 255, 255), TRUE);
 		ScreenFlip();
-		
-	}
-	SetDrawBright(255, 255, 255);
-	DrawGraph(0, 0, _cg,TRUE);
-		DrawString(500, 500, "何か押して下さい。/n", GetColor(255, 255, 255), TRUE);
-		ScreenFlip();
-		WaitKey();
-		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-	}
 
-
+	}
+	_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
+*/
+}

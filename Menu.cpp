@@ -20,6 +20,7 @@ Menu::Menu(SceneMgr& scenemgr, Game& game)
 	QGGrHandle = LoadGraph("images/Quest_Going.png");  //クエスト中スロット
 	NextGrHandle = LoadGraph("images/Next_m_3.png");  //次のターンへボタン
 	NextTurnGrHandle = LoadGraph("images/Base-Illust.png");  //次のターンに移る時の画面
+	Quest = LoadGraph("images/冒険者_2.png");  //次のターンに移る時の画面
 	//_turnnumber.Start = FALSE;
 }
 
@@ -112,12 +113,15 @@ void Menu::Menu_Input() {
 
 	GetMenuPosition(MENU_NUM::クエスト, max_x, min_x, max_y, min_y);
 
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((_game.GetMouseX() < max_x) &&
-		(_game.GetMouseX() > min_x)) && 
+	if( (_game.GetMouseX() < max_x) &&
+		(_game.GetMouseX() > min_x) && 
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
-		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Quest);
+		Menu::NOW_SELECT::Quest;
+		DrawGraph(0, 190, Quest, TRUE);
+		if (_mousetrg != 0) {
+			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Quest);
+		}
 	}
 
 	GetMenuPosition(MENU_NUM::冒険者, max_x, min_x, max_y, min_y);
@@ -216,6 +220,7 @@ void Menu::Menu_Render() {
 	//int no = 100;
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "所持金%d/n", no);
 	//DrawGraph(0, 0, _bg, TRUE);
+
 	DrawGraph(0, 190, QGrHandle, TRUE);
 	DrawGraph(0, 338, MGrHandle, TRUE);
 	DrawGraph(0, 486, GGrHandle, TRUE);
@@ -225,6 +230,18 @@ void Menu::Menu_Render() {
 	DrawGraph(1750, 0, NextGrHandle, TRUE);  //次のターンへボタン
 	//_turnnumber.Draw();
 	DrawGraph(1500, 190, QGGrHandle, TRUE);  //クエスト中スロット、クエストに行っている間だけ表示したい
+	switch (now_select)
+	{
+	case Menu::NOW_SELECT::Quest:
+		DrawGraph(0, 190, Quest, TRUE);
+		break;
+	case Menu::NOW_SELECT::Adventurer:
+		break;
+	case Menu::NOW_SELECT::Guild:
+		break;
+	default:
+		break;
+	}
 	
 }
 

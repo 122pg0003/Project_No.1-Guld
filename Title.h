@@ -4,15 +4,29 @@
 class SceneMgr;
 class Game;
 
-class Title{
+class Title {
 public:
-	Title(SceneMgr& scenemgr,Game& game);
+	Title(Game& game);
 	~Title();
-	void Title_Update();
+	int Title_Update();
 	void Title_Render();
 private:
 	Game& _game;
-	SceneMgr& _scenemgr;
+	//SceneMgr& _scenemgr;
 	int _cg;
-	int _cg1;
+	int AMGGrHandle;
+	int RogoGrHandle;
+	int TitleGrHandle;
+	bool skip();
+
+	// 画像の透過度
+	int _imageAlpha;
+	// 画像を透過して表示が終わったら１カウントするカウンタ
+	int _alphaLoopCount;
+	// タイトル画面が表示されてから、モードの選択をされたらtrue
+	bool _isSelectGameMode;
+
+	const int _imageAlphaSpeed = 5;
+	const int _waitMaxAlphaFrame = 20;
+	int _waitTitleCount;
 };
