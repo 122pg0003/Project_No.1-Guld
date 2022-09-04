@@ -33,6 +33,12 @@ private:
 		クエスト中,        //クエスト中
 	};
 
+	enum class NOW_SELECT {
+		Quest
+		,Adventurer
+		,Guild
+	};
+
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	SceneMgr& _scenemgr;
 	TurnNumber _turnnumber;

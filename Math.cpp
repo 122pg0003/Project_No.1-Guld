@@ -10,7 +10,7 @@ Math::Math()
 	SuccessRate = 0;
 	no = 0;
 	
-	 mymoney = 10000;
+	 //mymoney = 10000;
 	 //reward = 10000;
 	 //cost = 1000;
 
@@ -22,7 +22,7 @@ Math::Math()
 Math::~Math() {
 
 }
-//int mymoney = 10000;
+int mymoney = 10000;
 int reward = 10000;
 int cost =1000;
 

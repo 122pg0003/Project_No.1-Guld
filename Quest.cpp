@@ -48,13 +48,18 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	
 
 
-	Q1 = LoadGraph("images/ch_001.mini.2.png");  //冒険者1
+	Q1     = LoadGraph("images/ch_001.mini.2.png");  //冒険者1
 	Q1_1 = LoadGraph("images/ch_001.mini1.png");
-	Q1Start = LoadGraph("images/出撃ボタン.png");  //出撃ボタン
-	Q2 = LoadGraph("images/ch_002.mini2.png");  //冒険者2
-	Q2_1 = LoadGraph("images/ch_002.mini1.png");
-	Q3 = LoadGraph("images/ch_06.mini2.png");  //冒険者3
+	Q2     = LoadGraph("images/ch_002.mini2.png");  //冒険者2
+	Q2_1 = LoadGraph("images/ch_02.mini1.png");
+	Q3     = LoadGraph("images/ch_06.mini2.png");  //冒険者3
 	Q3_1 = LoadGraph("images/ch_06.mini1.png");
+	Q4     = LoadGraph("images/ch_09_mini02.png");//冒険者4
+	Q4_1 = LoadGraph("images/ch_09_mini01.png");
+	Q5_1     = LoadGraph("images/ch_03_mini01.png");//冒険者5
+	Q6_1     = LoadGraph("images/ch_005_mini01.png");//冒険者6
+
+	QuestStart = LoadGraph("images/出撃ボタン.png");  //出撃ボタン
 	menu = LoadGraph("images/Base-illust.png");  //クエスト1中身
 	clear = LoadGraph("images/success.png");
 	failure = LoadGraph("images/failure.png");
@@ -75,6 +80,7 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	Click1 = false;
 	Click2 = false;
 	Click3 = false;
+	Click4 = false;
 
 	//random = 0;
 
@@ -236,27 +242,37 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		min_y = 640;
 
 		break;
-	case MENU_NUM::QInside:
-		max_x = 1040;
+		///冒険者1
+	case MENU_NUM::QuestAdventurer1:
+		max_x = 897;
 		min_x = 760;
 		max_y = 298;
 		min_y = 210;
 		break;
 
-
-	case MENU_NUM::QInside1:
-		max_x = 1040;
-		min_x = 760;
-		max_y = 386;
-		min_y = 270;
+		///冒険者2
+	case MENU_NUM::QuestAdventurer2:
+		max_x = 1034;
+		min_x = 897;
+		max_y = 298;
+		min_y = 210;
 		break;
 
-	case MENU_NUM::QInside2:
-		max_x = 1040;
+		///冒険者3
+	case MENU_NUM::QuestAdventurer3:
+		max_x = 897;
 		min_x = 760;
 		max_y = 474;
 		min_y = 330;
 		break;
+
+	case MENU_NUM::QuestAdventurer4:
+		max_x = 1034;
+		min_x = 897;
+		max_y = 474;
+		min_y = 330;
+		break;
+
 	case MENU_NUM::クエスト開始:
 		max_x = 1980;
 		min_x = 1500;
@@ -334,9 +350,16 @@ void Quest::Quest_Input() {
 		TotalSkill = 0;
 		TotalKnow = 0;
 		AdventurerGood = 0;
+
+		Click1 = false;
+		Click2 = false;
+		Click3 = false;
+		Click4 = false;
 		break;
 	
 	}
+
+
 	switch (scene)
 	{
 
@@ -451,12 +474,12 @@ void Quest::Quest_Input() {
 		//Back_Button();
 
 
-		if ((_mousetrg != 0) &&
+	if ((_mousetrg != 0) &&
 			((mouse_x < max_x) &&
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-
+	
 			scene = MENU_NUM::メニュー;
 			q = Q::Q初期値;
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
@@ -464,7 +487,7 @@ void Quest::Quest_Input() {
 		}
 
 
-		GetMenuPosition(MENU_NUM::QInside, max_x, min_x, max_y, min_y);
+		GetMenuPosition(MENU_NUM::QuestAdventurer1, max_x, min_x, max_y, min_y);
 
 		if ((_mousetrg != 0) &&
 			((mouse_x < max_x) &&
@@ -490,7 +513,7 @@ void Quest::Quest_Input() {
 		}
 
 
-		GetMenuPosition(MENU_NUM::QInside1, max_x, min_x, max_y, min_y);
+		GetMenuPosition(MENU_NUM::QuestAdventurer2, max_x, min_x, max_y, min_y);
 
 		if ((_mousetrg != 0) &&
 			((mouse_x < max_x) &&
@@ -515,7 +538,7 @@ void Quest::Quest_Input() {
 
 		}
 
-		GetMenuPosition(MENU_NUM::QInside2, max_x, min_x, max_y, min_y);
+		GetMenuPosition(MENU_NUM::QuestAdventurer3, max_x, min_x, max_y, min_y);
 
 		if ((_mousetrg != 0) &&
 			((mouse_x < max_x) &&
@@ -536,6 +559,32 @@ void Quest::Quest_Input() {
 				Delete_Quest_Adventurer_Status(2);
 			}
 		}
+
+		GetMenuPosition(MENU_NUM::QuestAdventurer4, max_x, min_x, max_y, min_y);
+
+		if ((_mousetrg != 0) &&
+			((mouse_x < max_x) &&
+				(mouse_x > min_x)) &&
+			(mouse_y < max_y) &&
+			(mouse_y > min_y)) {
+			//scene = MENU_NUM::QInside;
+		//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
+			q = Q::Q4;
+			//クリックされたらステータスに数値をプラス、もう一度押されたらマイナスする
+			//星１冒険者１
+			if (Click4 == false) {
+				Click4 = true;
+
+				Add_Quest_Adventurer_Status(2);
+			}
+
+			else if (Click4 == true) {
+				Click4 = false;
+				Delete_Quest_Adventurer_Status(2);
+			}
+			//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
+		}
+
 
 		GetMenuPosition(MENU_NUM::クエスト開始, max_x, min_x, max_y, min_y);
 
@@ -567,6 +616,7 @@ void Quest::Quest_Input() {
 			
 		}
 		break;
+
 		case MENU_NUM::クエスト2:
 
 			//Back_Button();
@@ -585,7 +635,7 @@ void Quest::Quest_Input() {
 			}
 
 
-			GetMenuPosition(MENU_NUM::QInside, max_x, min_x, max_y, min_y);
+			GetMenuPosition(MENU_NUM::QuestAdventurer1, max_x, min_x, max_y, min_y);
 
 			if ((_mousetrg != 0) &&
 				((mouse_x < max_x) &&
@@ -610,7 +660,7 @@ void Quest::Quest_Input() {
 			}
 
 
-			GetMenuPosition(MENU_NUM::QInside1, max_x, min_x, max_y, min_y);
+			GetMenuPosition(MENU_NUM::QuestAdventurer2, max_x, min_x, max_y, min_y);
 
 			if ((_mousetrg != 0) &&
 				((mouse_x < max_x) &&
@@ -633,7 +683,7 @@ void Quest::Quest_Input() {
 
 			}
 
-			GetMenuPosition(MENU_NUM::QInside2, max_x, min_x, max_y, min_y);
+			GetMenuPosition(MENU_NUM::QuestAdventurer3, max_x, min_x, max_y, min_y);
 
 			if ((_mousetrg != 0) &&
 				((mouse_x < max_x) &&
@@ -704,7 +754,7 @@ void Quest::Quest_Input() {
 				}
 
 
-				GetMenuPosition(MENU_NUM::QInside, max_x, min_x, max_y, min_y);
+				GetMenuPosition(MENU_NUM::QuestAdventurer1, max_x, min_x, max_y, min_y);
 
 				if ((_mousetrg != 0) &&
 					((mouse_x < max_x) &&
@@ -730,7 +780,7 @@ void Quest::Quest_Input() {
 				}
 
 
-				GetMenuPosition(MENU_NUM::QInside1, max_x, min_x, max_y, min_y);
+				GetMenuPosition(MENU_NUM::QuestAdventurer2, max_x, min_x, max_y, min_y);
 
 				if ((_mousetrg != 0) &&
 					((mouse_x < max_x) &&
@@ -753,7 +803,7 @@ void Quest::Quest_Input() {
 
 				}
 
-				GetMenuPosition(MENU_NUM::QInside2, max_x, min_x, max_y, min_y);
+				GetMenuPosition(MENU_NUM::QuestAdventurer3, max_x, min_x, max_y, min_y);
 
 				if ((_mousetrg != 0) &&
 					((mouse_x < max_x) &&
@@ -823,7 +873,7 @@ void Quest::Quest_Input() {
 					}
 
 
-					GetMenuPosition(MENU_NUM::QInside, max_x, min_x, max_y, min_y);
+					GetMenuPosition(MENU_NUM::QuestAdventurer1, max_x, min_x, max_y, min_y);
 
 					if ((_mousetrg != 0) &&
 						((mouse_x < max_x) &&
@@ -849,7 +899,7 @@ void Quest::Quest_Input() {
 					}
 
 
-					GetMenuPosition(MENU_NUM::QInside1, max_x, min_x, max_y, min_y);
+					GetMenuPosition(MENU_NUM::QuestAdventurer2, max_x, min_x, max_y, min_y);
 
 					if ((_mousetrg != 0) &&
 						((mouse_x < max_x) &&
@@ -872,7 +922,7 @@ void Quest::Quest_Input() {
 
 					}
 
-					GetMenuPosition(MENU_NUM::QInside2, max_x, min_x, max_y, min_y);
+					GetMenuPosition(MENU_NUM::QuestAdventurer3, max_x, min_x, max_y, min_y);
 
 					if ((_mousetrg != 0) &&
 						((mouse_x < max_x) &&
@@ -942,7 +992,7 @@ void Quest::Quest_Input() {
 						}
 
 
-						GetMenuPosition(MENU_NUM::QInside, max_x, min_x, max_y, min_y);
+						GetMenuPosition(MENU_NUM::QuestAdventurer1, max_x, min_x, max_y, min_y);
 
 						if ((_mousetrg != 0) &&
 							((mouse_x < max_x) &&
@@ -968,7 +1018,7 @@ void Quest::Quest_Input() {
 						}
 
 
-						GetMenuPosition(MENU_NUM::QInside1, max_x, min_x, max_y, min_y);
+						GetMenuPosition(MENU_NUM::QuestAdventurer2, max_x, min_x, max_y, min_y);
 
 						if ((_mousetrg != 0) &&
 							((mouse_x < max_x) &&
@@ -991,7 +1041,7 @@ void Quest::Quest_Input() {
 
 						}
 
-						GetMenuPosition(MENU_NUM::QInside2, max_x, min_x, max_y, min_y);
+						GetMenuPosition(MENU_NUM::QuestAdventurer3, max_x, min_x, max_y, min_y);
 
 						if ((_mousetrg != 0) &&
 							((mouse_x < max_x) &&
@@ -1061,7 +1111,7 @@ void Quest::Quest_Input() {
 							}
 
 
-							GetMenuPosition(MENU_NUM::QInside, max_x, min_x, max_y, min_y);
+							GetMenuPosition(MENU_NUM::QuestAdventurer1, max_x, min_x, max_y, min_y);
 
 							if ((_mousetrg != 0) &&
 								((mouse_x < max_x) &&
@@ -1087,7 +1137,7 @@ void Quest::Quest_Input() {
 							}
 
 
-							GetMenuPosition(MENU_NUM::QInside1, max_x, min_x, max_y, min_y);
+							GetMenuPosition(MENU_NUM::QuestAdventurer2, max_x, min_x, max_y, min_y);
 
 							if ((_mousetrg != 0) &&
 								((mouse_x < max_x) &&
@@ -1110,7 +1160,7 @@ void Quest::Quest_Input() {
 
 							}
 
-							GetMenuPosition(MENU_NUM::QInside2, max_x, min_x, max_y, min_y);
+							GetMenuPosition(MENU_NUM::QuestAdventurer3, max_x, min_x, max_y, min_y);
 
 							if ((_mousetrg != 0) &&
 								((mouse_x < max_x) &&
@@ -1197,12 +1247,15 @@ void Quest::Quest_Render() {
 	case MENU_NUM::クエスト1:
 		graph.GraphQuest_Level1(random);  //クエストの中身
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
-		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
+		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
+		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
+		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
+		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
 		
 		DrawString(100, 100, "クエスト1", TRUE);
-		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
+		DrawFormatString(1000, 500, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
 		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
 		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
 		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
@@ -1215,9 +1268,13 @@ void Quest::Quest_Render() {
 		
 
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
-		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
+		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
+		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
+		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
+		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+
+		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
 		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
 		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
 		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
@@ -1236,9 +1293,13 @@ void Quest::Quest_Render() {
 		graph.GraphQuest_Level1(random2);
 
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
-		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
+		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
+		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
+		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
+		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+
+		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
 		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
 		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
 		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
@@ -1257,9 +1318,13 @@ void Quest::Quest_Render() {
 		graph.GraphQuest_Level1(random3);
 
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
-		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
+		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
+		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
+		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
+		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+
+		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
 		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
 		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
 		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
@@ -1278,9 +1343,13 @@ void Quest::Quest_Render() {
 		graph.GraphQuest_Level1(random4);
 
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
-		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
+		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
+		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
+		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
+		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+
+		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
 		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
 		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
 		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
@@ -1299,9 +1368,13 @@ void Quest::Quest_Render() {
 		graph.GraphQuest_Level1(random5);
 
 		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(760, 298, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 386, Q3_1, TRUE);   //冒険者3
-		DrawGraph(1500, 700, Q1Start, TRUE);//クエスト出撃
+		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
+		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
+		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
+		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
+		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+
+		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
 		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
 		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
 		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
@@ -1316,14 +1389,14 @@ void Quest::Quest_Render() {
 
 		break;
 
-	case MENU_NUM::QInside:
+	case MENU_NUM::QuestAdventurer1:
 		
 		//DrawGraph(1070, 210, Q1Start, TRUE);
 		//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
 		//DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
 		break;
 
-	case MENU_NUM::QInside1:
+	case MENU_NUM::QuestAdventurer2:
 		//DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
 	//	DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
 		break;
@@ -1354,6 +1427,8 @@ void Quest::Quest_Render() {
 		Click1 = false;  //ココからbreakまでの処理は再度クエストを選択した際に冒険者がいない状態にするもの
 		Click2 = false;
 		Click3 = false;
+		Click4 = false;
+
 		TotalAttack = 0;
 		TotalDefence = 0;
 		TotalSkill = 0;
@@ -1363,21 +1438,23 @@ void Quest::Quest_Render() {
 	case Q::Q1:
 	{
 		if (Click2 == true) {
-			DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
-		}
+		DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
+    }
 		if (Click3 == true) {
 			DrawExtendGraph(1470, 210, 1670, 360, Q3, TRUE);
 		}
 		if (Click1 == true) {
 			DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
-
-			break;
+		}
+		if (Click4 == true) {
+			DrawExtendGraph(1470, 210, 1670, 360, Q4, TRUE);
 		}
 		else {
 
 			break;
 		}
 	}
+
 	case Q::Q2:
 
 	{
@@ -1389,12 +1466,16 @@ void Quest::Quest_Render() {
 		}
 		if (Click2 == true) {
 			DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
-
+		}
+		if (Click4 == true) {
+		DrawExtendGraph(1470, 210, 1670, 360, Q4, TRUE);
 		}
 		else {
 
+	break;
 		}
-	}break;
+	}
+
 	case Q::Q3:
 	{
 		if (Click1 == true) {
@@ -1407,11 +1488,38 @@ void Quest::Quest_Render() {
 			DrawExtendGraph(1470, 210, 1670, 360, Q3, TRUE);
 
 		}
-		else {
+		if (Click4 == true) {
+			DrawExtendGraph(1470, 210, 1670, 360, Q4, TRUE);
 
 		}
-		break;
+		else {
+
+			break;
+		}
 	}
+
+	case Q::Q4:
+	{
+		if (Click1 == true) {
+			DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
+		}
+		if (Click2 == true) {
+			DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
+		}
+		if (Click4 == true) {
+			DrawExtendGraph(1470, 210, 1670, 360, Q4, TRUE);
+
+		}
+		if (Click3 == true) {
+			DrawExtendGraph(1470, 210, 1670, 360, Q3, TRUE);
+
+		}
+		else {
+
+			break;
+		}
+	}
+
 	case Q::Qクエスト判定: 
 		//DrawGraph(100, 100, clear, TRUE);
 		//math._questresult = rand() % 2;

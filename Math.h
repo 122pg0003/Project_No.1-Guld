@@ -11,7 +11,6 @@ class Math{
 public:
 	Math();     //コンストラクタ
 	~Math();   //デストラクタ
-  int mymoney;
 	void Math_Update();
 	void Math_Render();
 	void Guild_B();

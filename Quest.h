@@ -55,6 +55,7 @@ public:
 	bool Click1;  //冒険者１の判定
 	bool Click2;  //冒険者２の判定
 	bool Click3;  //冒険者３の判定
+	bool Click4;  //冒険者4の判定
 	bool End;     //クエストの終了判定
 	bool QuestStart;
 
@@ -104,9 +105,10 @@ private:
 		,クエスト9
 		,クエスト10
 		,クエスト11
-		,QInside
-		,QInside1
-		,QInside2
+		,QuestAdventurer1
+		,QuestAdventurer2
+		,QuestAdventurer3
+		,QuestAdventurer4
 		,クエスト開始
 	};
 
@@ -116,6 +118,7 @@ private:
 		,Q1
 		,Q2
 		,Q3
+		,Q4
 		,Qクエスト判定
 		,Q初期値 = -1,
 	};
@@ -165,11 +168,20 @@ private:
 
 	int Q1;
 	int Q1_1;
-	int Q1Start;
+	int Quest_Start;
 	int Q2;
 	int Q2_1;
 	int Q3;
 	int Q3_1;
+	int Q4;
+	int Q4_1;
+	int Q5;
+	int Q5_1;
+	int Q6;
+	int Q6_1;///
+
+
+
 	int menu;
 	int clear;
 	int failure;
