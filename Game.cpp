@@ -43,6 +43,7 @@ void Game::Render() {
 		audio.Main_Audio();
 		Audio_Check = true;
 	}
+	audio.Check_Click();
 	ClearDrawScreen();
 	mouse.M();
 	scenemgr.Scene_Render();

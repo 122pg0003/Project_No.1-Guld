@@ -48,19 +48,19 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	
 
 
-	Q1     = LoadGraph("images/ch_001.mini.2.png");  //冒険者1
-	Q1_1 = LoadGraph("images/ch_001.mini1.png");
+	Q1     = LoadGraph("images/ch_001.mini.2 (1).png");  //冒険者1
+	Q1_1 = LoadGraph("images/ch_001.mini1 (2).png");
 	Q2     = LoadGraph("images/ch_002.mini2.png");  //冒険者2
 	Q2_1 = LoadGraph("images/ch_02.mini1.png");
 	Q3     = LoadGraph("images/ch_06.mini2.png");  //冒険者3
-	Q3_1 = LoadGraph("images/ch_06.mini1.png");
+	Q3_1 = LoadGraph("images/ch_06.mini1 (1).png");
 	Q4     = LoadGraph("images/ch_09_mini02.png");//冒険者4
 	Q4_1 = LoadGraph("images/ch_09_mini01.png");
 	Q5_1     = LoadGraph("images/ch_03_mini01.png");//冒険者5
 	Q6_1     = LoadGraph("images/ch_005_mini01.png");//冒険者6
 
 	QuestStart = LoadGraph("images/出撃ボタン.png");  //出撃ボタン
-	menu = LoadGraph("images/Base-illust.png");  //クエスト1中身
+	menu = LoadGraph("images/window.png");  //クエスト1中身
 	clear = LoadGraph("images/success.png");
 	failure = LoadGraph("images/failure.png");
 	Back = LoadGraph("images/back.png");
@@ -1253,12 +1253,13 @@ void Quest::Quest_Render() {
 		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
 		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
+		DrawGraph(1750, 20, Back, TRUE);
 		
 		DrawString(100, 100, "クエスト1", TRUE);
-		DrawFormatString(1000, 500, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
-		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
-		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
-		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
+		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
+		DrawFormatString(1200, 785, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1200, 840, GetColor(0, 0, 0), "賢さ%d", questData1.ClearTotalKnow);
 		//DrawFormatString(1000, 980, GetColor(0, 0, 0), "得意不得意%d", questData1.ClearTotalKnow);
 
 		break;
@@ -1273,12 +1274,13 @@ void Quest::Quest_Render() {
 		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
 		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
 		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
-
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
-		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
-		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
-		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+		DrawGraph(1750, 20, Back, TRUE);
+
+		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
+		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
+		DrawFormatString(1200, 785, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1200, 840, GetColor(0, 0, 0), "賢さ%d", questData1.ClearTotalKnow);
 
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
@@ -1298,12 +1300,13 @@ void Quest::Quest_Render() {
 		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
 		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
 		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
-
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
-		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
-		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
-		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+		DrawGraph(1750, 20, Back, TRUE);
+
+		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
+		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
+		DrawFormatString(1200, 785, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1200, 840, GetColor(0, 0, 0), "賢さ%d", questData1.ClearTotalKnow);
 
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
@@ -1323,12 +1326,13 @@ void Quest::Quest_Render() {
 		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
 		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
 		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
-
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
-		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
-		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
-		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+		DrawGraph(1750, 20, Back, TRUE);
+
+		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
+		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
+		DrawFormatString(1200, 785, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1200, 840, GetColor(0, 0, 0), "賢さ%d", questData1.ClearTotalKnow);
 
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
@@ -1348,13 +1352,13 @@ void Quest::Quest_Render() {
 		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
 		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
 		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
-
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
-		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
-		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
-		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+		DrawGraph(1750, 20, Back, TRUE);
 
+		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
+		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
+		DrawFormatString(1200, 785, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1200, 840, GetColor(0, 0, 0), "賢さ%d", questData1.ClearTotalKnow);
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
 		DrawBox(760, 270, 1050, 330, GetColor(0, 255, 0), TRUE);
@@ -1373,12 +1377,13 @@ void Quest::Quest_Render() {
 		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
 		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
 		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
-
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawFormatString(1000, 680, GetColor(0, 0, 0), "アタック%d", questData1.ClearTotalAttack);
-		DrawFormatString(1000, 780, GetColor(0, 0, 0), "ディフェンス%d", questData1.ClearTotalDefence);
-		DrawFormatString(1000, 880, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
-		DrawFormatString(1000, 980, GetColor(0, 0, 0), "知識%d", questData1.ClearTotalKnow);
+		DrawGraph(1750, 20, Back, TRUE);
+
+		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
+		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
+		DrawFormatString(1200, 785, GetColor(0, 0, 0), "スキル%d", questData1.ClearTotalSkill);
+		DrawFormatString(1200, 840, GetColor(0, 0, 0), "賢さ%d", questData1.ClearTotalKnow);
 
 		/*DrawGraph(0, 0, _cg1, TRUE);
 		DrawBox(760, 210, 1050, 270, GetColor(255, 0, 0), TRUE);
@@ -1408,11 +1413,12 @@ void Quest::Quest_Render() {
 
 
 		int FontHandle = CreateFontToHandle(NULL, 40, 3);
-		DrawFormatStringToHandle(880, 680, GetColor(0, 0, 0), FontHandle, "攻%d", TotalAttack);
-		DrawFormatStringToHandle(880, 760, GetColor(0, 0, 0), FontHandle, "守%d", TotalDefence);
-		DrawFormatStringToHandle(880, 840, GetColor(0, 0, 0), FontHandle, "技%d", TotalSkill);
-		DrawFormatStringToHandle(880, 920, GetColor(0, 0, 0), FontHandle, "知%d", TotalKnow);
-		DrawFormatStringToHandle(1000, 920, GetColor(0, 0, 0), FontHandle, "得意%d", AdventurerGood);
+		DrawFormatStringToHandle(780, 680, GetColor(0, 0, 0), FontHandle, "メンバーの総合値");
+		DrawFormatStringToHandle(880, 720, GetColor(0, 0, 0), FontHandle, "攻%d", TotalAttack);
+		DrawFormatStringToHandle(880, 770, GetColor(0, 0, 0), FontHandle, "守%d", TotalDefence);
+		DrawFormatStringToHandle(880, 820, GetColor(0, 0, 0), FontHandle, "技%d", TotalSkill);
+		DrawFormatStringToHandle(880, 870, GetColor(0, 0, 0), FontHandle, "知%d", TotalKnow);
+		//DrawFormatStringToHandle(1000, 920, GetColor(0, 0, 0), FontHandle, "得意%d", AdventurerGood);
 		//DrawFormatString(1000, 680, GetColor(0, 0, 0), "成功率%d", math.SuccessRate);
 		DeleteFontToHandle(FontHandle);
 
@@ -1438,16 +1444,16 @@ void Quest::Quest_Render() {
 	case Q::Q1:
 	{
 		if (Click2 == true) {
-		DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
+		DrawGraph(1270, 210,Q2, TRUE);
     }
 		if (Click3 == true) {
-			DrawExtendGraph(1470, 210, 1670, 360, Q3, TRUE);
+			DrawGraph(1470, 210,Q3, TRUE);
 		}
 		if (Click1 == true) {
-			DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
+			DrawGraph(1070, 210,Q1, TRUE);
 		}
 		if (Click4 == true) {
-			DrawExtendGraph(1470, 210, 1670, 360, Q4, TRUE);
+			DrawGraph(1470, 210,Q4, TRUE);
 		}
 		else {
 
@@ -1459,16 +1465,16 @@ void Quest::Quest_Render() {
 
 	{
 		if (Click3 == true) {
-			DrawExtendGraph(1470, 210, 1670, 360, Q3, TRUE);
+			DrawGraph(1470, 210,Q3, TRUE);
 		}
 		if (Click1 == true) {
-			DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
+			DrawGraph(1070, 210,Q1, TRUE);
 		}
 		if (Click2 == true) {
-			DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
+			DrawGraph(1270, 210,Q2, TRUE);
 		}
 		if (Click4 == true) {
-		DrawExtendGraph(1470, 210, 1670, 360, Q4, TRUE);
+		DrawGraph(1470, 210,Q4, TRUE);
 		}
 		else {
 
@@ -1479,17 +1485,17 @@ void Quest::Quest_Render() {
 	case Q::Q3:
 	{
 		if (Click1 == true) {
-			DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
+			DrawGraph(1070, 210,Q1, TRUE);
 		}
 		if (Click2 == true) {
-			DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
+			DrawGraph(1270, 210,Q2, TRUE);
 		}
 		if (Click3 == true) {
-			DrawExtendGraph(1470, 210, 1670, 360, Q3, TRUE);
+			DrawGraph(1470, 210,Q3, TRUE);
 
 		}
 		if (Click4 == true) {
-			DrawExtendGraph(1470, 210, 1670, 360, Q4, TRUE);
+			DrawGraph(1470, 210,Q4, TRUE);
 
 		}
 		else {
@@ -1501,17 +1507,17 @@ void Quest::Quest_Render() {
 	case Q::Q4:
 	{
 		if (Click1 == true) {
-			DrawExtendGraph(1070, 210, 1270, 360, Q1, TRUE);
+			DrawGraph(1070, 210,Q1, TRUE);
 		}
 		if (Click2 == true) {
-			DrawExtendGraph(1270, 210, 1470, 360, Q2, TRUE);
+			DrawGraph(1270, 210,Q2, TRUE);
 		}
 		if (Click4 == true) {
-			DrawExtendGraph(1470, 210, 1670, 360, Q4, TRUE);
+			DrawGraph(1470, 210,Q4, TRUE);
 
 		}
 		if (Click3 == true) {
-			DrawExtendGraph(1470, 210, 1670, 360, Q3, TRUE);
+			DrawGraph(1470, 210,Q3, TRUE);
 
 		}
 		else {

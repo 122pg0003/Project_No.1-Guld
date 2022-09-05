@@ -20,7 +20,7 @@ Menu::Menu(SceneMgr& scenemgr, Game& game)
 	QGGrHandle = LoadGraph("images/Quest_Going.png");  //クエスト中スロット
 	NextGrHandle = LoadGraph("images/Next_m_3.png");  //次のターンへボタン
 	NextTurnGrHandle = LoadGraph("images/Base-Illust.png");  //次のターンに移る時の画面
-	Quest = LoadGraph("images/冒険者_2.png");  //次のターンに移る時の画面
+	Quest = LoadGraph("images/クエストメニューバー＿2.png");  //次のターンに移る時の画面
 	//_turnnumber.Start = FALSE;
 }
 
@@ -109,7 +109,7 @@ void Menu::Menu_Input() {
 	int max_x, min_x, max_y, min_y;
 	int mouse_x = _game.GetMouseX();
 	int mouse_y = _game.GetMouseY();
-	
+	Menu::NOW_SELECT::MENU;
 
 	GetMenuPosition(MENU_NUM::クエスト, max_x, min_x, max_y, min_y);
 
@@ -117,8 +117,8 @@ void Menu::Menu_Input() {
 		(_game.GetMouseX() > min_x) && 
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
+		//DrawGraph(0, 190, Quest, TRUE);
 		Menu::NOW_SELECT::Quest;
-		DrawGraph(0, 190, Quest, TRUE);
 		if (_mousetrg != 0) {
 			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Quest);
 		}
@@ -217,21 +217,11 @@ void Menu::Menu_Update() {
 
 //描画
 void Menu::Menu_Render() {
-	//int no = 100;
-	//DrawFormatString(0, 0, GetColor(255, 255, 255), "所持金%d/n", no);
-	//DrawGraph(0, 0, _bg, TRUE);
-
-	DrawGraph(0, 190, QGrHandle, TRUE);
-	DrawGraph(0, 338, MGrHandle, TRUE);
-	DrawGraph(0, 486, GGrHandle, TRUE);
-	DrawGraph(0, 634, TGrHandle, TRUE);
-	DrawGraph(0, 782, IGrHandle, TRUE);
-	DrawGraph(0, 930, NGrHandle, TRUE);
-	DrawGraph(1750, 0, NextGrHandle, TRUE);  //次のターンへボタン
-	//_turnnumber.Draw();
-	DrawGraph(1500, 190, QGGrHandle, TRUE);  //クエスト中スロット、クエストに行っている間だけ表示したい
 	switch (now_select)
 	{
+	case Menu::NOW_SELECT::MENU:
+		DrawGraph(0, 190, QGrHandle, TRUE);
+		break;
 	case Menu::NOW_SELECT::Quest:
 		DrawGraph(0, 190, Quest, TRUE);
 		break;
@@ -242,6 +232,20 @@ void Menu::Menu_Render() {
 	default:
 		break;
 	}
+	//int no = 100;
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), "所持金%d/n", no);
+	//DrawGraph(0, 0, _bg, TRUE);
+
+	//DrawGraph(0, 190, Quest, TRUE);
+	DrawGraph(0, 190, QGrHandle, TRUE);
+	DrawGraph(0, 338, MGrHandle, TRUE);
+	DrawGraph(0, 486, GGrHandle, TRUE);
+	DrawGraph(0, 634, TGrHandle, TRUE);
+	DrawGraph(0, 782, IGrHandle, TRUE);
+	DrawGraph(0, 930, NGrHandle, TRUE);
+	DrawGraph(1750, 0, NextGrHandle, TRUE);  //次のターンへボタン
+	//_turnnumber.Draw();
+	DrawGraph(1500, 190, QGGrHandle, TRUE);  //クエスト中スロット、クエストに行っている間だけ表示したい
 	
 }
 

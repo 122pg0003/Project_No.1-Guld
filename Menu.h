@@ -34,7 +34,8 @@ private:
 	};
 
 	enum class NOW_SELECT {
-		Quest
+		MENU
+		,Quest
 		,Adventurer
 		,Guild
 	};

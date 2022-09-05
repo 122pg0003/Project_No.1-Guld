@@ -84,7 +84,10 @@ bool AABBDraw::TouchCheck() {
 		AABBInfo& info = aabbInfo[i];
 
 
-		if ((MouseX > info.X) && (MouseX < info.X2) && (MouseY > info.Y) && (MouseY < info.Y2)) {
+		if ((MouseX > info.X) &&
+			(MouseX < info.X2) &&
+			(MouseY > info.Y) &&
+			(MouseY < info.Y2)) {
 
 			touch.reset(new AABBInfo(info));
 			return true;

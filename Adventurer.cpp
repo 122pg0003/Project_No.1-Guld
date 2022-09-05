@@ -2,6 +2,7 @@
 #include"DxLib.h"
 #include"SceneMgr.h"
 #include"Game.h"
+#include"AABB.h"
 
 
 
@@ -10,19 +11,32 @@
 Adventurer::Adventurer(SceneMgr& scenemgr, Game& game) :
 	_scenemgr(scenemgr)
 	, _game(game) {
-	_cg = LoadGraph("images/Scene_Game.png");
-	/*  x1 = 1000 ;
-		y1 = 600 ;
-		x2 = 100;
-		y2 = 100 ;*/
-	_BIGrHandle = LoadGraph("images/Base-Illust.png");
-	Q1GrHandle = LoadGraph("images/Quest-1.png");  //クエスト1スロット
-	Q2GrHandle = LoadGraph("images/Quest-2.png");  //クエスト2スロット
-	Q3GrHandle = LoadGraph("images/Quest-3.png");  //クエスト3スロット
-	Q4GrHandle = LoadGraph("images/Quest-4.png");  //クエスト4スロット
-	Q5GrHandle = LoadGraph("images/Quest-5.png");  //クエスト5スロット
-	Q6GrHandle = LoadGraph("images/Quest-6.png");  //クエスト6スロット
+	       Back = LoadGraph("images/back.png");
+	       menu = LoadGraph("images/chw_0.png");
+	Adventurer1 = LoadGraph("images/ch_001.mini3.png ");
+    Adventurer2 = LoadGraph("images/ch_02.mini3.png ");
+    Adventurer3 = LoadGraph("images/ch_03_mini03.png ");
+    Adventurer4 = LoadGraph("images/ ch_005_mini03.png");
+    Adventurer5 = LoadGraph("images/ ch_06.mini3.png");
+    Adventurer6 = LoadGraph("images/ ch_08_mini3.png");
+	a = LoadGraph("images/ch_001.mini3.png");
+	b = LoadGraph("images/ch_02.mini3.png");
+	c = LoadGraph("images/ch_03_mini03.png");
+
+   
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer1, Adventurer1);
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer2, Adventurer2);
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer3, Adventurer3);
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer4, Adventurer4);
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer5, Adventurer5);
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer6, Adventurer6);
+
+	ScreenNo = 1;
+	pattern = MENU_NUM::Null;
+	nowSelectedPattern = MENU_NUM::Null;
+	oldpattern = MENU_NUM::Null;
 }
+
 
 
 
@@ -40,221 +54,109 @@ int[] Adventurer::GetMenuPosition(int menuIndex) {
 void Adventurer::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y) {
 	switch (menuIndex)
 	{
-	case MENU_NUM::メニュー:
-
+	case MENU_NUM::Return:
+	{
 		max_x = 1850;
 		min_x = 1800;
 		max_y = 90;
 		min_y = 45;
-
-		break;
-
-	case MENU_NUM::冒険者1:
-	
-		max_x = 656;
-		min_x = 396;
-		max_y = 580;
-		min_y = 270;
-
-		break;
-
-	case MENU_NUM::冒険者2:
-
-		max_x = 1090;
-		min_x = 830;
-		max_y = 580;
-		min_y = 270;
-
-		break;
-
-	case MENU_NUM::冒険者3:
-
-		max_x = 1524;
-		min_x = 1264;
-		max_y = 580;
-		min_y = 270;
-
-		break;
-	case MENU_NUM::冒険者4:
-
-		max_x = 656;
-		min_x = 396;
-		max_y = 950;
-		min_y = 640;
-
-		break;
-	case MENU_NUM::冒険者5:
-
-		max_x = 1090;
-		min_x = 830;
-		max_y = 950;
-		min_y = 640;
-
-		break;
-	case MENU_NUM::冒険者6:
-
-		max_x = 1524;
-		min_x = 1264;
-		max_y = 950;
-		min_y = 640;
-
-		break;
-
-	case MENU_NUM::冒険者7:
-
-		max_x = 600;
-		min_x = 500;
-		max_y = 600;
-		min_y = 500;
-
 		break;
 	}
-	
+	}
 }
+
 
 void Adventurer::Adventurer_Input() {
 	int max_x, min_x, max_y, min_y;
-
-	GetMenuPosition(MENU_NUM::メニュー, max_x, min_x, max_y, min_y);
-
+	GetMenuPosition(MENU_NUM::Return, max_x, min_x, max_y, min_y);
+	//右上のBOXをクリックするとホームに戻る
 	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
-		
-				_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
+		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 
+	}
+
+	auto isClick = AABBDraw::ClickCheck();
+
+	if (AABBDraw::IsTouch() == true) {
+		auto touch = AABBDraw::GetTouch();
+
+		AABBDraw::LOAD_NUM load[] = {
+		AABBDraw::LOAD_NUM::Adventurer1,///冒険者1
+		AABBDraw::LOAD_NUM::Adventurer2,///冒険者2
+		AABBDraw::LOAD_NUM::Adventurer3,///冒険者3
+		AABBDraw::LOAD_NUM::Adventurer4,///冒険者4
+		AABBDraw::LOAD_NUM::Adventurer5,///冒険者5
+		AABBDraw::LOAD_NUM::Adventurer6,///冒険者6
+		};
+		MENU_NUM pat[] = {
+		MENU_NUM::Adventurer1 ,
+		MENU_NUM::Adventurer2 ,
+		MENU_NUM::Adventurer3 ,
+		MENU_NUM::Adventurer4 ,
+		MENU_NUM::Adventurer5 ,
+		MENU_NUM::Adventurer6 ,
+		};
+
+		for (auto i = 0; i < 16; ++i) {
+			//if (pat[i] == MENU_NUM::Set) {
+			//	pattern = MENU_NUM::GuildMenu;
+			//}
+
+			int handle = AABBDraw::GetHandle(load[i]);
+
+			if (touch->Handle == handle) {
+				pattern = pat[i];
+				oldpattern = pat[i];
+				break;
 			}
 
-	GetMenuPosition(MENU_NUM::冒険者1, max_x, min_x, max_y, min_y);
-
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((_game.GetMouseX() < max_x) &&
-		(_game.GetMouseX() > min_x)) &&
-		(_game.GetMouseY() < max_y) &&
-		(_game.GetMouseY() > min_y)) {
-	//DrawBox(1000, 900, 900, 100, GetColor(255, 0, 255), TRUE);
-		MENU_NUM scene = MENU_NUM::冒険者1;
-		//DrawString(800, 800, "aaaaaaaaaaaa", GetColor(255, 255, 0), FALSE);
-				//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		//DrawBox(x1,y1,x2,y2,GetColor(255, 0, 0), TRUE);
+		}
 
 	}
 
-	GetMenuPosition(MENU_NUM::冒険者2, max_x, min_x, max_y, min_y);
-
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((_game.GetMouseX() < max_x) &&
-			(_game.GetMouseX() > min_x)) &&
-		(_game.GetMouseY() < max_y) &&
-		(_game.GetMouseY() > min_y)) {
-		MENU_NUM scene = MENU_NUM::冒険者2;
-		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		//DrawBox(x1,y1,x2,y2,GetColor(255, 0, 0), TRUE);
-
-	}
-
-	GetMenuPosition(MENU_NUM::冒険者3, max_x, min_x, max_y, min_y);
-
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((_game.GetMouseX() < max_x) &&
-			(_game.GetMouseX() > min_x)) &&
-		(_game.GetMouseY() < max_y) &&
-		(_game.GetMouseY() > min_y)) {
-		MENU_NUM scene = MENU_NUM::冒険者3;
-		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		//DrawBox(x1,y1,x2,y2,GetColor(255, 0, 0), TRUE);
-
-	}
-	GetMenuPosition(MENU_NUM::冒険者4, max_x, min_x, max_y, min_y);
-
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((_game.GetMouseX() < max_x) &&
-			(_game.GetMouseX() > min_x)) &&
-		(_game.GetMouseY() < max_y) &&
-		(_game.GetMouseY() > min_y)) {
-		MENU_NUM scene = MENU_NUM::冒険者4;
-		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		//DrawBox(x1,y1,x2,y2,GetColor(255, 0, 0), TRUE);
-
-	}
-	GetMenuPosition(MENU_NUM::冒険者5, max_x, min_x, max_y, min_y);
-
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((_game.GetMouseX() < max_x) &&
-			(_game.GetMouseX() > min_x)) &&
-		(_game.GetMouseY() < max_y) &&
-		(_game.GetMouseY() > min_y)) {
-		MENU_NUM scene = MENU_NUM::冒険者5;
-		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		//DrawBox(x1,y1,x2,y2,GetColor(255, 0, 0), TRUE);
-
-	}
-	GetMenuPosition(MENU_NUM::冒険者6, max_x, min_x, max_y, min_y);
-
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((_game.GetMouseX() < max_x) &&
-			(_game.GetMouseX() > min_x)) &&
-		(_game.GetMouseY() < max_y) &&
-		(_game.GetMouseY() > min_y)) {
-		MENU_NUM scene = MENU_NUM::冒険者6;
-		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		//DrawBox(x1,y1,x2,y2,GetColor(255, 0, 0), TRUE);
-
-	}
-
-	GetMenuPosition(MENU_NUM::冒険者7, max_x, min_x, max_y, min_y);
-
-	if (((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) &&
-		((_game.GetMouseX() < max_x) &&
-			(_game.GetMouseX() > min_x)) &&
-		(_game.GetMouseY() < max_y) &&
-		(_game.GetMouseY() > min_y)) {
-		//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-		//DrawBox(x1,y1,x2,y2,GetColor(255, 0, 0), TRUE);
-
-	}
 }
+
 void Adventurer::Adventurer_Update() {
-		//ClearDrawScreen();
-		DrawGraph(400, 200, _cg, TRUE);
-		//DrawString(0, 60, "Aキーを押すとメニュー画面に進みます。", GetColor(255, 255, 255));
-		//if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			switch (scene)
-			{
-			case Adventurer::MENU_NUM::冒険者1:
-				DrawBox(200, 200, 200, 200, GetColor(255, 0, 0), TRUE);
-				break;
-			case Adventurer::MENU_NUM::冒険者2:
-				DrawBox(200, 200, 200, 200, GetColor(255, 0, 0), TRUE);
-				break;
-			case Adventurer::MENU_NUM::冒険者3:
-				DrawBox(200, 200, 200, 200, GetColor(255, 0, 0), TRUE);
-				break;
-			case Adventurer::MENU_NUM::冒険者4:
-				DrawBox(200, 200, 200, 200, GetColor(255, 0, 0), TRUE);
-				break;
-			case Adventurer::MENU_NUM::冒険者5:
-				DrawBox(200, 200, 200, 200, GetColor(255, 0, 0), TRUE);
-				break;
-			case Adventurer::MENU_NUM::冒険者6:
-				DrawBox(200, 200, 200, 200, GetColor(255, 0, 0), TRUE);
-				break;
-			}
-		//}
+		
 
 }
 
 void Adventurer::Adventurer_Render() {
-	DrawBox(1800, 45, 1850, 90, GetColor(255, 0, 0), TRUE);
-	DrawGraph(135, 185, _BIGrHandle, TRUE);
-	//DrawGraph(400, 200, _cg, TRUE);
-	DrawGraph(396, 270, Q1GrHandle, TRUE);  //画像サイズ　幅260　高さ310　以下同じ
-	DrawGraph(830, 270, Q2GrHandle, TRUE);
-	DrawGraph(1264, 270, Q3GrHandle, TRUE);
-	DrawGraph(396, 640, Q4GrHandle, TRUE);
-	DrawGraph(830, 640, Q5GrHandle, TRUE);
-	DrawGraph(1264, 640, Q6GrHandle, TRUE);
+	DrawGraph(0, 0, menu, TRUE);
+	DrawGraph(1750, 20, Back, TRUE);
+
+	AABBDraw::MyDrawGraph(790,234,Adventurer1,TRUE);
+	AABBDraw::MyDrawGraph(1014,234,Adventurer2,TRUE);
+	AABBDraw::MyDrawGraph(1238,234,Adventurer3,TRUE);
+	AABBDraw::MyDrawGraph(1462,234,Adventurer4,TRUE);
+	AABBDraw::MyDrawGraph(898,575,Adventurer5,TRUE);
+	AABBDraw::MyDrawGraph(1125,575,Adventurer6,TRUE);
+
+	switch (pattern)
+	{
+	case Adventurer::MENU_NUM::Adventurer1:
+		DrawGraph(174, 215, a, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer2:
+		DrawGraph(174, 215, b, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer3:
+		DrawGraph(174, 215, c, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer4:
+		break;
+	case Adventurer::MENU_NUM::Adventurer5:
+		break;
+	case Adventurer::MENU_NUM::Adventurer6:
+		break;
+	case Adventurer::MENU_NUM::Null:
+		break;
+	default:
+		break;
+	}
 }
 

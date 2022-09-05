@@ -42,13 +42,19 @@ public:
     Training,  //鍛錬場
     Atelier,  //アトリエ
     Library,  //図書館
-    画面1,
-    画面2,
-    ポーション,
-    炭鉱,
-    サキュバス,
-    掃除屋,
-    投資
+    Menu_Quest,       ///メニュークエスト
+    Menu_Guild,       ///メニューギルド
+    Menu_Trede,       ///メニュー交易
+    Menu_Investment,  ///メニュー投資
+    Adventurer1,
+    Adventurer2,
+    Adventurer3,
+    Adventurer4,
+    Adventurer5,
+    Adventurer6
+      
+
+
   };
 
   static int MyDrawGraph(int x, int y, int GrHandle, int TransFlag);  //画像の描画

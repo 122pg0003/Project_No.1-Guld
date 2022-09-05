@@ -22,29 +22,38 @@ protected:
 private:
 
 	enum class MENU_NUM {
-		ƒƒjƒ…[
-		,–`Œ¯Ò1
-		,–`Œ¯Ò2
-		,–`Œ¯Ò3
-		,–`Œ¯Ò4
-		,–`Œ¯Ò5
-		,–`Œ¯Ò6
-		,–`Œ¯Ò7
+		Return,
+		ƒƒjƒ…[,
+		Adventurer1,
+		Adventurer2,
+		Adventurer3,
+		Adventurer4,
+		Adventurer5,
+		Adventurer6,
+		Null = -1  //–¢‘I‘ğ
 	};
 
-	
+	MENU_NUM pattern;
+	MENU_NUM oldpattern;
+	MENU_NUM nowSelectedPattern;
 
 	MENU_NUM scene;
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	SceneMgr& _scenemgr;
-	int _cg;
-	int _BIGrHandle;
-	int Q1GrHandle;
-	int Q2GrHandle;
-	int Q3GrHandle;
-	int Q4GrHandle;
-	int Q5GrHandle;
-	int Q6GrHandle;
+	int menu;
+	int Back;
+	int ScreenNo;
+	int Adventurer1; ///–`Œ¯Ò1
+	int Adventurer2; ///–`Œ¯Ò2
+	int Adventurer3; ///–`Œ¯Ò3
+	int Adventurer4; ///–`Œ¯Ò4
+	int Adventurer5; ///–`Œ¯Ò5
+	int Adventurer6; ///–`Œ¯Ò6
+	int Adventurer7; ///–`Œ¯Ò7
+	int Adventurer8; ///–`Œ¯Ò8
+	int a;
+	int b;
+	int c;
 
 
 	//int _cursorIndex;
