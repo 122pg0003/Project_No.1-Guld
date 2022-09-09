@@ -51,9 +51,18 @@ private:
 	int Adventurer6; ///–`Œ¯Ò6
 	int Adventurer7; ///–`Œ¯Ò7
 	int Adventurer8; ///–`Œ¯Ò8
-	int a;
-	int b;
-	int c;
+	int Adventurer1_1;
+	int Adventurer2_1;
+	int Adventurer3_1;
+	int Adventurer4_1;
+	int Adventurer5_1;
+	int Adventurer6_1;
+	int Adventurer1_2;
+	int Adventurer2_2;
+	int Adventurer3_2;
+	int Adventurer4_2;
+	int Adventurer5_2;
+	int Adventurer6_2;
 
 
 	//int _cursorIndex;

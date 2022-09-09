@@ -16,12 +16,29 @@ Adventurer::Adventurer(SceneMgr& scenemgr, Game& game) :
 	Adventurer1 = LoadGraph("images/ch_001.mini3.png ");
     Adventurer2 = LoadGraph("images/ch_02.mini3.png ");
     Adventurer3 = LoadGraph("images/ch_03_mini03.png ");
-    Adventurer4 = LoadGraph("images/ ch_005_mini03.png");
-    Adventurer5 = LoadGraph("images/ ch_06.mini3.png");
-    Adventurer6 = LoadGraph("images/ ch_08_mini3.png");
-	a = LoadGraph("images/ch_001.mini3.png");
-	b = LoadGraph("images/ch_02.mini3.png");
-	c = LoadGraph("images/ch_03_mini03.png");
+    Adventurer4 = LoadGraph("images/ch_005_mini03.png");
+    Adventurer5 = LoadGraph("images/ch_06.mini3.png");
+    Adventurer6 = LoadGraph("images/ch_08_mini3.png");
+
+		Adventurer1_1 = LoadGraph("images/ch_001.mini5.png");
+		Adventurer2_1 = LoadGraph("images/ch_02.mini5.png");
+		Adventurer3_1 = LoadGraph("images/ch_03_mini05.png");
+		Adventurer4_1 = LoadGraph("images/ch_005_mini05.png");
+		Adventurer5_1 = LoadGraph("images/ch_06.mini5.png");
+		Adventurer6_1 = LoadGraph("images/ch_08_mini5.png");
+
+		Adventurer1_2 = LoadGraph("images/chw_1.png");
+		Adventurer2_2 = LoadGraph("images/chw_2.png");
+		Adventurer3_2 = LoadGraph("images/chw_3.png");
+		Adventurer4_2 = LoadGraph("images/chw_5.png");
+		Adventurer5_2 = LoadGraph("images/chw_6.png");
+		Adventurer6_2 = LoadGraph("images/chw_8.png");
+
+
+
+
+
+
 
    
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer1, Adventurer1);
@@ -57,7 +74,7 @@ void Adventurer::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int
 	case MENU_NUM::Return:
 	{
 		max_x = 1850;
-		min_x = 1800;
+		min_x = 1750;
 		max_y = 90;
 		min_y = 45;
 		break;
@@ -76,6 +93,9 @@ void Adventurer::Adventurer_Input() {
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
 		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
+		pattern = MENU_NUM::Null;
+		nowSelectedPattern = MENU_NUM::Null;
+		oldpattern = MENU_NUM::Null;
 
 	}
 
@@ -102,17 +122,17 @@ void Adventurer::Adventurer_Input() {
 		};
 
 		for (auto i = 0; i < 16; ++i) {
-			//if (pat[i] == MENU_NUM::Set) {
-			//	pattern = MENU_NUM::GuildMenu;
-			//}
-
 			int handle = AABBDraw::GetHandle(load[i]);
 
 			if (touch->Handle == handle) {
 				pattern = pat[i];
 				oldpattern = pat[i];
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+			nowSelectedPattern = pat[i];
+			}
 				break;
 			}
+
 
 		}
 
@@ -139,24 +159,55 @@ void Adventurer::Adventurer_Render() {
 	switch (pattern)
 	{
 	case Adventurer::MENU_NUM::Adventurer1:
-		DrawGraph(174, 215, a, TRUE);
+		DrawGraph(174, 215, Adventurer1_1, TRUE);
 		break;
 	case Adventurer::MENU_NUM::Adventurer2:
-		DrawGraph(174, 215, b, TRUE);
+		DrawGraph(174, 215, Adventurer2_1, TRUE);
 		break;
 	case Adventurer::MENU_NUM::Adventurer3:
-		DrawGraph(174, 215, c, TRUE);
+		DrawGraph(174, 215, Adventurer3_1, TRUE);
 		break;
 	case Adventurer::MENU_NUM::Adventurer4:
+		DrawGraph(174, 215, Adventurer4_1, TRUE);
 		break;
 	case Adventurer::MENU_NUM::Adventurer5:
+		DrawGraph(174, 215, Adventurer5_1, TRUE);
 		break;
 	case Adventurer::MENU_NUM::Adventurer6:
+		DrawGraph(174, 215, Adventurer6_1, TRUE);
 		break;
 	case Adventurer::MENU_NUM::Null:
 		break;
 	default:
 		break;
 	}
+
+
+	switch (nowSelectedPattern)
+	{
+	case Adventurer::MENU_NUM::Adventurer1:
+		DrawGraph(0, 0, Adventurer1_2, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer2:
+		DrawGraph(0, 0, Adventurer2_2, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer3:
+		DrawGraph(0, 0, Adventurer3_2, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer4:
+		DrawGraph(0, 0, Adventurer4_2, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer5:
+		DrawGraph(0, 0, Adventurer5_2, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer6:
+		DrawGraph(0, 0, Adventurer6_2, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Null:
+		break;
+	default:
+		break;
+	}
+
 }
 
