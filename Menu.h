@@ -22,7 +22,7 @@ protected:
 private:
 
 	enum class  MENU_NUM {
-		クエスト,         //クエスト
+		Quest,         //クエスト
 		冒険者,           //冒険者
 		ギルド,           //ギルド
 		施設,             //施設
@@ -31,16 +31,13 @@ private:
 		次の月,           //次の月
 		次のターン,        //次のターン
 		クエスト中,        //クエスト中
+		Null = -1  //未選択
 	};
 
-	enum class NOW_SELECT {
-		MENU
-		,Quest
-		,Adventurer
-		,Guild
-	};
+	MENU_NUM pattern;
+	MENU_NUM oldpattern;
+	MENU_NUM nowSelectedPattern;
 
-	NOW_SELECT now_select;
 
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	SceneMgr& _scenemgr;

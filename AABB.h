@@ -43,6 +43,7 @@ public:
     Atelier,  //アトリエ
     Library,  //図書館
     Menu_Quest,       ///メニュークエスト
+    Menu_Adventurer,   ///メニュー冒険者
     Menu_Guild,       ///メニューギルド
     Menu_Trede,       ///メニュー交易
     Menu_Investment,  ///メニュー投資
