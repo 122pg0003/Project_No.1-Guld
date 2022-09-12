@@ -16,6 +16,7 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	//,math(*this)
 	//,_math(*this,_game,_scenemgr)
 {
+	
 	   //_cg = LoadGraph("images/quest1_1.jpg");
 	///クエストの中身の画像
 	 /* quest1_1 = LoadGraph("images/quest1_1.png");
@@ -61,8 +62,8 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 
 	QuestStart = LoadGraph("images/出撃ボタン.png");  //出撃ボタン
 	menu = LoadGraph("images/window.png");  //クエスト1中身
-	clear = LoadGraph("images/success.png");
-	failure = LoadGraph("images/failure.png");
+	clear = LoadGraph("images/result.png");
+	failure = LoadGraph("images/result02.png");
 	Back = LoadGraph("images/back.png");
 	End = FALSE;
 
@@ -158,14 +159,14 @@ void Quest::Quest_Result() {  //クエストの結果を表示する
 			TotalAttack, TotalDefence, TotalSkill, TotalKnow);
 		if (math._questresult == 1) {
 			ClearDrawScreen();
-			DrawGraph(600, 390, clear, TRUE);
+			DrawGraph(0, 0, clear, TRUE);
 			ScreenFlip();
 			WaitKey();
 			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 		}
 		else if(math._questresult == 0) {
 			ClearDrawScreen();
-			DrawGraph(600, 390, failure, TRUE);
+			DrawGraph(0, 0, failure, TRUE);
 			ScreenFlip();
 			WaitKey();
 			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);

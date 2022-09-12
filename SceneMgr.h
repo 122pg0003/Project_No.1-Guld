@@ -13,6 +13,7 @@
 
 
 class Game;
+class Math;
 
 class SceneMgr {
 public:

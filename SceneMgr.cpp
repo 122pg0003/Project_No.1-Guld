@@ -1,5 +1,6 @@
 #include"SceneMgr.h"
 #include"DxLib.h"
+#include"Game.h"
 //#include"Math.h"
 
 
@@ -28,7 +29,7 @@ SceneMgr::SceneMgr(Game& game)
 
 //デストラクタ
 SceneMgr::~SceneMgr() {
-
+	
 }
 
 //入力
