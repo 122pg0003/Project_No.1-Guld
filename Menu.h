@@ -1,7 +1,7 @@
 #pragma once
 #include "TurnNumber.h"
 #include "QuestContent.h"
-#include"Quest.h"
+
 class TurnNumber;
 class SceneMgr;
 class Game;
@@ -43,6 +43,7 @@ private:
 	SceneMgr& _scenemgr;
 	TurnNumber _turnnumber;
 	
+	int z;
 	int _bg;
 	int QGrHandle;
 	int	MGrHandle;
@@ -52,6 +53,8 @@ private:
 	int	NGrHandle;
 	int QGGrHandle;  //クエスト中
 	int Quest;
+	int Adventurer;
+	int Guild;
 	int NextGrHandle;  //次の月へ
 	int NextTurnGrHandle;
 	int _mouse, _mousetrg;

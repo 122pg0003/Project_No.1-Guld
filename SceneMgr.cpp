@@ -17,7 +17,7 @@ SceneMgr::SceneMgr(Game& game)
 	, nextmonth(*this, _game)
 	//, title(*this, _game)
 	, save(*this, _game)
-	//,math(*this)
+	
 
 
 {
@@ -45,16 +45,16 @@ void SceneMgr::Scene_Input() {
 		quest.Quest_Input();
 		break;
 	case eScene::QuestEnd:  //クエスト完了時のリザルト画面
-		quest.Quest_Result();
+		//quest.Quest_Result();
 		break;
 	case eScene::Guild:
 		guild.Guild_Input();
 		break;
 	case eScene::Trede:
-		trede.Trede_Input();
+		//trede.Trede_Input();
 		break;
 	case eScene::Investment:
-		investment.Investment_Input();
+		//investment.Investment_Input();
 		break;
 	case eScene::NextMonth:
 		nextmonth.NextMonth_Input();
@@ -82,10 +82,11 @@ void SceneMgr::Scene_Update() {
 		guild.Guild_Update();
 		break;
 	case eScene::Trede:
-		trede.Trede_Update();
+		Info_Save();
+		//trede.Trede_Update();
 		break;
 	case eScene::Investment:
-		investment.Investment_Update();
+		//investment.Investment_Update();
 		break;
 	case eScene::NextMonth:
 		nextmonth.NextMonth_Update();
@@ -111,16 +112,15 @@ void SceneMgr::Scene_Render() {
 		guild.Guild_Render();
 		break;
 	case eScene::Trede:
-		save.Info_Save();
 		//trede.Trede_Render();
 		break;
 	case eScene::Investment:
-		save.Info_Load();
+		Info_Load();
 		//investment.Investment_Render();
 		break;
 
 	}
-	math.Math_Render();
+	Math_Render();
 	menu.HomeMenu_Render();
 }
 

@@ -6,6 +6,7 @@
 #include"AABB.h"
 #include"Audio.h"
 
+
 constexpr auto SCREEN_W = 1980;
 constexpr auto SCREEN_H = 1080;
 constexpr auto SCREEN_DEPTH = 32;
@@ -20,7 +21,9 @@ public:
 	void Render();   //描画
 	void Check();  //触れたかのチェック
 	int  GetMouseX() { return mouse.GetMouseX(); }      //マウスのX座標取得
-	int  GetMouseY() { return mouse.GetMouseY(); }      //マウスのY座標取得    
+	int  GetMouseY() { return mouse.GetMouseY(); }      //マウスのY座標取得
+	int _mouse, _mousetrg;
+	bool Audio_Check;
 	//bool CheckHit() { return aabb.CheckHit(); }
 protected:
 	SceneMgr scenemgr;
@@ -28,8 +31,7 @@ protected:
 	Audio audio;
 	//AABB  aabb;   //当たり判定
 	BackGround  background;
-	bool Audio_Check;
-	
+
 
 	/*private:
 	char StrBuf[128], StrBuf2[32];

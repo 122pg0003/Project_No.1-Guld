@@ -16,18 +16,19 @@ Save::~Save() {
 }
 
 	//FILE* fp;
-	char ch[50] = "ABCDEFGH";
-	int money = 1000000;
+	//char ch[50] = "ABCDEFGH";
+	//int money = 1000000;
 void Save::Info_Save() {
 
 	
-	FILE* fp;
-	fopen_s(&fp, "セーブデータ.dat", "wb"); // ファイルを開く
-	if (fp == NULL) { // NULLが返ってきたらエラー発生
-		return ;
-	}
-	//fwrite(&math.mymoney, sizeof(int), 1, fp); // ファイルにmoneyの値を出力する
-	fclose(fp); //ファイルを閉じる
+	//FILE* fp;
+	//fopen_s(&fp, "セーブデータ.dat", "wb"); // ファイルを開く
+	//if (fp == NULL) { // NULLが返ってきたらエラー発生
+	//	return ;
+	//}
+	//
+	////fwrite(&mymoney, sizeof(int), 1, fp); // ファイルにmoneyの値を出力する
+	//fclose(fp); //ファイルを閉じる
 	
 }
 

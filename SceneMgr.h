@@ -13,9 +13,9 @@
 
 
 class Game;
-class Math;
 
-class SceneMgr {
+
+class SceneMgr: public Math {
 public:
 	enum class eScene {
 		//Title,           //ƒ^ƒCƒgƒ‹
@@ -32,10 +32,11 @@ public:
 
 	SceneMgr(Game& game);
 	~SceneMgr();
-	virtual void Scene_Input();
-	virtual void Scene_Update();
-	virtual void Scene_Render();
-	virtual void SceneMgr_ChangeScene(eScene nextScene);
+	 void Scene_Input();
+	 void Scene_Update();
+	 void Scene_Render();
+	 void SceneMgr_ChangeScene(eScene nextScene);
+	
 
 	eScene scene{ eScene::Menu };
 protected:
@@ -47,7 +48,7 @@ protected:
 	Trede trede;
 	Investment investment;
 	NextMonth nextmonth;
-	Math math;
+	//Math math;
 	TurnNumber turnnumber;
 	Save save;
 

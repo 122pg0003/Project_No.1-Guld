@@ -30,7 +30,7 @@ public:
 	QuestContent questcontent;
 };
 
-class Quest {
+class Quest : public Math {
 public:
 	Quest(SceneMgr& scenemgr,Game& game);  //コンストラクタ
 	~Quest();                              //デストラクタ
@@ -64,13 +64,14 @@ public:
 protected:
 	Game& _game;
 	SceneMgr& _scenemgr;
-	Math math;
+  //Math math;
 	QuestData questData1;
 	QuestData questData2;
 	QuestData questdata3;
 	Adventurer_Status AdventurerStatus;
 	TurnNumber turnnumber;
 	Graph graph;
+	
 	//QuestContent questcontent;
 
 private:
@@ -153,6 +154,7 @@ private:
 	int i;
 	int a;
 	int b;
+	
 	
 	int QGrHandle[6];
 	int quest1_1;	

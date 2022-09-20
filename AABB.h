@@ -52,7 +52,9 @@ public:
     Adventurer3,
     Adventurer4,
     Adventurer5,
-    Adventurer6
+    Adventurer6,
+    Development,  //”­“W
+    Delete,  //íœ
       
 
 

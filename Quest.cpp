@@ -2,11 +2,12 @@
 #include"DxLib.h"
 #include"SceneMgr.h"
 #include"Game.h"
-#include"Math.h"
+//#include"Math.h"
 #include "Adventurer_Status.h"
 #include "TurnNumber.h"
 #include"Graph.h"
-
+#include <memory>
+#include <vector>
 
 
 //コンストラクタ
@@ -89,7 +90,9 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	//questData1.SetQuestParam(5);
 	//questData2.SetQuestParam(0);
 
+	
 }
+
 
 //デストラクタ
 Quest::~Quest() {
@@ -152,26 +155,26 @@ void Quest::Delete_Quest_Adventurer_Status(int AdventurerNo) {
 void Quest::Quest_Result() {  //クエストの結果を表示する
 	questData1.SetQuestParam(random);
 	if (End == TRUE) {
-		math.Judgement(questData1.ClearTotalAttack,
+		Judgement(questData1.ClearTotalAttack,
 			questData1.ClearTotalDefence,
 			questData1.ClearTotalSkill,
 			questData1.ClearTotalKnow,
 			TotalAttack, TotalDefence, TotalSkill, TotalKnow);
-		if (math._questresult == 1) {
+		if (_questresult == 1) {
 			ClearDrawScreen();
 			DrawGraph(0, 0, clear, TRUE);
 			ScreenFlip();
 			WaitKey();
 			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 		}
-		else if(math._questresult == 0) {
+		else if(_questresult == 0) {
 			ClearDrawScreen();
 			DrawGraph(0, 0, failure, TRUE);
 			ScreenFlip();
 			WaitKey();
 			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 		}
-		math._questresult = -1;
+		_questresult = -1;
 		End = FALSE;
 	}
 	else {
@@ -371,9 +374,10 @@ void Quest::Quest_Input() {
 				(mouse_x > min_x)) &&
 			(mouse_y < max_y) &&
 			(mouse_y > min_y)) {
-			a = -1;
+			
 			scene = MENU_NUM::メニュー;
 			q = Q::Q初期値;
+			
 			_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 			
 		}
@@ -602,6 +606,7 @@ void Quest::Quest_Input() {
 			(mouse_y > min_y)) {
 			//math.Judgement();
 			q = Q::Qクエスト判定;
+			//Quest_Result();
 			//	q = Q::Qメニュー;
 				//if (math.Judgement()) {
 				////	GetMoney(i);
@@ -1535,6 +1540,7 @@ void Quest::Quest_Render() {
 		End = TRUE;
 		//WaitKey();
 		scene = MENU_NUM::メニュー;
+		Quest_Result();
 		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 		q = Q::Q初期値;
 		break;
