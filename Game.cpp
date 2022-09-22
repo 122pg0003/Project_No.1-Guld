@@ -81,4 +81,5 @@ void Game::SetRandom() {
 	random5 = tmp[5];
 	random6 = tmp[6];
 
+
 }
