@@ -5,6 +5,7 @@
 #include"Adventurer_Status.h"
 #include"AABB.h"
 #include"Audio.h"
+#include"TurnNumber.h"
 
 
 constexpr auto SCREEN_W = 1980;
@@ -20,23 +21,37 @@ public:
 	void Clear();  //配列の初期化
 	void Render();   //描画
 	void Check();  //触れたかのチェック
+	void SetRandom();  ///クエスト用乱数
+
 	int  GetMouseX() { return mouse.GetMouseX(); }      //マウスのX座標取得
 	int  GetMouseY() { return mouse.GetMouseY(); }      //マウスのY座標取得
+	int  GetTrun() { return turnno.turn; }
+	int GetRandom() { return random; }
+	int GetRandom1() { return random1; }
+	int GetRandom2() { return random2; }
+	int GetRandom3() { return random3; }
+	int GetRandom4() { return random4; }
+	int GetRandom5() { return random5; }
+	int GetRandom6() { return random6; }
+
 	int _mouse, _mousetrg;
 	bool Audio_Check;
-	//bool CheckHit() { return aabb.CheckHit(); }
+	
 protected:
 	SceneMgr scenemgr;
 	Mouse mouse;
 	Audio audio;
-	//AABB  aabb;   //当たり判定
 	BackGround  background;
+	TurnNumber turnno;
 
-
-	/*private:
-	char StrBuf[128], StrBuf2[32];
-	int MouseX, MouseY;
-	int StringCr, BoxCr;*/
+private:
+	int random;
+	int random1;
+	int random2;
+	int random3;
+	int random4;
+	int random5;
+	int random6;
 
 };
 

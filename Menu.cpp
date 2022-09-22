@@ -12,6 +12,7 @@ Menu::Menu(SceneMgr& scenemgr, Game& game)
 //,quest(scenemgr.quest)
 {
 	_bg = LoadGraph("images/gi_001.png");  //ホーム画面
+
 	QGrHandle = LoadGraph("images/Quest_Slot.png");  //クエストスロット
 	MGrHandle = LoadGraph("images/Member_Slot.png");  //メンバースロット
 	GGrHandle = LoadGraph("images/Guild_Slot.png");  //ギルドスロット
@@ -19,6 +20,7 @@ Menu::Menu(SceneMgr& scenemgr, Game& game)
 	IGrHandle = LoadGraph("images/Investment_Slot.png");  //投資スロット
 	NGrHandle = LoadGraph("images/Save_Slot.png");  //セーブスロット
 	QGGrHandle = LoadGraph("images/Quest_Going.png");  //クエスト中スロット
+
 	NextGrHandle = LoadGraph("images/Next_m_3.png");  //次のターンへボタン
 	NextTurnGrHandle = LoadGraph("images/Base-Illust.png");  //次のターンに移る時の画面
 	Quest = LoadGraph("images/クエストメニューバー＿2.png");  //
@@ -30,6 +32,7 @@ Menu::Menu(SceneMgr& scenemgr, Game& game)
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Menu_Quest, QGrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Menu_Adventurer, MGrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Menu_Guild, GGrHandle);
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Menu_Save, NGrHandle);
 
 
 	pattern = MENU_NUM::Null;
@@ -40,7 +43,7 @@ Menu::Menu(SceneMgr& scenemgr, Game& game)
 
 
 Menu::~Menu() {
-
+	
 }
 
 //選択項目の領域指定
@@ -98,8 +101,8 @@ void Menu::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_
 
 		max_x = 1900;
 		min_x = 1750;
-		max_y = 150;
-		min_y = 0;
+		max_y = 1050;
+		min_y = 900;
 		break;
 
 	case MENU_NUM::クエスト中:
@@ -133,12 +136,14 @@ void Menu::Menu_Input() {
 			AABBDraw::LOAD_NUM::Menu_Quest,
 			AABBDraw::LOAD_NUM::Menu_Adventurer,
 			AABBDraw::LOAD_NUM::Menu_Guild,
+			AABBDraw::LOAD_NUM::Menu_Save,
 		};
 
 		MENU_NUM pat[] = {
 		MENU_NUM::Quest,
 		MENU_NUM::冒険者,
 		MENU_NUM::ギルド,
+		MENU_NUM::Save,
 
 		};
 
@@ -228,20 +233,20 @@ void Menu::Menu_Input() {
 
 	//	_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::NextMonth);
 	//}
-	//GetMenuPosition(MENU_NUM::次のターン, max_x, min_x, max_y, min_y);
+	GetMenuPosition(MENU_NUM::次のターン, max_x, min_x, max_y, min_y);
 
-	//if ((_mousetrg != 0) &&
-	//	((_game.GetMouseX() < max_x) &&
-	//		(_game.GetMouseX() > min_x)) &&
-	//	(_game.GetMouseY() < max_y) &&
-	//	(_game.GetMouseY() > min_y)) {
-	//	//ClearDrawScreen();
-	//	_turnnumber.TurnCount();  //ターン数増加
-	//	//DrawGraph(135,115, NextTurnGrHandle, TRUE);
-	//	//ScreenFlip();
-	//	WaitKey();
-	//	_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-	//}
+	if ((_mousetrg != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
+		//ClearDrawScreen();
+		_turnnumber.TurnCount();  //ターン数増加
+		//DrawGraph(135,115, NextTurnGrHandle, TRUE);
+		//ScreenFlip();
+		WaitKey();
+		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
+	}
 
 	GetMenuPosition(MENU_NUM::クエスト中, max_x, min_x, max_y, min_y);
 
@@ -272,8 +277,8 @@ void Menu::Menu_Update() {
 	case Menu::MENU_NUM::ギルド:
 		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Guild);
 		break;
-	case Menu::MENU_NUM::交易:
-		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Trede);
+	case Menu::MENU_NUM::Save:
+		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Save);
 	default:
 		break;
 	}
@@ -290,24 +295,15 @@ void Menu::Menu_Update() {
 
 //描画
 void Menu::Menu_Render() {
-	//int no = 100;
-	//DrawFormatString(0, 0, GetColor(255, 255, 255), "所持金%d/n", no);
-	//DrawGraph(0, 0, _bg, TRUE);
+	
+	AABBDraw::MyDrawGraph(18, 192, QGrHandle, TRUE);
+	AABBDraw::MyDrawGraph(18, 411, MGrHandle, TRUE);
+	AABBDraw::MyDrawGraph(18, 630, GGrHandle, TRUE);
+	AABBDraw::MyDrawGraph(18, 849, NGrHandle, TRUE);
 
-	//DrawGraph(0, 190, Quest, TRUE);
-	AABBDraw::MyDrawGraph(0, 190, QGrHandle, TRUE);
-	AABBDraw::MyDrawGraph(0, 338, MGrHandle, TRUE);
-	AABBDraw::MyDrawGraph(0, 486, GGrHandle, TRUE);
-
-
-	//DrawGraph(0, 338, MGrHandle, TRUE);
-	//DrawGraph(0, 486, GGrHandle, TRUE);
-	DrawGraph(0, 634, TGrHandle, TRUE);
-	DrawGraph(0, 782, IGrHandle, TRUE);
-	DrawGraph(0, 930, NGrHandle, TRUE);
-	DrawGraph(1750, 0, NextGrHandle, TRUE);  //次のターンへボタン
-	//_turnnumber.Draw();
-	DrawGraph(1500, 190, QGGrHandle, TRUE);  //クエスト中スロット、クエストに行っている間だけ表示したい
+	//DrawGraph(0, 849, NGrHandle, TRUE);
+	DrawGraph(1750, 900, NextGrHandle, TRUE);  //次のターンへボタン
+	
 	
 	switch (pattern)
 	{

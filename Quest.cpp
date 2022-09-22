@@ -14,31 +14,9 @@
 Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	_scenemgr(scenemgr)
 	, _game(game)
-	//,math(*this)
-	//,_math(*this,_game,_scenemgr)
 {
-	
-	   //_cg = LoadGraph("images/quest1_1.jpg");
-	///クエストの中身の画像
-	 /* quest1_1 = LoadGraph("images/quest1_1.png");
-	  quest1_2 = LoadGraph("images/quest1_2.png");
-    quest1_3 = LoadGraph("images/quest1_3.png");
-    quest1_4 = LoadGraph("images/quest1_4.png");
-    quest1_5 = LoadGraph("images/quest1_5.png");
-    quest1_6 = LoadGraph("images/quest1_6.png");
-    quest1_7 = LoadGraph("images/quest1_7.png");
-    quest1_8 = LoadGraph("images/quest1_8.png");
-    quest1_9 = LoadGraph("images/quest1_9.png");
-    quest1_10 = LoadGraph("images/quest1_10.png");*/
+
 	_BIGrHandle = LoadGraph("images/Base-Illust.png");
-
-
-	//Q1GrHandle = LoadGraph("images/to-batu_s1.png");  //クエスト1スロット
-	//Q2GrHandle = LoadGraph("images/bo-ei_s1.png");  //クエスト2スロット
-	//Q3GrHandle = LoadGraph("images/saishu_s1.png");  //クエスト3スロット
-	//Q4GrHandle = LoadGraph("images/others_s1.png");  //クエスト4スロット
-	//Q5GrHandle = LoadGraph("images/to-batu_s1.png");  //クエスト5スロット
-	//Q6GrHandle = LoadGraph("images/bo-ei_s1.png");  //クエスト6スロット
 
 	///クエストのスロット
 	QGrHandle[0] = LoadGraph("images/to-batu_s1.png");  //クエスト1スロット　討伐
@@ -52,14 +30,25 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 
 	Q1     = LoadGraph("images/ch_001.mini.2 (1).png");  //冒険者1
 	Q1_1 = LoadGraph("images/ch_001.mini1 (2).png");
+
 	Q2     = LoadGraph("images/ch_002.mini2.png");  //冒険者2
 	Q2_1 = LoadGraph("images/ch_02.mini1.png");
-	Q3     = LoadGraph("images/ch_06.mini2.png");  //冒険者3
+
+	Q3     = LoadGraph("images/ch_06.mini3.png");  //冒険者3
 	Q3_1 = LoadGraph("images/ch_06.mini1 (1).png");
-	Q4     = LoadGraph("images/ch_09_mini02.png");//冒険者4
+
+	Q4     = LoadGraph("images/ch_09_mini03.png");//冒険者4
 	Q4_1 = LoadGraph("images/ch_09_mini01.png");
+
+	Q5 = LoadGraph("images/ch_03_mini03.png");//冒険者4
 	Q5_1     = LoadGraph("images/ch_03_mini01.png");//冒険者5
+
+	Q6 = LoadGraph("images/ch_005_mini03.png");//冒険者4
 	Q6_1     = LoadGraph("images/ch_005_mini01.png");//冒険者6
+
+	Q7 = LoadGraph("images/ch_08_mini3.png");//冒険者4
+	Q7_1 = LoadGraph("images/ch_08_mini1.png");//冒険者6
+
 
 	QuestStart = LoadGraph("images/出撃ボタン.png");  //出撃ボタン
 	menu = LoadGraph("images/window.png");  //クエスト1中身
@@ -191,8 +180,8 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 
 		max_x = 1900;
 		min_x = 1750;
-		max_y = 170;
-		min_y = 20;
+		max_y = 1050;
+		min_y = 190;
 
 		break;
 
@@ -278,10 +267,10 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		break;
 
 	case MENU_NUM::クエスト開始:
-		max_x = 1980;
-		min_x = 1500;
-		max_y = 1060;
-		min_y = 700;
+		max_x = 1823;
+		min_x = 1573;
+		max_y = 928;
+		min_y = 678;
 		break;
 	}
 }
@@ -295,17 +284,32 @@ void Quest::Random_Quest() {
 		//random = 1;
 		//scene = static_cast<MENU_NUM>(random);
 	if (a == -1) {
-		random =  GetRand(4) + 1;
-			 
-		random1 = GetRand(4) + 1;
-			 
-		random2 = GetRand(4) + 1;
-		 
-		random3 = GetRand(4) + 1;
-				 
-		random4 = GetRand(4) + 1;
-	 
-		random5 = GetRand(4) + 1;
+		_game.GetRandom() == random;
+		_game.GetRandom1() == random1;
+		_game.GetRandom2() == random2;
+		_game.GetRandom3() == random3;
+		_game.GetRandom4() == random4;
+		_game.GetRandom5() == random5;
+		
+
+
+
+
+
+
+
+
+		//random =  GetRand(4) + 1;
+		//	 
+		//random1 = GetRand(4) + 1;
+		//	 
+		//random2 = GetRand(4) + 1;
+		// 
+		//random3 = GetRand(4) + 1;
+		//		 
+		//random4 = GetRand(4) + 1;
+	 	//
+		//random5 = GetRand(4) + 1;
 
 
 		
@@ -1247,19 +1251,21 @@ void Quest::Quest_Render() {
 		graph.Quest_Slot_Level1_4(random3);
 		graph.Quest_Slot_Level1_5(random4);
 		graph.Quest_Slot_Level1_6(random5);
-		DrawGraph(1750, 20, Back, TRUE);
+		DrawGraph(1750, 900, Back, TRUE);
 		break;
 
 	case MENU_NUM::クエスト1:
 		graph.GraphQuest_Level1(random);  //クエストの中身
-		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
-		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
-		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
-		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+		DrawGraph(763, 208, Q1_1, TRUE);    //冒険者1
+		DrawGraph(900, 208, Q2_1, TRUE);   //冒険者2
+		DrawGraph(763, 318, Q5_1, TRUE);   //冒険者3
+		DrawGraph(900, 318, Q3_1, TRUE);   //冒険者4
+		DrawGraph(763, 428, Q6_1, TRUE);   //冒険者5
+		DrawGraph(900, 428, Q7_1, TRUE);   //冒険者6
+		DrawGraph(763, 538, Q4_1, TRUE);   //冒険者7
+		
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawGraph(1750, 20, Back, TRUE);
+		DrawGraph(1750, 900, Back, TRUE);
 		
 		DrawString(100, 100, "クエスト1", TRUE);
 		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
@@ -1274,14 +1280,15 @@ void Quest::Quest_Render() {
 		graph.GraphQuest_Level1(random1);
 		
 
-		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
-		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
-		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
-		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+		DrawGraph(763, 208, Q1_1, TRUE);    //冒険者1
+		DrawGraph(900, 208, Q2_1, TRUE);   //冒険者2
+		DrawGraph(763, 318, Q5_1, TRUE);   //冒険者3
+		DrawGraph(900, 318, Q3_1, TRUE);   //冒険者4
+		DrawGraph(763, 428, Q6_1, TRUE);   //冒険者5
+		DrawGraph(900, 428, Q7_1, TRUE);   //冒険者6
+		DrawGraph(763, 538, Q4_1, TRUE);   //冒険者7
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawGraph(1750, 20, Back, TRUE);
+		DrawGraph(1750, 900, Back, TRUE);
 
 		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
 		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
@@ -1300,14 +1307,15 @@ void Quest::Quest_Render() {
 	case MENU_NUM::クエスト3:
 		graph.GraphQuest_Level1(random2);
 
-		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
-		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
-		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
-		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+		DrawGraph(763, 208, Q1_1, TRUE);    //冒険者1
+		DrawGraph(900, 208, Q2_1, TRUE);   //冒険者2
+		DrawGraph(763, 318, Q5_1, TRUE);   //冒険者3
+		DrawGraph(900, 318, Q3_1, TRUE);   //冒険者4
+		DrawGraph(763, 428, Q6_1, TRUE);   //冒険者5
+		DrawGraph(900, 428, Q7_1, TRUE);   //冒険者6
+		DrawGraph(763, 538, Q4_1, TRUE);   //冒険者7
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawGraph(1750, 20, Back, TRUE);
+		DrawGraph(1750, 900, Back, TRUE);
 
 		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
 		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
@@ -1326,14 +1334,15 @@ void Quest::Quest_Render() {
 	case MENU_NUM::クエスト4:
 		graph.GraphQuest_Level1(random3);
 
-		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
-		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
-		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
-		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+		DrawGraph(763, 208, Q1_1, TRUE);    //冒険者1
+		DrawGraph(900, 208, Q2_1, TRUE);   //冒険者2
+		DrawGraph(763, 318, Q5_1, TRUE);   //冒険者3
+		DrawGraph(900, 318, Q3_1, TRUE);   //冒険者4
+		DrawGraph(763, 428, Q6_1, TRUE);   //冒険者5
+		DrawGraph(900, 428, Q7_1, TRUE);   //冒険者6
+		DrawGraph(763, 538, Q4_1, TRUE);   //冒険者7
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawGraph(1750, 20, Back, TRUE);
+		DrawGraph(1750, 900, Back, TRUE);
 
 		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
 		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
@@ -1352,14 +1361,15 @@ void Quest::Quest_Render() {
 	case MENU_NUM::クエスト5:
 		graph.GraphQuest_Level1(random4);
 
-		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
-		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
-		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
-		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+		DrawGraph(763, 208, Q1_1, TRUE);    //冒険者1
+		DrawGraph(900, 208, Q2_1, TRUE);   //冒険者2
+		DrawGraph(763, 318, Q5_1, TRUE);   //冒険者3
+		DrawGraph(900, 318, Q3_1, TRUE);   //冒険者4
+		DrawGraph(763, 428, Q6_1, TRUE);   //冒険者5
+		DrawGraph(900, 428, Q7_1, TRUE);   //冒険者6
+		DrawGraph(763, 538, Q4_1, TRUE);   //冒険者7
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawGraph(1750, 20, Back, TRUE);
+		DrawGraph(1750, 900, Back, TRUE);
 
 		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
 		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);
@@ -1377,14 +1387,15 @@ void Quest::Quest_Render() {
 	case MENU_NUM::クエスト6:
 		graph.GraphQuest_Level1(random5);
 
-		DrawGraph(760, 210, Q1_1, TRUE);    //冒険者1
-		DrawGraph(897, 210, Q2_1, TRUE);   //冒険者2
-		DrawGraph(760, 320, Q3_1, TRUE);   //冒険者3
-		DrawGraph(897, 320, Q4_1, TRUE);   //冒険者4
-		DrawGraph(760, 430, Q5_1, TRUE);   //冒険者5
-		DrawGraph(897, 430, Q6_1, TRUE);   //冒険者6
+		DrawGraph(763, 208, Q1_1, TRUE);    //冒険者1
+		DrawGraph(900, 208, Q2_1, TRUE);   //冒険者2
+		DrawGraph(763, 318, Q5_1, TRUE);   //冒険者3
+		DrawGraph(900, 318, Q3_1, TRUE);   //冒険者4
+		DrawGraph(763, 428, Q6_1, TRUE);   //冒険者5
+		DrawGraph(900, 428, Q7_1, TRUE);   //冒険者6
+		DrawGraph(763, 538, Q4_1, TRUE);   //冒険者7
 		DrawGraph(1500, 700, QuestStart, TRUE);//クエスト出撃
-		DrawGraph(1750, 20, Back, TRUE);
+		DrawGraph(1750, 900, Back, TRUE);
 
 		DrawFormatString(1200, 675, GetColor(0, 0, 0), "攻撃力%d", questData1.ClearTotalAttack);
 		DrawFormatString(1200, 730, GetColor(0, 0, 0), "防御力%d", questData1.ClearTotalDefence);

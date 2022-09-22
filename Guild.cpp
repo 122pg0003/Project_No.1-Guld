@@ -10,6 +10,8 @@
 Guild::Guild(SceneMgr& scenemgr, Game& game) :
 	_scenemgr(scenemgr)
 	, _game(game) {
+	Back = LoadGraph("images/back.png");
+
 	_BIGrHandle = LoadGraph("images/window.png");
 	_BuildingSlotGrHandle = LoadGraph("images/building.png");
 	_BuildingGrHandle = LoadGraph("images/Guild.png");  //リストのベース
@@ -132,6 +134,7 @@ Guild::Guild(SceneMgr& scenemgr, Game& game) :
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Set, setGrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Development, developmentGrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Delete, deleteGrHandle);
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Back, Back);
 
 	GuildLv = 11;
 	BarLv = 20;
@@ -171,10 +174,10 @@ void Guild::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		{
 	case MENU_NUM::Return:
 
-		max_x = 1920;
-		min_x = 1770;
-		max_y = 195;
-		min_y = 45;
+		max_x = 1900;
+		min_x = 1750;
+		max_y = 1050;
+		min_y = 190;
 
 		break;
 	case MENU_NUM::Up:
@@ -254,6 +257,7 @@ void Guild::Guild_Input() {
 		AABBDraw::LOAD_NUM::Training,  //鍛錬場
 		AABBDraw::LOAD_NUM::Atelier,  //アトリエ
 		AABBDraw::LOAD_NUM::Library,  //図書館
+		AABBDraw::LOAD_NUM::Back,  
 		};
 		MENU_NUM pat[] = {
 		MENU_NUM::Up,
@@ -272,6 +276,7 @@ void Guild::Guild_Input() {
 		MENU_NUM::Training,  //鍛錬場
 		MENU_NUM::Atelier,  //アトリエ
 		MENU_NUM::Library,  //図書館
+		MENU_NUM::Back,  //図書館
 		};
 
 		for (auto i = 0; i < 15; ++i) {
@@ -312,6 +317,7 @@ void Guild::Guild_Input() {
 		(_game.GetMouseY() > min_y)) {
 		pattern = MENU_NUM::Set;
 	}
+	
 }
 
 void Guild::Guild_Update() {
@@ -621,6 +627,8 @@ void Guild::Guild_Update() {
 }
 
 void Guild::Guild_Render() {
+
+	DrawGraph(1750, 900, Back, TRUE);
 
 	DrawFormatString(0, 0, GetColor(0, 0, 0), "pattern=%d", pattern);
 

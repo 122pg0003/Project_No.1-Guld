@@ -27,7 +27,7 @@ public:
 	int TrainingLv;
 	int AtelierLv;
 	int LibraryLv;
-
+	int Back;
 
 	int MaxBuilding;
 	int TotalBuilding;
@@ -63,6 +63,7 @@ private:
 		Delete,  //削除
 		Return,  //メニューに戻る
 		GuildMenu,  //メニュー
+		Back,
 		Null = -1,  //未選択
 
 	};

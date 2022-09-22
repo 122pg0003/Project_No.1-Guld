@@ -180,8 +180,9 @@ private:
 	int Q5;
 	int Q5_1;
 	int Q6;
-	int Q6_1;///
-
+	int Q6_1;
+	int Q7;
+	int Q7_1;
 
 
 	int menu;

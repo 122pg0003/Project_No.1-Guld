@@ -45,7 +45,7 @@ public:
     Menu_Quest,       ///メニュークエスト
     Menu_Adventurer,   ///メニュー冒険者
     Menu_Guild,       ///メニューギルド
-    Menu_Trede,       ///メニュー交易
+    Menu_Save,       ///メニューセーブ
     Menu_Investment,  ///メニュー投資
     Adventurer1,
     Adventurer2,
@@ -53,8 +53,10 @@ public:
     Adventurer4,
     Adventurer5,
     Adventurer6,
+    Adventurer7,
     Development,  //発展
     Delete,  //削除
+    Back
       
 
 

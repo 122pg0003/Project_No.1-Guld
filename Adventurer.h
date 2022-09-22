@@ -30,6 +30,7 @@ private:
 		Adventurer4,
 		Adventurer5,
 		Adventurer6,
+		Adventurer7,
 		Null = -1  //–¢‘I‘ğ
 	};
 
@@ -57,12 +58,14 @@ private:
 	int Adventurer4_1;
 	int Adventurer5_1;
 	int Adventurer6_1;
+	int Adventurer7_1;
 	int Adventurer1_2;
 	int Adventurer2_2;
 	int Adventurer3_2;
 	int Adventurer4_2;
 	int Adventurer5_2;
 	int Adventurer6_2;
+	int Adventurer7_2;
 
 
 	//int _cursorIndex;

@@ -13,12 +13,15 @@ Adventurer::Adventurer(SceneMgr& scenemgr, Game& game) :
 	, _game(game) {
 	       Back = LoadGraph("images/back.png");
 	       menu = LoadGraph("images/chw_0.png");
-	Adventurer1 = LoadGraph("images/ch_001.mini3.png ");
-    Adventurer2 = LoadGraph("images/ch_02.mini3.png ");
-    Adventurer3 = LoadGraph("images/ch_03_mini03.png ");
-    Adventurer4 = LoadGraph("images/ch_005_mini03.png");
-    Adventurer5 = LoadGraph("images/ch_06.mini3.png");
-    Adventurer6 = LoadGraph("images/ch_08_mini3.png");
+
+	Adventurer1 = LoadGraph("images/ch_001.mini4.png ");
+    Adventurer2 = LoadGraph("images/ch_02.mini4.png ");
+    Adventurer3 = LoadGraph("images/ch_03_mini04.png ");
+    Adventurer4 = LoadGraph("images/ch_005_mini04.png");
+    Adventurer5 = LoadGraph("images/ch_06.mini4.png");
+    Adventurer6 = LoadGraph("images/ch_08_mini4.png");
+    Adventurer7 = LoadGraph("images/ch_09_mini04.png");
+
 
 		Adventurer1_1 = LoadGraph("images/ch_001.mini5.png");
 		Adventurer2_1 = LoadGraph("images/ch_02.mini5.png");
@@ -26,6 +29,7 @@ Adventurer::Adventurer(SceneMgr& scenemgr, Game& game) :
 		Adventurer4_1 = LoadGraph("images/ch_005_mini05.png");
 		Adventurer5_1 = LoadGraph("images/ch_06.mini5.png");
 		Adventurer6_1 = LoadGraph("images/ch_08_mini5.png");
+		Adventurer7_1 = LoadGraph("images/ch_09_mini05.png");
 
 		Adventurer1_2 = LoadGraph("images/chw_1.png");
 		Adventurer2_2 = LoadGraph("images/chw_2.png");
@@ -33,6 +37,7 @@ Adventurer::Adventurer(SceneMgr& scenemgr, Game& game) :
 		Adventurer4_2 = LoadGraph("images/chw_5.png");
 		Adventurer5_2 = LoadGraph("images/chw_6.png");
 		Adventurer6_2 = LoadGraph("images/chw_8.png");
+		Adventurer7_2 = LoadGraph("images/chw_9.png");
 
 
 
@@ -47,6 +52,7 @@ Adventurer::Adventurer(SceneMgr& scenemgr, Game& game) :
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer4, Adventurer4);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer5, Adventurer5);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer6, Adventurer6);
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Adventurer7, Adventurer7);
 
 	ScreenNo = 1;
 	pattern = MENU_NUM::Null;
@@ -73,10 +79,10 @@ void Adventurer::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int
 	{
 	case MENU_NUM::Return:
 	{
-		max_x = 1850;
+		max_x = 1900;
 		min_x = 1750;
-		max_y = 90;
-		min_y = 45;
+		max_y = 1050;
+		min_y = 190;
 		break;
 	}
 	}
@@ -111,6 +117,7 @@ void Adventurer::Adventurer_Input() {
 		AABBDraw::LOAD_NUM::Adventurer4,///–`Œ¯ŽÒ4
 		AABBDraw::LOAD_NUM::Adventurer5,///–`Œ¯ŽÒ5
 		AABBDraw::LOAD_NUM::Adventurer6,///–`Œ¯ŽÒ6
+		AABBDraw::LOAD_NUM::Adventurer7,///–`Œ¯ŽÒ7
 		};
 		MENU_NUM pat[] = {
 		MENU_NUM::Adventurer1 ,
@@ -119,6 +126,7 @@ void Adventurer::Adventurer_Input() {
 		MENU_NUM::Adventurer4 ,
 		MENU_NUM::Adventurer5 ,
 		MENU_NUM::Adventurer6 ,
+		MENU_NUM::Adventurer7 ,
 		};
 
 		for (auto i = 0; i < 16; ++i) {
@@ -147,7 +155,7 @@ void Adventurer::Adventurer_Update() {
 
 void Adventurer::Adventurer_Render() {
 	DrawGraph(0, 0, menu, TRUE);
-	DrawGraph(1750, 20, Back, TRUE);
+	DrawGraph(1750, 900, Back, TRUE);
 
 	AABBDraw::MyDrawGraph(790,234,Adventurer1,TRUE);
 	AABBDraw::MyDrawGraph(1014,234,Adventurer2,TRUE);
@@ -155,6 +163,7 @@ void Adventurer::Adventurer_Render() {
 	AABBDraw::MyDrawGraph(1462,234,Adventurer4,TRUE);
 	AABBDraw::MyDrawGraph(898,575,Adventurer5,TRUE);
 	AABBDraw::MyDrawGraph(1125,575,Adventurer6,TRUE);
+	AABBDraw::MyDrawGraph(1355,575,Adventurer7,TRUE);
 
 	switch (pattern)
 	{
@@ -175,6 +184,9 @@ void Adventurer::Adventurer_Render() {
 		break;
 	case Adventurer::MENU_NUM::Adventurer6:
 		DrawGraph(174, 215, Adventurer6_1, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer7:
+		DrawGraph(174, 215, Adventurer7_1, TRUE);
 		break;
 	case Adventurer::MENU_NUM::Null:
 		break;
@@ -202,6 +214,9 @@ void Adventurer::Adventurer_Render() {
 		break;
 	case Adventurer::MENU_NUM::Adventurer6:
 		DrawGraph(0, 0, Adventurer6_2, TRUE);
+		break;
+	case Adventurer::MENU_NUM::Adventurer7:
+		DrawGraph(0, 0, Adventurer7_2, TRUE);
 		break;
 	case Adventurer::MENU_NUM::Null:
 		break;

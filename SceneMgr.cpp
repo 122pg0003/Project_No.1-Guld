@@ -81,15 +81,8 @@ void SceneMgr::Scene_Update() {
 	case eScene::Guild:
 		guild.Guild_Update();
 		break;
-	case eScene::Trede:
+	case eScene::Save:
 		Info_Save();
-		//trede.Trede_Update();
-		break;
-	case eScene::Investment:
-		//investment.Investment_Update();
-		break;
-	case eScene::NextMonth:
-		nextmonth.NextMonth_Update();
 		break;
 	}
 }

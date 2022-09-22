@@ -34,6 +34,8 @@ int WINAPI WinMain(
     audio->Main_Audio();
   }
 
+  game->SetRandom();
+
   //メインループ
   while (ProcessMessage() != -1) {
     //ESCAPEで終了

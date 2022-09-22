@@ -27,6 +27,7 @@ public:
 		Trede,        //ŒðˆÕ
 		Investment,   //“ŠŽ‘
 		NextMonth,    //ŽŸ‚ÌŒŽ
+		Save,
 		None = -1,
 	};
 
