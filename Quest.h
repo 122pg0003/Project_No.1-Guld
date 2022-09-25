@@ -84,12 +84,12 @@ private:
 		int random3,
 		int random4,
 		int random5);
-	int random;
-	int random1;
-	int random2;
-	int random3;
-	int random4;
-	int random5;
+	//int random;
+	//int random1;
+	//int random2;
+	//int random3;
+	//int random4;
+	//int random5;
 
 
 	///クエスト選択画面

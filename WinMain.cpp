@@ -34,7 +34,7 @@ int WINAPI WinMain(
     audio->Main_Audio();
   }
 
-  game->SetRandom();
+  //game->SetRandom();
 
   //ƒƒCƒ“ƒ‹[ƒv
   while (ProcessMessage() != -1) {

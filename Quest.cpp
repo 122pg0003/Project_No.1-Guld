@@ -9,6 +9,12 @@
 #include <memory>
 #include <vector>
 
+int random;
+int random1;
+int random2;
+int random3;
+int random4;
+int random5;
 
 //コンストラクタ
 Quest::Quest(SceneMgr& scenemgr, Game& game) :
@@ -73,9 +79,12 @@ Quest::Quest(SceneMgr& scenemgr, Game& game) :
 	Click3 = false;
 	Click4 = false;
 
-	//random = 0;
-
-
+	random = 0;
+	random1 = 0;
+	random2 = 0;
+	random3 = 0;
+	random4 = 0;
+	random5 = 0;
 	//questData1.SetQuestParam(5);
 	//questData2.SetQuestParam(0);
 
@@ -283,42 +292,40 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 void Quest::Random_Quest() {
 		//random = 1;
 		//scene = static_cast<MENU_NUM>(random);
-	if (a == -1) {
-		_game.GetRandom() == random;
-		_game.GetRandom1() == random1;
-		_game.GetRandom2() == random2;
-		_game.GetRandom3() == random3;
-		_game.GetRandom4() == random4;
-		_game.GetRandom5() == random5;
+	//if (a == -1) {
+		//_game.GetRandom() == random;
+		//_game.GetRandom1() == random1;
+		//_game.GetRandom2() == random2;
+		//_game.GetRandom3() == random3;
+		//_game.GetRandom4() == random4;
+		//_game.GetRandom5() == random5;
 		
 
+	int tmp[7], i, j, flag;
+	
 
-
-
-
-
-
-
-		//random =  GetRand(4) + 1;
-		//	 
-		//random1 = GetRand(4) + 1;
-		//	 
-		//random2 = GetRand(4) + 1;
-		// 
-		//random3 = GetRand(4) + 1;
-		//		 
-		//random4 = GetRand(4) + 1;
-	 	//
-		//random5 = GetRand(4) + 1;
-
-
-		
-		a = 0;
+	for (i = 1; i <= 6; i++) {
+		flag = TRUE;
+		while (flag) {
+			flag = FALSE;
+			//tmp[i] = rand() % 10 + 1 ;
+			tmp[i] = rand() %  10 + 11;
+			for (j = 1; j < i; j++) {
+				if (tmp[j] == tmp[i]) {
+					flag = TRUE;
+					break;
+				}
+			}
+		}
 	}
-	//random = static_cast<int>(quest_graph);
-	//quest_graph = static_cast<Quest_Graph>(random);
-	  //a = static_cast<int>(quest_graph);
-	 
+	random = tmp[1];
+	random1 = tmp[2];
+	random2 = tmp[3];
+	random3 = tmp[4];
+	random4 = tmp[5];
+	random5 = tmp[6];
+	//random6 = tmp[6];
+
 }
 
 void Quest::RANDOM_Q(int random ,
@@ -372,7 +379,7 @@ void Quest::Quest_Input() {
 	{
 
 	case Quest::MENU_NUM::メニュー:
-	Random_Quest();
+	//Random_Quest();
 		if ((_mousetrg != 0) &&
 			((mouse_x < max_x) &&
 				(mouse_x > min_x)) &&
@@ -1237,10 +1244,14 @@ void Quest::Quest_Update() {
 
 //描画
 void Quest::Quest_Render() {
-	//int max_x, min_x, max_y, min_y;
-	//GetMenuPosition(MENU_NUM::クエスト1, max_x, min_x, max_y, min_y);
-	//int no = 0;
-		//int i = GetRand(6);
+	//_game.GetRandom();
+	//_game.GetRandom1();
+	//_game.GetRandom2();
+	//_game.GetRandom3();
+	//_game.GetRandom4();
+	//_game.GetRandom5();
+
+
 	switch (scene)
 	{
 	case MENU_NUM::メニュー:

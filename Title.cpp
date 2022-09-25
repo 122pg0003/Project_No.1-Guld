@@ -102,7 +102,7 @@ void Title::Title_Render() {
 		DrawGraph(0, 0, AMGGrHandle, TRUE);
 		break;
 	case 1:
-		DrawGraph(560, 140, RogoGrHandle, TRUE);
+		DrawGraph(0, 0, RogoGrHandle, TRUE);
 		break;
 	case 2:
 		DrawGraph(0, 0, _cg, TRUE);
@@ -116,87 +116,5 @@ void Title::Title_Render() {
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	ScreenFlip();
 
-	/*
-	while (ProcessMessage() != -1) {
 
-		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-			break;
-		}
-
-		WaitTimer(1000);
-		for (auto i = 0; i < 255; i++)
-		{
-			// 描画輝度をセット
-			SetDrawBright(i, i, i);
-
-			// グラフィックを描画
-			ClearDrawScreen();
-			DrawGraph(0, 0, AMGGrHandle, TRUE);
-			ScreenFlip();
-		}
-
-		WaitTimer(2000);
-
-		for (auto i = 255; i > 0; i--)
-		{
-			// 描画輝度をセット
-			SetDrawBright(i, i, i);
-
-			// グラフィックを描画
-			ClearDrawScreen();
-			DrawGraph(0, 0, AMGGrHandle, TRUE);
-			ScreenFlip();
-		}
-
-		for (auto i = 0; i < 255; i++)
-		{
-			// 描画輝度をセット
-			SetDrawBright(i, i, i);
-
-			// グラフィックを描画
-			ClearDrawScreen();
-			DrawGraph(560, 140, RogoGrHandle, TRUE);
-			ScreenFlip();
-		}
-
-		WaitTimer(2000);
-
-		for (auto i = 255; i > 0; i--)
-		{
-			// 描画輝度をセット
-			SetDrawBright(i, i, i);
-
-			// グラフィックを描画
-			ClearDrawScreen();
-			DrawGraph(560, 140, RogoGrHandle, TRUE);
-			ScreenFlip();
-		}
-
-		for (auto i = 0; i < 255; i++)
-		{
-			// 描画輝度をセット
-			SetDrawBright(i, i, i);
-
-			// グラフィックを描画
-			DrawGraph(0, 0, _cg, TRUE);
-			DrawGraph(0, 0, TitleGrHandle, TRUE);
-			ScreenFlip();
-		}
-		break;
-	}
-
-	while(ProcessMessage() != -1) {
-
-		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-			break;
-		}
-
-		DrawGraph(0, 0, _cg, TRUE);
-		DrawGraph(0, 0, TitleGrHandle, TRUE);
-		DrawString(850,960, "クリックして開始", GetColor(255, 255, 255), TRUE);
-		ScreenFlip();
-
-	}
-	_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
-*/
 }

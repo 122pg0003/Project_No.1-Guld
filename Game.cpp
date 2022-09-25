@@ -6,9 +6,8 @@
 Game::Game() :
 	scenemgr(*this)
 	, mouse(*this)
-	//, aabb(*this) 
 	,background(*this)
-	
+	,quest(scenemgr,*this)
 {
 	Audio_Check = false;
 }
@@ -57,29 +56,5 @@ void Game::Check() {
 	AABBDraw::TouchCheck();
 }
 
-void Game::SetRandom() {
-	int tmp[7], i, j, flag;
-	//srand((unsigned)time());
-
-	for (i = 1; i <= 6; i++) {
-		flag = TRUE;
-		while (flag) {
-			flag = FALSE;
-			tmp[i] = rand() % 53;
-			for (j = 1; j < i; j++) {
-				if (tmp[j] == tmp[i]) {
-					flag = TRUE;
-					break;
-				}
-			}
-		}
-	}
-	 random = tmp[1];
-	random1 = tmp[2];
-	random2 = tmp[3];
-	random4 = tmp[4];
-	random5 = tmp[5];
-	random6 = tmp[6];
-
-
-}
+//void Game::SetRandom() {
+//}

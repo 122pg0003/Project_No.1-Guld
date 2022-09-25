@@ -21,7 +21,7 @@ public:
 	void Clear();  //配列の初期化
 	void Render();   //描画
 	void Check();  //触れたかのチェック
-	void SetRandom();  ///クエスト用乱数
+//	void SetRandom() { return quest.Random_Quest(); }  ///クエスト用乱数
 
 	int  GetMouseX() { return mouse.GetMouseX(); }      //マウスのX座標取得
 	int  GetMouseY() { return mouse.GetMouseY(); }      //マウスのY座標取得
@@ -43,6 +43,7 @@ protected:
 	Audio audio;
 	BackGround  background;
 	TurnNumber turnno;
+	Quest quest;
 
 private:
 	int random;

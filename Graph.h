@@ -44,7 +44,7 @@ public:
 	void Graph_Render_Level2(QuestLevel2 index );
 private:
 	
-	int Quest_Slot[5];
-	int quest1[10];///クエストレベル1
+	int Quest_Slot[25];
+	int quest1[70];///クエストレベル1
 	int quest2[12];///クエストレベル2
 };

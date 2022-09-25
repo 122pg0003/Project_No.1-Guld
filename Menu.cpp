@@ -9,7 +9,7 @@
 Menu::Menu(SceneMgr& scenemgr, Game& game)
 :_scenemgr(scenemgr)
 , _game(game)
-//,quest(scenemgr.quest)
+,quest(scenemgr,game)
 {
 	_bg = LoadGraph("images/gi_001.png");  //ホーム画面
 
@@ -240,10 +240,12 @@ void Menu::Menu_Input() {
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
-		//ClearDrawScreen();
+
 		_turnnumber.TurnCount();  //ターン数増加
-		//DrawGraph(135,115, NextTurnGrHandle, TRUE);
-		//ScreenFlip();
+		//_game.SetRandom();
+		quest.Random_Quest();
+		
+		
 		WaitKey();
 		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 	}
@@ -283,12 +285,10 @@ void Menu::Menu_Update() {
 		break;
 	}
 	
-	//if (z == 1) {
+
 		pattern = MENU_NUM::Null;
 		nowSelectedPattern = MENU_NUM::Null;
 		oldpattern = MENU_NUM::Null;
- //    z = -1;
-	//}
 
 }
 
