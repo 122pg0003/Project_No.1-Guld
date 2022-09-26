@@ -1,9 +1,9 @@
 #pragma once
-#include"Math.h"
 #include "Adventurer_Status.h"
 #include "TurnNumber.h"
 #include "QuestContent.h"
 #include"Graph.h"
+#include"Math.h"
 #include<vector>
 
 class SceneMgr;
@@ -30,7 +30,7 @@ public:
 	QuestContent questcontent;
 };
 
-class Quest : public Math {
+class Quest :public Math {
 public:
 	Quest(SceneMgr& scenemgr,Game& game);  //コンストラクタ
 	~Quest();                              //デストラクタ

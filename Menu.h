@@ -60,4 +60,5 @@ private:
 	int NextGrHandle;  //ŽŸ‚ÌŒŽ‚Ö
 	int NextTurnGrHandle;
 	int _mouse, _mousetrg;
+	bool quest_flag = true;
 };

@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Game.h"
 #include"Audio.h"
+#include"Ending.h"
 
 enum GameMode
 {
@@ -27,7 +28,7 @@ int WINAPI WinMain(
   auto game = std::make_unique<Game>();
 
   auto title = std::make_unique<Title>(*game);
-
+  auto ending = std::make_unique<Ending>(*game);
   auto audio = std::make_unique<Audio>();
 
   if (nowSelectGameMode == GameMode::MODE_GAME) {
@@ -60,13 +61,30 @@ int WINAPI WinMain(
       game->Input();    // 入力
       game->Update();   // 更新
       game->Clear();    //配列の初期化
-      game->Render();   // 描画
+      ending->Render();
+      //game->Render();   // 描画
       game->Check();    //触れたかのチェック
+      if (game->EndingFlag == 1) {
+        nowSelectGameMode = MODE_ENDING;
+      }
       break;
     }
     case MODE_ENDING:
-    {
-      break;
+    { 
+      ending->Update();
+     ending->Render();
+    if (game->_mousetrg != 0 && ending->EDcount == 9) {
+      nowSelectGameMode = MODE_GAME;
+      ending->EDcount = 1;
+    }
+
+    if (game->_mousetrg != 0 && game->EndingFlag == 2) {
+      title->_isSelectGameMode = false;
+
+      nowSelectGameMode = MODE_TITLE;
+    }
+
+    break;
     }
     default:
       break;

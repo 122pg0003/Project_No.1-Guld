@@ -82,7 +82,7 @@ void SceneMgr::Scene_Update() {
 		guild.Guild_Update();
 		break;
 	case eScene::Save:
-		Info_Save();
+		math.Info_Save();
 		break;
 	}
 }
@@ -108,12 +108,12 @@ void SceneMgr::Scene_Render() {
 		//trede.Trede_Render();
 		break;
 	case eScene::Investment:
-		Info_Load();
+		math.Info_Load();
 		//investment.Investment_Render();
 		break;
 
 	}
-	Math_Render();
+	math.Math_Render();
 	menu.HomeMenu_Render();
 }
 

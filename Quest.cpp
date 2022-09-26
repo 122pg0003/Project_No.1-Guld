@@ -290,17 +290,6 @@ void Quest::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 
 ///クエストのランダム出現
 void Quest::Random_Quest() {
-		//random = 1;
-		//scene = static_cast<MENU_NUM>(random);
-	//if (a == -1) {
-		//_game.GetRandom() == random;
-		//_game.GetRandom1() == random1;
-		//_game.GetRandom2() == random2;
-		//_game.GetRandom3() == random3;
-		//_game.GetRandom4() == random4;
-		//_game.GetRandom5() == random5;
-		
-
 	int tmp[7], i, j, flag;
 	
 
@@ -308,8 +297,14 @@ void Quest::Random_Quest() {
 		flag = TRUE;
 		while (flag) {
 			flag = FALSE;
-			//tmp[i] = rand() % 10 + 1 ;
-			tmp[i] = rand() %  10 + 11;
+
+			if (_game.GetQuest() <= 0) {
+				tmp[i] = rand() % 10 + 1;
+			}
+			if (_game.GetQuest() >=100) {
+				tmp[i] = rand() % 10 + 11;
+			}
+
 			for (j = 1; j < i; j++) {
 				if (tmp[j] == tmp[i]) {
 					flag = TRUE;

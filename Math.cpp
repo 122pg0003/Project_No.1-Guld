@@ -1,5 +1,7 @@
 #include"Math.h"
 #include"Dxlib.h"
+#include<vector>
+
 //#include"Game.h"
 //#include"SceneMgr.h"
 //#include"Quest.h"
@@ -11,7 +13,9 @@ Math::Math()
 {
 	SuccessRate = 0;
 	no = 0;
+	//FameNo = 0;
 	//mymoney = 10000;
+	
 }
 
 
@@ -20,9 +24,11 @@ Math::~Math() {
 
 }
 
-int mymoney = 10000;
-int reward = 10000;
-int cost = 1000;
+
+	int mymoney = 10000;
+	int reward = 10000;
+	int cost = 1000;
+	int Fame{ 0 };  //–¼º’l
 
 void Math::Success(int& SuccessRate, int ClearTotalAttack, int ClearTotalDefence, int ClearTotalSkill, int ClearTotalKnow, int TotalAttack, int TotalDefence, int TotalSkill, int TotalKnow) {
 
@@ -72,41 +78,74 @@ bool Math::Judgement(int ClearTotalAttack, int ClearTotalDefence, int ClearTotal
 		//ƒNƒGƒXƒg¸”s
 		mymoney -= cost;
 		SuccessRate = 0;
+		Fame += 5000;
 
 		_questresult = 0;
 	}
+
 	else {
 		//ƒNƒGƒXƒg¬Œ÷
 		mymoney += (reward - cost);
 		SuccessRate = 0;
+		Fame += 5000;
+
 		_questresult = 1;
 	}
 	return 0;
 }
 
+int Math::GetMymoney() {
+	return mymoney;
+}
+
+int Math::FameNo() {
+	return Fame;
+}
+
+
 void Math::Math_Update() {
 
+	//if (Fame == 0) {
+	//	FameNo() = 2;
+	//}
+
+	//if (Fame > 1000) {
+	//	FameNo() = 1;
+	//}
+
+
+	auto str = std::to_string(mymoney);
+	auto C = str.c_str();
+	auto length = std::strlen(C);
+	width = GetDrawStringWidth(C, length);
+
+	auto strFame = std::to_string(Fame);
+	auto CFame = strFame.c_str();
+	auto lengthFame = std::strlen(CFame);
+	widthFame = GetDrawStringWidth(CFame, lengthFame);
+
+
 }
 
-void Math::Guild_B() {
-	mymoney -= 1000;
-}
+
 
 void Math::Math_Render() {
-	
-	DrawFormatString(1000, 45, GetColor(255, 255, 255), "%d\n", mymoney);
+	Math_Update();
+	DrawFormatString(1180 - width, 45, GetColor(255, 255, 255), "%d\n", mymoney);
+	//DrawFormatString(1180, 45, GetColor(255, 255, 255), "%d\n", mymoney);
+	DrawFormatString(1700 - widthFame, 45, GetColor(255, 255, 255), "%d\n", Fame);
+	//DrawFormatString(1700, 45, GetColor(255, 255, 255), "%d\n", Fame);
 
 }
-
 //{İİ’u”ï
 void Math::Set(int Lv) {
 	switch (Lv)
 	{
 	case 11:  //1‚ÍƒMƒ‹ƒh‘İ
-		mymoney -= 1000;
+		mymoney -= 2000000;
 		break;
 	case 12:
-		mymoney -= 1000;
+		mymoney -= 5000000;
 		break;
 
 	case 20:  //‚Q‚Íğê
@@ -120,7 +159,7 @@ void Math::Set(int Lv) {
 		break;
 
 	case 30:  //‚R‚Í‰‰Œ€ê
-		mymoney -= 3000000;
+		mymoney -= 300000;
 		break;
 	case 31:
 		mymoney -= 1000000;
@@ -130,147 +169,112 @@ void Math::Set(int Lv) {
 		break;
 
 	case 40:  //‚S‚Í‘å—ê
-		mymoney -= 250000;
+		mymoney -= 300000;
 		break;
 	case 41:
-		mymoney -= 400000;
+		mymoney -= 1000000;
 		break;
 	case 42:
-		mymoney -= 700000;
+		mymoney -= 3000000;
 		break;
 
 	case 50:  //‚T‚ÍH“°
-		mymoney -= 500000;
+		mymoney -= 300000;
 		break;
 	case 51:
-		mymoney -= 700000;
+		mymoney -= 1000000;
 		break;
 	case 52:
-		mymoney -= 100000;
+		mymoney -= 3000000;
 		break;
 
 	case 60:  //‚U‚ÍV•·”­sŠ
 		mymoney -= 300000;
 		break;
 	case 61:
-		mymoney -= 5000000;
+		mymoney -= 1000000;
 		break;
 	case 62:
-		mymoney -= 10000000;
+		mymoney -= 3000000;
 		break;
 
 	case 70:  //‚V‚Í•Ší‰®
-		mymoney -= 200000;
+		mymoney -= 300000;
 		break;
 	case 71:
-		mymoney -= 500000;
+		mymoney -= 1000000;
 		break;
 	case 72:
-		mymoney -= 1000000;
+		mymoney -= 3000000;
 
 	case 80:  //‚W‚Í–h‹ï‰®
-		mymoney -= 200000;
+		mymoney -= 300000;
 		break;
 	case 81:
-		mymoney -= 500000;
+		mymoney -= 1000000;
 		break;
 	case 82:
-		mymoney -= 1000000;
+		mymoney -= 3000000;
 		break;
 
 	case 90:  //‚X‚Í‹³‰ï
-		mymoney -= 200000;
+		mymoney -= 300000;
 		break;
 	case 91:
-		mymoney -= 500000;
+		mymoney -= 1000000;
 		break;
 	case 92:
-		mymoney -= 1000000;
+		mymoney -= 3000000;
 		break;
 
 	case 100:  //‚P‚O‚ÍËŒ‚ê
-		mymoney -= 200000;
+		mymoney -= 300000;
 		break;
 	case 101:
-		mymoney -= 500000;
+		mymoney -= 1000000;
 		break;
 	case 102:
-		mymoney -= 1000000;
+		mymoney -= 3000000;
 		break;
 
 	case 111:  //‚P‚P‚ÍŒ•pê
-		mymoney -= 200000;
+		mymoney -= 300000;
 		break;
 	case 112:
-		mymoney -= 500000;
+		mymoney -= 1000000;
 		break;
 	case 113:
-		mymoney -= 1000000;
+		mymoney -= 3000000;
 		break;
 
 	case 120:  //‚P‚Q‚Í’b˜Bê
-		mymoney -= 200000;
+		mymoney -= 300000;
 		break;
 	case 121:
-		mymoney -= 500000;
+		mymoney -= 1000000;
 		break;
 	case 122:
-		mymoney -= 1000000;
+		mymoney -= 3000000;
 		break;
 
 	case 130:  //‚P‚R‚ÍƒAƒgƒŠƒG
-		mymoney -= 200000;
+		mymoney -= 300000;
 		break;
 	case 131:
-		mymoney -= 500000;
+		mymoney -= 1000000;
 		break;
 	case 132:
-		mymoney -= 1000000;
+		mymoney -= 3000000;
 		break;
 
 	case 140:  //‚P‚S‚Í}‘ŠÙ
-		mymoney -= 200000;
+		mymoney -= 300000;
 		break;
 	case 141:
-		mymoney -= 500000;
-		break;
-	case 142:
 		mymoney -= 1000000;
 		break;
-	}
-}
-
-//–ˆƒ^[ƒ“ƒMƒ‹ƒh‚É‚¢‚é–`Œ¯Ò‚Ì‚â‚é‹C‚ğƒ‰ƒ“ƒ_ƒ€‚É‚P`‚Rlã‚°‚é
-void Math::BarEffect(int Lv) {
-	switch (Lv)
-	{
-	case 21:
-
-		break;
-	case 22:
-
-		break;
-	case 23:
-
-		break;
-	}
-
-}
-
-//–ˆƒ^[ƒ“ƒMƒ‹ƒh‚É‚¢‚é–`Œ¯Ò‚Ì‚â‚é‹C‚ğƒ‰ƒ“ƒ_ƒ€‚É‚P`‚Rlã‚°‚é
-void Math::TheaterEffect(int Lv) {
-	switch (Lv)
-	{
-		//int No = rand() % 6;
-	case 31:
-
-
-		break;
-	case 32:
-
-		break;
-	case 33:
-
+	case 142:
+		mymoney -= 3000000;
 		break;
 	}
 }
@@ -312,7 +316,7 @@ void Math::BathEffect(int Lv) {
 }
 
 //–ˆƒ^[ƒ“Š‹ài‚T‚O–œA‚P‚T‚O–œA‚R‚O‚O–œjŠl“¾
-void Math::DainingEffect(int Lv) {
+void Math::DiningEffect(int Lv) {
 	switch (Lv)
 	{
 	case 51:
@@ -357,6 +361,15 @@ void Math::WeaponEffect(int Lv) {
 		status.Attack[6] += 30;
 		break;
 	case 72:
+		status.Attack[0] += 20;
+		status.Attack[1] += 20;
+		status.Attack[2] += 20;
+		status.Attack[3] += 20;
+		status.Attack[4] += 20;
+		status.Attack[5] += 20;
+		status.Attack[6] += 20;
+		break;
+	case 73:
 		status.Attack[0] += 50;
 		status.Attack[1] += 50;
 		status.Attack[2] += 50;
@@ -364,15 +377,6 @@ void Math::WeaponEffect(int Lv) {
 		status.Attack[4] += 50;
 		status.Attack[5] += 50;
 		status.Attack[6] += 50;
-		break;
-	case 73:
-		status.Attack[0] += 100;
-		status.Attack[1] += 100;
-		status.Attack[2] += 100;
-		status.Attack[3] += 100;
-		status.Attack[4] += 100;
-		status.Attack[5] += 100;
-		status.Attack[6] += 100;
 		break;
 	}
 }
@@ -391,6 +395,15 @@ void Math::ArmorEffect(int Lv) {
 		status.Defence[6] += 30;
 		break;
 	case 82:
+		status.Defence[0] += 20;
+		status.Defence[1] += 20;
+		status.Defence[2] += 20;
+		status.Defence[3] += 20;
+		status.Defence[4] += 20;
+		status.Defence[5] += 20;
+		status.Defence[6] += 20;
+		break;
+	case 83:
 		status.Defence[0] += 50;
 		status.Defence[1] += 50;
 		status.Defence[2] += 50;
@@ -398,15 +411,6 @@ void Math::ArmorEffect(int Lv) {
 		status.Defence[4] += 50;
 		status.Defence[5] += 50;
 		status.Defence[6] += 50;
-		break;
-	case 83:
-		status.Defence[0] += 100;
-		status.Defence[1] += 100;
-		status.Defence[2] += 100;
-		status.Defence[3] += 100;
-		status.Defence[4] += 100;
-		status.Defence[5] += 100;
-		status.Defence[6] += 100;
 		break;
 	}
 }
@@ -425,6 +429,15 @@ void Math::ChurchEffect(int Lv) {
 		status.Know[6] += 30;
 		break;
 	case 92:
+		status.Know[0] += 20;
+		status.Know[1] += 20;
+		status.Know[2] += 20;
+		status.Know[3] += 20;
+		status.Know[4] += 20;
+		status.Know[5] += 20;
+		status.Know[6] += 20;
+		break;
+	case 93:
 		status.Know[0] += 50;
 		status.Know[1] += 50;
 		status.Know[2] += 50;
@@ -432,15 +445,6 @@ void Math::ChurchEffect(int Lv) {
 		status.Know[4] += 50;
 		status.Know[5] += 50;
 		status.Know[6] += 50;
-		break;
-	case 93:
-		status.Know[0] += 100;
-		status.Know[1] += 100;
-		status.Know[2] += 100;
-		status.Know[3] += 100;
-		status.Know[4] += 100;
-		status.Know[5] += 100;
-		status.Know[6] += 100;
 		break;
 	}
 }
@@ -459,6 +463,15 @@ void Math::RifleEffect(int Lv) {
 		status.Skill[6] += 30;
 		break;
 	case 102:
+		status.Skill[0] += 20;
+		status.Skill[1] += 20;
+		status.Skill[2] += 20;
+		status.Skill[3] += 20;
+		status.Skill[4] += 20;
+		status.Skill[5] += 20;
+		status.Skill[6] += 20;
+		break;
+	case 103:
 		status.Skill[0] += 50;
 		status.Skill[1] += 50;
 		status.Skill[2] += 50;
@@ -466,15 +479,6 @@ void Math::RifleEffect(int Lv) {
 		status.Skill[4] += 50;
 		status.Skill[5] += 50;
 		status.Skill[6] += 50;
-		break;
-	case 103:
-		status.Skill[0] += 100;
-		status.Skill[1] += 100;
-		status.Skill[2] += 100;
-		status.Skill[3] += 100;
-		status.Skill[4] += 100;
-		status.Skill[5] += 100;
-		status.Skill[6] += 100;
 		break;
 	}
 }
@@ -518,6 +522,24 @@ void Math::TrainingEffect(int Lv) {
 	switch (Lv)
 	{
 	case 121:
+		status.Defence[0] += 5;
+		status.Defence[1] += 5;
+		status.Defence[2] += 5;
+		status.Defence[3] += 5;
+		status.Defence[4] += 5;
+		status.Defence[5] += 5;
+		status.Defence[6] += 5;
+		break;
+	case 122:
+		status.Defence[0] += 15;
+		status.Defence[1] += 15;
+		status.Defence[2] += 15;
+		status.Defence[3] += 15;
+		status.Defence[4] += 15;
+		status.Defence[5] += 15;
+		status.Defence[6] += 15;
+		break;
+	case 123:
 		status.Defence[0] += 30;
 		status.Defence[1] += 30;
 		status.Defence[2] += 30;
@@ -525,24 +547,6 @@ void Math::TrainingEffect(int Lv) {
 		status.Defence[4] += 30;
 		status.Defence[5] += 30;
 		status.Defence[6] += 30;
-		break;
-	case 122:
-		status.Defence[0] += 50;
-		status.Defence[1] += 50;
-		status.Defence[2] += 50;
-		status.Defence[3] += 50;
-		status.Defence[4] += 50;
-		status.Defence[5] += 50;
-		status.Defence[6] += 50;
-		break;
-	case 123:
-		status.Defence[0] += 100;
-		status.Defence[1] += 100;
-		status.Defence[2] += 100;
-		status.Defence[3] += 100;
-		status.Defence[4] += 100;
-		status.Defence[5] += 100;
-		status.Defence[6] += 100;
 		break;
 	}
 }
@@ -552,6 +556,24 @@ void Math::AtelierEffect(int Lv) {
 	switch (Lv)
 	{
 	case 131:
+		status.Skill[0] += 5;
+		status.Skill[1] += 5;
+		status.Skill[2] += 5;
+		status.Skill[3] += 5;
+		status.Skill[4] += 5;
+		status.Skill[5] += 5;
+		status.Skill[6] += 5;
+		break;
+	case 132:
+		status.Skill[0] += 15;
+		status.Skill[1] += 15;
+		status.Skill[2] += 15;
+		status.Skill[3] += 15;
+		status.Skill[4] += 15;
+		status.Skill[5] += 15;
+		status.Skill[6] += 15;
+		break;
+	case 133:
 		status.Skill[0] += 30;
 		status.Skill[1] += 30;
 		status.Skill[2] += 30;
@@ -559,24 +581,6 @@ void Math::AtelierEffect(int Lv) {
 		status.Skill[4] += 30;
 		status.Skill[5] += 30;
 		status.Skill[6] += 30;
-		break;
-	case 132:
-		status.Skill[0] += 50;
-		status.Skill[1] += 50;
-		status.Skill[2] += 50;
-		status.Skill[3] += 50;
-		status.Skill[4] += 50;
-		status.Skill[5] += 50;
-		status.Skill[6] += 50;
-		break;
-	case 133:
-		status.Skill[0] += 100;
-		status.Skill[1] += 100;
-		status.Skill[2] += 100;
-		status.Skill[3] += 100;
-		status.Skill[4] += 100;
-		status.Skill[5] += 100;
-		status.Skill[6] += 100;
 		break;
 	}
 }
@@ -586,6 +590,24 @@ void Math::LibraryEffect(int Lv) {
 	switch (Lv)
 	{
 	case 141:
+		status.Know[0] += 5;
+		status.Know[1] += 5;
+		status.Know[2] += 5;
+		status.Know[3] += 5;
+		status.Know[4] += 5;
+		status.Know[5] += 5;
+		status.Know[6] += 5;
+		break;
+	case 142:
+		status.Know[0] += 15;
+		status.Know[1] += 15;
+		status.Know[2] += 15;
+		status.Know[3] += 15;
+		status.Know[4] += 15;
+		status.Know[5] += 15;
+		status.Know[6] += 15;
+		break;
+	case 143:
 		status.Know[0] += 30;
 		status.Know[1] += 30;
 		status.Know[2] += 30;
@@ -594,26 +616,146 @@ void Math::LibraryEffect(int Lv) {
 		status.Know[5] += 30;
 		status.Know[6] += 30;
 		break;
-	case 142:
-		status.Know[0] += 50;
-		status.Know[1] += 50;
-		status.Know[2] += 50;
-		status.Know[3] += 50;
-		status.Know[4] += 50;
-		status.Know[5] += 50;
-		status.Know[6] += 50;
+	}
+}
+
+void Math::WeaponDelete(int Lv) {
+	switch (Lv)
+	{
+	case 71:
+		status.Attack[0] -= 30;
+		status.Attack[1] -= 30;
+		status.Attack[2] -= 30;
+		status.Attack[3] -= 30;
+		status.Attack[4] -= 30;
+		status.Attack[5] -= 30;
+		status.Attack[6] -= 30;
 		break;
-	case 143:
-		status.Know[0] += 100;
-		status.Know[1] += 100;
-		status.Know[2] += 100;
-		status.Know[3] += 100;
-		status.Know[4] += 100;
-		status.Know[5] += 100;
-		status.Know[6] += 100;
+	case 72:
+		status.Attack[0] -= 50;
+		status.Attack[1] -= 50;
+		status.Attack[2] -= 50;
+		status.Attack[3] -= 50;
+		status.Attack[4] -= 50;
+		status.Attack[5] -= 50;
+		status.Attack[6] -= 50;
+		break;
+	case 73:
+		status.Attack[0] -= 100;
+		status.Attack[1] -= 100;
+		status.Attack[2] -= 100;
+		status.Attack[3] -= 100;
+		status.Attack[4] -= 100;
+		status.Attack[5] -= 100;
+		status.Attack[6] -= 100;
 		break;
 	}
 }
+
+void Math::ArmorDelete(int Lv) {
+	switch (Lv)
+	{
+	case 81:
+		status.Defence[0] -= 30;
+		status.Defence[1] -= 30;
+		status.Defence[2] -= 30;
+		status.Defence[3] -= 30;
+		status.Defence[4] -= 30;
+		status.Defence[5] -= 30;
+		status.Defence[6] -= 30;
+		break;
+	case 82:
+		status.Defence[0] -= 50;
+		status.Defence[1] -= 50;
+		status.Defence[2] -= 50;
+		status.Defence[3] -= 50;
+		status.Defence[4] -= 50;
+		status.Defence[5] -= 50;
+		status.Defence[6] -= 50;
+		break;
+	case 83:
+		status.Defence[0] -= 100;
+		status.Defence[1] -= 100;
+		status.Defence[2] -= 100;
+		status.Defence[3] -= 100;
+		status.Defence[4] -= 100;
+		status.Defence[5] -= 100;
+		status.Defence[6] -= 100;
+		break;
+	}
+}
+
+void Math::ChurchDelete(int Lv) {
+	switch (Lv)
+	{
+	case 91:
+		status.Know[0] -= 30;
+		status.Know[1] -= 30;
+		status.Know[2] -= 30;
+		status.Know[3] -= 30;
+		status.Know[4] -= 30;
+		status.Know[5] -= 30;
+		status.Know[6] -= 30;
+		break;
+	case 92:
+		status.Know[0] -= 50;
+		status.Know[1] -= 50;
+		status.Know[2] -= 50;
+		status.Know[3] -= 50;
+		status.Know[4] -= 50;
+		status.Know[5] -= 50;
+		status.Know[6] -= 50;
+		break;
+	case 93:
+		status.Know[0] -= 100;
+		status.Know[1] -= 100;
+		status.Know[2] -= 100;
+		status.Know[3] -= 100;
+		status.Know[4] -= 100;
+		status.Know[5] -= 100;
+		status.Know[6] -= 100;
+		break;
+	}
+}
+
+void Math::RifleDelete(int Lv) {
+	switch (Lv)
+	{
+	case 101:
+		status.Skill[0] -= 30;
+		status.Skill[1] -= 30;
+		status.Skill[2] -= 30;
+		status.Skill[3] -= 30;
+		status.Skill[4] -= 30;
+		status.Skill[5] -= 30;
+		status.Skill[6] -= 30;
+		break;
+	case 102:
+		status.Skill[0] -= 50;
+		status.Skill[1] -= 50;
+		status.Skill[2] -= 50;
+		status.Skill[3] -= 50;
+		status.Skill[4] -= 50;
+		status.Skill[5] -= 50;
+		status.Skill[6] -= 50;
+		break;
+	case 103:
+		status.Skill[0] -= 100;
+		status.Skill[1] -= 100;
+		status.Skill[2] -= 100;
+		status.Skill[3] -= 100;
+		status.Skill[4] -= 100;
+		status.Skill[5] -= 100;
+		status.Skill[6] -= 100;
+		break;
+	}
+}
+
+
+
+
+
+
 
 //ˆÛ”ï‚Ì’¥û
 void Math::GuildCost(int Lv) {
@@ -628,26 +770,6 @@ void Math::GuildCost(int Lv) {
 		break;
 	case 13:
 		mymoney -= 5000000;
-		break;
-
-	case 21:
-		mymoney -= 100000;
-		break;
-	case 22:
-		mymoney -= 500000;
-		break;
-	case 23:
-		mymoney -= 1000000;
-		break;
-
-	case 31:
-		mymoney -= 100000;
-		break;
-	case 32:
-		mymoney -= 500000;
-		break;
-	case 33:
-		mymoney -= 1000000;
 		break;
 
 	case 41:
@@ -772,6 +894,7 @@ void Math::Info_Save() {
 			return;
 		}
 		fwrite(&mymoney, sizeof(int), 1, fp); // ƒtƒ@ƒCƒ‹‚Émoney‚Ì’l‚ğo—Í‚·‚é
+		fwrite(&Fame, sizeof(int), 1, fp); // ƒtƒ@ƒCƒ‹‚Émoney‚Ì’l‚ğo—Í‚·‚é
 		fclose(fp); //ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
 
 	}
@@ -786,5 +909,6 @@ void Math::Info_Load() {
 	}
 
 	fread(&mymoney, sizeof(int), 1, fp);
+	fread(&Fame, sizeof(int), 1, fp);
 	fclose(fp);
 }

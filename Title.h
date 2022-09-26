@@ -10,6 +10,9 @@ public:
 	~Title();
 	int Title_Update();
 	void Title_Render();
+	// タイトル画面が表示されてから、モードの選択をされたらtrue
+	bool _isSelectGameMode;
+
 private:
 	Game& _game;
 	//SceneMgr& _scenemgr;
@@ -23,8 +26,7 @@ private:
 	int _imageAlpha;
 	// 画像を透過して表示が終わったら１カウントするカウンタ
 	int _alphaLoopCount;
-	// タイトル画面が表示されてから、モードの選択をされたらtrue
-	bool _isSelectGameMode;
+
 
 	const int _imageAlphaSpeed = 5;
 	const int _waitMaxAlphaFrame = 20;

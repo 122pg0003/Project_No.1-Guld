@@ -5,7 +5,7 @@
 class SceneMgr;
 class Game;
 
-class Guild :public Math{
+class Guild {
 public:
 	Guild(SceneMgr& scenemgr, Game& game);
 	~Guild();
@@ -13,9 +13,8 @@ public:
 	void Guild_Update();
 	void Guild_Render();
 
+
 	int GuildLv;
-	int BarLv;
-	int TheaterLv;
 	int BathLv;
 	int DiningLv;
 	int NewspaperLv;
@@ -27,26 +26,27 @@ public:
 	int TrainingLv;
 	int AtelierLv;
 	int LibraryLv;
-	int Back;
+
 
 	int MaxBuilding;
 	int TotalBuilding;
 
-
+	bool MaxBuildFlag;
+	bool MoneyFlag;
+	bool DeleteFlag;
 
 
 protected:
 	Game& _game;
 	SceneMgr& _scenemgr;
-	//Math math;
+	Math math;
 
 private:
 	enum class MENU_NUM {
+		Yes,  //はいボタン
 		Up, //上矢印
 		Down,  //下矢印
 		Guild,  //ギルド拡張
-		Bar,  //酒場
-		Theater,  //演劇場
 		Bath,  //大浴場
 		Dining,  //食堂
 		Newspaper,  //新聞発行所
@@ -61,9 +61,9 @@ private:
 		Set,  //設置
 		Development,  //発展
 		Delete,  //削除
+		Result,  //結果表示
 		Return,  //メニューに戻る
 		GuildMenu,  //メニュー
-		Back,
 		Null = -1,  //未選択
 
 	};
@@ -71,6 +71,8 @@ private:
 	MENU_NUM pattern;
 	MENU_NUM oldpattern;
 	MENU_NUM nowSelectedPattern;
+
+	int GetBuildingMoney(MENU_NUM type);
 
 	void GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max_y, int& min_y);
 	int _BIGrHandle{ -1 };
@@ -82,7 +84,6 @@ private:
 	int BaseGrHandle{ -1 };
 	int BoardGrHandle{ -1 };  //ウィンドウ
 	int YesGrHandle{ -1 };  //YESボタン
-	int NoGrHandle{ -1 };  //NOボタン
 
 	int upGrHandle{ -1 };  //上矢印
 	int downGrHandle{ -1 };  //下矢印
@@ -96,18 +97,6 @@ private:
 	int g_1_1GrHandle{ -1 };
 	int g_1_2GrHandle{ -1 };
 	int g_1_3GrHandle{ -1 };
-
-	int g_2GrHandle{ -1 };  //2は酒場
-	int g_2_0GrHandle{ -1 };
-	int g_2_1GrHandle{ -1 };
-	int g_2_2GrHandle{ -1 };
-	int g_2_3GrHandle{ -1 };
-
-	int g_3GrHandle{ -1 };  //3は演劇場
-	int g_3_0GrHandle{ -1 };
-	int g_3_1GrHandle{ -1 };
-	int g_3_2GrHandle{ -1 };
-	int g_3_3GrHandle{ -1 };
 
 	int g_4GrHandle{ -1 };  //4は大浴場
 	int g_4_0GrHandle{ -1 };

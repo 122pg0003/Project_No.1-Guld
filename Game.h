@@ -4,9 +4,9 @@
 #include"BackGround.h"
 #include"Adventurer_Status.h"
 #include"AABB.h"
+#include"Guild.h"
+#include"Math.h"
 #include"Audio.h"
-#include"TurnNumber.h"
-
 
 constexpr auto SCREEN_W = 1980;
 constexpr auto SCREEN_H = 1080;
@@ -22,6 +22,10 @@ public:
 	void Render();   //描画
 	void Check();  //触れたかのチェック
 //	void SetRandom() { return quest.Random_Quest(); }  ///クエスト用乱数
+	//void GetSave() { return math.Info_Save(); }
+	//void GetLoad() { return math.Info_Load(); }
+	//void GetMathRender() { return math.Math_Render(); }
+	
 
 	int  GetMouseX() { return mouse.GetMouseX(); }      //マウスのX座標取得
 	int  GetMouseY() { return mouse.GetMouseY(); }      //マウスのY座標取得
@@ -33,9 +37,19 @@ public:
 	int GetRandom4() { return random4; }
 	int GetRandom5() { return random5; }
 	int GetRandom6() { return random6; }
+	int GetQuest() { return math.FameNo(); }
+	int GetBathLv() { return guild.BathLv; }
+	int GetDiningLv() { return guild.DiningLv; }
+	int GetNewspaperLv() { return guild.NewspaperLv; }
+	int GetSwordLv() { return guild.SwordLv; }
+	int GetTrainingLv() { return guild.TrainingLv; }
+	int GetAtelierLv() { return guild.AtelierLv; }
+	int GetLibraryLv() { return guild.LibraryLv; }	
+	
 
 	int _mouse, _mousetrg;
 	bool Audio_Check;
+	int EndingFlag;
 	
 protected:
 	SceneMgr scenemgr;
@@ -44,6 +58,8 @@ protected:
 	BackGround  background;
 	TurnNumber turnno;
 	Quest quest;
+  Math math;
+	Guild guild;
 
 private:
 	int random;

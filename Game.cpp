@@ -8,8 +8,10 @@ Game::Game() :
 	, mouse(*this)
 	,background(*this)
 	,quest(scenemgr,*this)
+	, guild(scenemgr, *this)
 {
 	Audio_Check = false;
+	EndingFlag = 0;
 }
 
 //デストラクタ
@@ -27,8 +29,16 @@ void Game::Input() {
 void Game::Update() {
 	scenemgr.Scene_Update();
 	//auto A = Adventurer_Status::Find("Key1");
+	if (math.FameNo() >= 5000) {
+		EndingFlag = 1;
+	}
 
+	if (math.GetMymoney() < 0) {
+		EndingFlag = 2;
+	}
 }
+
+
 
 //配列の初期化
 void Game::Clear() {
@@ -53,6 +63,10 @@ void Game::Render() {
 
 //触れているかのチェック
 void Game::Check() {
+	int keyold = _mouse;
+	_mouse = (GetMouseInput() & MOUSE_INPUT_LEFT);
+	//_mousetrg = (_mouse ^ keyold) & _mouse;
+	_mousetrg = (keyold == 0) && (_mouse == 1);
 	AABBDraw::TouchCheck();
 }
 

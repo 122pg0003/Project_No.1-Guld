@@ -39,6 +39,7 @@ Menu::Menu(SceneMgr& scenemgr, Game& game)
 	nowSelectedPattern = MENU_NUM::Null;
 	oldpattern = MENU_NUM::Null;
 	 z = 1;
+	
 }
 
 
@@ -271,6 +272,11 @@ void Menu::Menu_Update() {
 	switch (nowSelectedPattern)
 	{
 	case Menu::MENU_NUM::Quest:
+		if (quest_flag == true) {
+			quest_flag = false;
+			quest.Random_Quest();
+
+		}
 		_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Quest);
 		break;
 	case Menu::MENU_NUM::–`Œ¯ŽÒ:

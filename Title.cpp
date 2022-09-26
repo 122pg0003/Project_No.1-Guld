@@ -60,6 +60,8 @@ int Title::Title_Update() {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) // 実際にはモード選択が行われたら、にする
 			{
 				_isSelectGameMode = true;
+				
+
 			}
 		}
 	}
@@ -71,6 +73,10 @@ int Title::Title_Update() {
 		if (_alphaLoopCount == 3)
 		{
 			return 1;
+			_imageAlpha = 0;
+			_alphaLoopCount = 0;
+			_waitTitleCount = 0;
+			_alphaLoopCount = 0;
 			//_scenemgr.SceneMgr_ChangeScene(SceneMgr::eScene::Menu);
 		}
 	}

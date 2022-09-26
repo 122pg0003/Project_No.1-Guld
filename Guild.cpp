@@ -10,8 +10,6 @@
 Guild::Guild(SceneMgr& scenemgr, Game& game) :
 	_scenemgr(scenemgr)
 	, _game(game) {
-	Back = LoadGraph("images/back.png");
-
 	_BIGrHandle = LoadGraph("images/window.png");
 	_BuildingSlotGrHandle = LoadGraph("images/building.png");
 	_BuildingGrHandle = LoadGraph("images/Guild.png");  //ÉäÉXÉgÇÃÉxÅ[ÉX
@@ -21,7 +19,6 @@ Guild::Guild(SceneMgr& scenemgr, Game& game) :
 	BaseGrHandle = LoadGraph("images/gb.png");  //é{ê›ÇÃÉ{Å[Éh
 	BoardGrHandle = LoadGraph("images/che.png");  //ÉEÉBÉìÉhÉE
 	YesGrHandle = LoadGraph("images/yes.png");
-	NoGrHandle = LoadGraph("images/no.png");
 
 
 	upGrHandle = LoadGraph("images/up1.png");  //è„ñÓàÛ
@@ -36,18 +33,6 @@ Guild::Guild(SceneMgr& scenemgr, Game& game) :
 	g_1_1GrHandle = LoadGraph("images/gi1_1.png");
 	g_1_2GrHandle = LoadGraph("images/gi1_2.png");
 	g_1_3GrHandle = LoadGraph("images/gi1_3.png");
-
-	//2ÇÕéèÍ
-	g_2_0GrHandle = LoadGraph("images/gi2_0.png");
-	g_2_1GrHandle = LoadGraph("images/gi2_1.png");
-	g_2_2GrHandle = LoadGraph("images/gi2_2.png");
-	g_2_3GrHandle = LoadGraph("images/gi2_3.png");
-
-	//3ÇÕââåÄèÍ
-	g_3_0GrHandle = LoadGraph("images/gi3_0.png");
-	g_3_1GrHandle = LoadGraph("images/gi3_1.png");
-	g_3_2GrHandle = LoadGraph("images/gi3_2.png");
-	g_3_3GrHandle = LoadGraph("images/gi3_3.png");
 
 	//4ÇÕëÂóÅèÍ
 	g_4_0GrHandle = LoadGraph("images/gi4_0.png");
@@ -104,22 +89,21 @@ Guild::Guild(SceneMgr& scenemgr, Game& game) :
 	g_12_3GrHandle = LoadGraph("images/gi12_3.png");
 
 	//13ÇÕÉAÉgÉäÉG
-	g_13_0GrHandle = LoadGraph("images/gi13_0.png");
-	g_13_1GrHandle = LoadGraph("images/gi13_1.png");
-	g_13_2GrHandle = LoadGraph("images/gi13_2.png");
-	g_13_3GrHandle = LoadGraph("images/gi13_3.png");
+	g_13_0GrHandle = LoadGraph("images/gi14_0.png");
+	g_13_1GrHandle = LoadGraph("images/gi14_1.png");
+	g_13_2GrHandle = LoadGraph("images/gi14_2.png");
+	g_13_3GrHandle = LoadGraph("images/gi14_3.png");
 
 	//14ÇÕê}èëäŸ
-	g_14_0GrHandle = LoadGraph("images/gi14_0.png");
-	g_14_1GrHandle = LoadGraph("images/gi14_1.png");
-	g_14_2GrHandle = LoadGraph("images/gi14_2.png");
-	g_14_3GrHandle = LoadGraph("images/gi14_3.png");
+	g_14_0GrHandle = LoadGraph("images/gi13_0.png");
+	g_14_1GrHandle = LoadGraph("images/gi13_1.png");
+	g_14_2GrHandle = LoadGraph("images/gi13_2.png");
+	g_14_3GrHandle = LoadGraph("images/gi13_3.png");
 
+	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Yes, YesGrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Up, upGrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Down, downGrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Guild, g_1_1GrHandle);
-	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Bar, g_2_0GrHandle);
-	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Theater, g_3_0GrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Bath, g_4_0GrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Dining, g_5_0GrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Newspaper, g_6_0GrHandle);
@@ -134,11 +118,8 @@ Guild::Guild(SceneMgr& scenemgr, Game& game) :
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Set, setGrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Development, developmentGrHandle);
 	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Delete, deleteGrHandle);
-	AABBDraw::SetHandle(AABBDraw::LOAD_NUM::Back, Back);
 
 	GuildLv = 11;
-	BarLv = 20;
-	TheaterLv = 30;
 	BathLv = 40;
 	DiningLv = 50;
 	NewspaperLv = 60;
@@ -156,6 +137,9 @@ Guild::Guild(SceneMgr& scenemgr, Game& game) :
 	MaxBuilding = 3;
 	TotalBuilding = 0;
 
+	MaxBuildFlag = false;
+	MoneyFlag = false;
+	DeleteFlag = false;
 
 	ScreenNo = 1;
 	pattern = MENU_NUM::Null;
@@ -174,10 +158,10 @@ void Guild::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		{
 	case MENU_NUM::Return:
 
-		max_x = 1900;
-		min_x = 1750;
-		max_y = 1050;
-		min_y = 190;
+		max_x = 1920;
+		min_x = 1770;
+		max_y = 195;
+		min_y = 45;
 
 		break;
 	case MENU_NUM::Up:
@@ -218,6 +202,11 @@ void Guild::GetMenuPosition(MENU_NUM menuIndex, int& max_x, int& min_x, int& max
 		min_y = 598;
 
 		break;
+	case MENU_NUM::Yes:
+		max_x = 967;
+		min_x = 707;
+		max_y = 700;
+		min_y = 625;
 		}
 	}
 }
@@ -244,8 +233,6 @@ void Guild::Guild_Input() {
 		AABBDraw::LOAD_NUM::Up,
 		AABBDraw::LOAD_NUM::Down,
 		AABBDraw::LOAD_NUM::Guild,  //ÉMÉãÉhägí£
-		AABBDraw::LOAD_NUM::Bar,  //éèÍ
-		AABBDraw::LOAD_NUM::Theater,  //ââåÄèÍ
 		AABBDraw::LOAD_NUM::Bath,  //ëÂóÅèÍ
 		AABBDraw::LOAD_NUM::Dining,  //êHì∞
 		AABBDraw::LOAD_NUM::Newspaper,  //êVï∑î≠çsèä
@@ -257,14 +244,11 @@ void Guild::Guild_Input() {
 		AABBDraw::LOAD_NUM::Training,  //íbòBèÍ
 		AABBDraw::LOAD_NUM::Atelier,  //ÉAÉgÉäÉG
 		AABBDraw::LOAD_NUM::Library,  //ê}èëäŸ
-		AABBDraw::LOAD_NUM::Back,  
 		};
 		MENU_NUM pat[] = {
 		MENU_NUM::Up,
 		MENU_NUM::Down,
 		MENU_NUM::Guild,  //ÉMÉãÉhägí£
-		MENU_NUM::Bar,  //éèÍ
-		MENU_NUM::Theater,  //ââåÄèÍ
 		MENU_NUM::Bath,  //ëÂóÅèÍ
 		MENU_NUM::Dining,  //êHì∞
 		MENU_NUM::Newspaper,  //êVï∑î≠çsèä
@@ -276,48 +260,64 @@ void Guild::Guild_Input() {
 		MENU_NUM::Training,  //íbòBèÍ
 		MENU_NUM::Atelier,  //ÉAÉgÉäÉG
 		MENU_NUM::Library,  //ê}èëäŸ
-		MENU_NUM::Back,  //ê}èëäŸ
 		};
 
-		for (auto i = 0; i < 15; ++i) {
-			int handle = AABBDraw::GetHandle(load[i]);
+		if (_game._mousetrg != 0) {
+			std::shared_ptr<AABBInfo> Touch = AABBDraw::GetTouch();
 
-			if (touch->Handle == handle && (_game._mousetrg & MOUSE_INPUT_LEFT)) {
-				pattern = pat[i];
-				oldpattern = pat[i];
-				break;
+			if (Touch != nullptr) {
+				AABBDraw::LOAD_NUM Type = AABBDraw::GetType(Touch->Handle);
+
+				for (auto i = 0; i < 14; ++i) {
+					if (load[i] == Type) {
+						//oldpattern = pattern;
+						pattern = pat[i];
+						oldpattern = pat[i];
+						break;
+					}
+				}
 			}
-
 		}
 	}
 
 	GetMenuPosition(MENU_NUM::Development, max_x, min_x, max_y, min_y);
-	if ((_game._mousetrg & MOUSE_INPUT_LEFT) &&
+	if ((_game._mousetrg != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
+		//oldpattern = pattern;
 		pattern = MENU_NUM::Development;
 	}
 
 	GetMenuPosition(MENU_NUM::Delete, max_x, min_x, max_y, min_y);
-	if ((_game._mousetrg & MOUSE_INPUT_LEFT) &&
+	if ((_game._mousetrg != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
+		//oldpattern = pattern;
 		pattern = MENU_NUM::Delete;
 	}
 
 	GetMenuPosition(MENU_NUM::Set, max_x, min_x, max_y, min_y);
-	if ((_game._mousetrg & MOUSE_INPUT_LEFT) &&
+	if ((_game._mousetrg != 0) &&
 		((_game.GetMouseX() < max_x) &&
 			(_game.GetMouseX() > min_x)) &&
 		(_game.GetMouseY() < max_y) &&
 		(_game.GetMouseY() > min_y)) {
+		//oldpattern = pattern;
 		pattern = MENU_NUM::Set;
 	}
-	
+	GetMenuPosition(MENU_NUM::Yes, max_x, min_x, max_y, min_y);
+	if ((_game._mousetrg != 0) &&
+		((_game.GetMouseX() < max_x) &&
+			(_game.GetMouseX() > min_x)) &&
+		(_game.GetMouseY() < max_y) &&
+		(_game.GetMouseY() > min_y)) {
+		//oldpattern = pattern;
+		pattern = MENU_NUM::GuildMenu;
+	}
 }
 
 void Guild::Guild_Update() {
@@ -335,15 +335,15 @@ void Guild::Guild_Update() {
 		pattern = MENU_NUM::GuildMenu;
 		break;
 	}
+	case MENU_NUM::GuildMenu:
+	{
+		BuiltType = MENU_NUM::Null;
+		pattern = MENU_NUM::Null;
+		oldpattern = MENU_NUM::Null;
+		MoneyFlag = false;
+		break;
+	}
 	case MENU_NUM::Guild:
-	{
-		break;
-	}
-	case MENU_NUM::Bar:
-	{
-		break;
-	}
-	case MENU_NUM::Theater:
 	{
 		break;
 	}
@@ -393,244 +393,560 @@ void Guild::Guild_Update() {
 	}
 	case MENU_NUM::Set:
 	{
-		if ((oldpattern == MENU_NUM::Guild) && GuildLv < 13)
-		{
-			if (GuildLv == 11) {
-				MaxBuilding += 2;
+		if (_game._mousetrg != 0) {
+			if (TotalBuilding == MaxBuilding) {
+				MaxBuildFlag = true;
+				break;
 			}
-			if (GuildLv == 12) {
-				MaxBuilding += 3;
+			if (oldpattern == MENU_NUM::Guild)
+			{
+				BuiltType = MENU_NUM::Guild;
+				oldpattern = MENU_NUM::Null;
+				break;
 			}
-			BuiltType = MENU_NUM::Guild;
-			Set(GuildLv);
-			GuildLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		if (TotalBuilding == MaxBuilding) {
-			break;
-		}
-		if ((oldpattern == MENU_NUM::Bar) && BarLv == 20) {
-			BuiltType = MENU_NUM::Bar;
-			Set(BarLv);
-			BarLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Bar) && BarLv < 23)
-		{
-			BuiltType = MENU_NUM::Bar;
-			Set(BarLv);
-			BarLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
 
-		if ((oldpattern == MENU_NUM::Theater) && TheaterLv == 30) {
-			BuiltType = MENU_NUM::Theater;
-			Set(TheaterLv);
-			TheaterLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Theater) && TheaterLv < 33)
-		{
-			BuiltType = MENU_NUM::Theater;
-			Set(TheaterLv);
-			TheaterLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
+			if (oldpattern == MENU_NUM::Bath) {
+				int money = GetBuildingMoney(oldpattern);
 
-		if ((oldpattern == MENU_NUM::Bath) && BathLv == 40) {
-			BuiltType = MENU_NUM::Bath;
-			Set(BathLv);
-			BathLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Bath) && BathLv < 43)
-		{
-			BuiltType = MENU_NUM::Bath;
-			Set(BathLv);
-			BathLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
+				if (BathLv == 40 && math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Bath;
+					math.Set(BathLv);
+					BathLv += 1;
+					TotalBuilding += 1;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
 
-		if ((oldpattern == MENU_NUM::Dining) && DiningLv == 50) {
-			BuiltType = MENU_NUM::Dining;
-			Set(DiningLv);
-			DiningLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Dining) && DiningLv < 53)
-		{
-			BuiltType = MENU_NUM::Dining;
-			Set(DiningLv);
-			DiningLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
+			if ((oldpattern == MENU_NUM::Dining) && DiningLv == 50) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Dining;
+					math.Set(DiningLv);
+					DiningLv += 1;
+					TotalBuilding += 1;
+					MoneyFlag = false;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
 
-		if ((oldpattern == MENU_NUM::Newspaper) && NewspaperLv == 60) {
-			BuiltType = MENU_NUM::Newspaper;
-			Set(NewspaperLv);
-			NewspaperLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Newspaper) && NewspaperLv < 63)
-		{
-			BuiltType = MENU_NUM::Newspaper;
-			Set(NewspaperLv);
-			NewspaperLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
+			if ((oldpattern == MENU_NUM::Newspaper) && NewspaperLv == 60) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Newspaper;
+					math.Set(NewspaperLv);
+					NewspaperLv += 1;
+					TotalBuilding += 1;
+					MoneyFlag = false;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
 
-		if ((oldpattern == MENU_NUM::Weapon) && WeaponLv == 70) {
-			BuiltType = MENU_NUM::Weapon;
-			Set(WeaponLv);
-			WeaponLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Weapon) && WeaponLv < 73)
-		{
-			BuiltType = MENU_NUM::Weapon;
-			Set(WeaponLv);
-			WeaponLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
+			if ((oldpattern == MENU_NUM::Weapon) && WeaponLv == 70) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Weapon;
+					math.Set(WeaponLv);
+					WeaponLv += 1;
+					TotalBuilding += 1;
+					MoneyFlag = false;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
 
-		if ((oldpattern == MENU_NUM::Armor) && ArmorLv == 80) {
-			BuiltType = MENU_NUM::Armor;
-			Set(ArmorLv);
-			ArmorLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Armor) && ArmorLv < 83)
-		{
-			BuiltType = MENU_NUM::Armor;
-			Set(ArmorLv);
-			ArmorLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
+			if ((oldpattern == MENU_NUM::Armor) && ArmorLv == 80) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Armor;
+					math.Set(ArmorLv);
+					ArmorLv += 1;
+					TotalBuilding += 1;
+					MoneyFlag = false;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
 
-		if ((oldpattern == MENU_NUM::Church) && ChurchLv == 90) {
-			BuiltType = MENU_NUM::Church;
-			Set(ChurchLv);
-			ChurchLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Church) && ChurchLv < 93)
-		{
-			BuiltType = MENU_NUM::Church;
-			Set(ChurchLv);
-			ChurchLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-
-		if ((oldpattern == MENU_NUM::Rifle) && RifleLv == 100) {
-			BuiltType = MENU_NUM::Rifle;
-			Set(RifleLv);
-			RifleLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Rifle) && RifleLv < 103)
-		{
-			BuiltType = MENU_NUM::Rifle;
-			Set(RifleLv);
-			RifleLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-
-		if ((oldpattern == MENU_NUM::Sword) && SwordLv == 110) {
-			BuiltType = MENU_NUM::Sword;
-			Set(SwordLv);
-			SwordLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Sword) && SwordLv < 113)
-		{
-			BuiltType = MENU_NUM::Sword;
-			Set(SwordLv);
-			SwordLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-
-		if ((oldpattern == MENU_NUM::Training) && TrainingLv == 120) {
-			BuiltType = MENU_NUM::Training;
-			Set(TrainingLv);
-			TrainingLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Training) && TrainingLv < 123)
-		{
-			BuiltType = MENU_NUM::Training;
-			Set(TrainingLv);
-			TrainingLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-
-		if ((oldpattern == MENU_NUM::Atelier) && AtelierLv == 130) {
-			BuiltType = MENU_NUM::Atelier;
-
-			Set(AtelierLv);
-			AtelierLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Atelier) && AtelierLv < 133)
-		{
-			BuiltType = MENU_NUM::Atelier;
-			Set(AtelierLv);
-			AtelierLv += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
+			if ((oldpattern == MENU_NUM::Church) && ChurchLv == 90) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Church;
+					math.Set(ChurchLv);
+					ChurchLv += 1;
+					TotalBuilding += 1;
+					MoneyFlag = false;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
 
 
-		if ((oldpattern == MENU_NUM::Library) && LibraryLv == 140) {
-			BuiltType = MENU_NUM::Library;
-			Set(LibraryLv);
-			LibraryLv += 1;
-			TotalBuilding += 1;
-			pattern = MENU_NUM::GuildMenu;
-		}
-		else if ((oldpattern == MENU_NUM::Library) && LibraryLv < 143)
+			if ((oldpattern == MENU_NUM::Rifle) && RifleLv == 100) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Rifle;
+					math.Set(RifleLv);
+					RifleLv += 1;
+					TotalBuilding += 1;
+					MoneyFlag = false;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
 
-		{
-			BuiltType = MENU_NUM::Library;
-			Set(LibraryLv);
-			LibraryLv += 1;
-			pattern = MENU_NUM::GuildMenu;
+
+			if ((oldpattern == MENU_NUM::Sword) && SwordLv == 110) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Sword;
+					math.Set(SwordLv);
+					SwordLv += 1;
+					TotalBuilding += 1;
+					MoneyFlag = false;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+				}
+			}
+
+			if ((oldpattern == MENU_NUM::Training) && TrainingLv == 120) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Training;
+					math.Set(TrainingLv);
+					TrainingLv += 1;
+					TotalBuilding += 1;
+					MoneyFlag = false;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
+
+			if ((oldpattern == MENU_NUM::Atelier) && AtelierLv == 130) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Atelier;
+
+					math.Set(AtelierLv);
+					AtelierLv += 1;
+					TotalBuilding += 1;
+					MoneyFlag = false;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
+
+
+			if ((oldpattern == MENU_NUM::Library) && LibraryLv == 140) {
+				int money = GetBuildingMoney(oldpattern);
+				if (math.GetMymoney() >= money) {
+					BuiltType = MENU_NUM::Library;
+					math.Set(LibraryLv);
+					LibraryLv += 1;
+					TotalBuilding += 1;
+					oldpattern = MENU_NUM::Null;
+					DeleteFlag = true;
+					MoneyFlag = false;
+				}
+				else {
+					MoneyFlag = true;
+					oldpattern = MENU_NUM::Null;
+				}
+			}
 		}
 		break;
 	}
 	case MENU_NUM::Development:
 	{
+		if ((oldpattern == MENU_NUM::Guild) && GuildLv < 13)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (GuildLv == 11 && math.GetMymoney() >= money) {
+				MaxBuilding += 2;
+				MaxBuildFlag = false;
+				MoneyFlag = false;
+			}
+			else if (GuildLv == 12 && math.GetMymoney() >= money) {
+				MaxBuilding += 3;
+				MaxBuildFlag = false;
+				MoneyFlag = false;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+			BuiltType = MENU_NUM::Guild;
+			math.Set(GuildLv);
+			GuildLv += 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Bath) && BathLv < 43 && BathLv != 40)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Bath;
+				math.Set(BathLv);
+				BathLv += 1;
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Dining) && DiningLv < 53 && DiningLv != 50)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Dining;
+				math.Set(DiningLv);
+				DiningLv += 1;
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Newspaper) && NewspaperLv < 63 && NewspaperLv != 60)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Newspaper;
+				math.Set(NewspaperLv);
+				NewspaperLv += 1;
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Weapon) && WeaponLv < 73 && WeaponLv != 70)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Weapon;
+				math.Set(WeaponLv);
+				WeaponLv += 1;
+				math.WeaponEffect(WeaponLv);
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Armor) && ArmorLv < 83 && ArmorLv != 80)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Armor;
+				math.Set(ArmorLv);
+				ArmorLv += 1;
+				math.ArmorEffect(ArmorLv);
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Church) && ChurchLv < 93 && ChurchLv != 90)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Church;
+				math.Set(ChurchLv);
+				ChurchLv += 1;
+				math.ChurchEffect(ChurchLv);
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Rifle) && RifleLv < 103 && RifleLv != 100)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Rifle;
+				math.Set(RifleLv);
+				RifleLv += 1;
+				math.RifleEffect(RifleLv);
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Sword) && SwordLv < 113 && SwordLv != 110)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Sword;
+				math.Set(SwordLv);
+				SwordLv += 1;
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Training) && TrainingLv < 123 && TrainingLv != 120)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Training;
+				math.Set(TrainingLv);
+				TrainingLv += 1;
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Atelier) && AtelierLv < 133 && AtelierLv != 130)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Atelier;
+				math.Set(AtelierLv);
+				AtelierLv += 1;
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
+		if ((oldpattern == MENU_NUM::Library) && LibraryLv < 143 && LibraryLv != 140)
+		{
+			int money = GetBuildingMoney(oldpattern);
+			if (math.GetMymoney() >= money) {
+				BuiltType = MENU_NUM::Library;
+				math.Set(LibraryLv);
+				LibraryLv += 1;
+				oldpattern = MENU_NUM::Null;
+				MoneyFlag = false;
+				DeleteFlag = true;
+			}
+			else if (math.GetMymoney() < money) {
+				MoneyFlag = true;
+				break;
+			}
+		}
 		break;
 	}
 
 
 	case MENU_NUM::Delete:
 	{
+		if (oldpattern == MENU_NUM::Guild)
+		{
+			BuiltType = MENU_NUM::Guild;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Bath) && BathLv < 44)
+		{
+			if (BathLv == 40) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Bath;
+			BathLv = 40;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Dining) && DiningLv < 54)
+		{
+			if (DiningLv == 50) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Dining;
+			DiningLv = 50;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Newspaper) && NewspaperLv < 64)
+		{
+			if (NewspaperLv == 60) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Newspaper;
+			NewspaperLv = 60;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Weapon) && WeaponLv < 74)
+		{
+			if (WeaponLv == 70) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Weapon;
+			math.WeaponDelete(WeaponLv);
+			WeaponLv = 70;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Armor) && ArmorLv < 84)
+		{
+			if (ArmorLv == 80) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Armor;
+			math.ArmorDelete(ArmorLv);
+			ArmorLv = 80;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Church) && ChurchLv < 94)
+		{
+			if (ChurchLv == 90) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Church;
+			math.ChurchDelete(ChurchLv);
+			ChurchLv = 90;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Rifle) && RifleLv < 104)
+		{
+			if (RifleLv == 100) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Rifle;
+			math.RifleDelete(RifleLv);
+			RifleLv = 100;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Sword) && SwordLv < 114)
+		{
+			if (SwordLv == 110) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Sword;
+			SwordLv = 110;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Training) && TrainingLv < 124)
+		{
+			if (TrainingLv == 120) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Training;
+			TrainingLv = 120;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Atelier) && AtelierLv < 134)
+		{
+			if (AtelierLv == 130) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Atelier;
+			math.Set(AtelierLv);
+			AtelierLv = 130;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
+		if ((oldpattern == MENU_NUM::Library) && LibraryLv < 144)
+		{
+			if (LibraryLv == 140) {
+				DeleteFlag = false;
+				break;
+			}
+			BuiltType = MENU_NUM::Library;
+			LibraryLv = 140;
+			TotalBuilding -= 1;
+			oldpattern = MENU_NUM::Null;
+		}
 		break;
 	}
-
-
 	}
-
-
-
 }
 
 void Guild::Guild_Render() {
 
-	DrawGraph(1750, 900, Back, TRUE);
-
 	DrawFormatString(0, 0, GetColor(0, 0, 0), "pattern=%d", pattern);
+	DrawFormatString(0, 100, GetColor(0, 0, 0), "oldpattern=%d", oldpattern);
 
 	DrawGraph(0, 0, BaseGrHandle, TRUE);
 	DrawGraph(1545, 753, TotalGrHandle, TRUE);
@@ -645,9 +961,9 @@ void Guild::Guild_Render() {
 	if (ScreenNo == 1) {
 
 		AABBDraw::MyDrawGraph(170, 228, g_1_1GrHandle, TRUE);
-		AABBDraw::MyDrawGraph(873, 228, g_2_0GrHandle, TRUE);
-		AABBDraw::MyDrawGraph(170, 598, g_3_0GrHandle, TRUE);
-		AABBDraw::MyDrawGraph(873, 598, g_4_0GrHandle, TRUE);
+		AABBDraw::MyDrawGraph(873, 228, g_4_0GrHandle, TRUE);
+		AABBDraw::MyDrawGraph(170, 598, g_5_0GrHandle, TRUE);
+		AABBDraw::MyDrawGraph(873, 598, g_6_0GrHandle, TRUE);
 
 		if (GuildLv == 11) {
 			DrawGraph(170, 228, g_1_1GrHandle, FALSE);
@@ -659,104 +975,104 @@ void Guild::Guild_Render() {
 			DrawGraph(170, 228, g_1_3GrHandle, FALSE);
 		}
 
-		if (BarLv == 20) {
-			DrawGraph(873, 228, g_2_0GrHandle, FALSE);
-		}
-		else if (BarLv == 21) {
-			DrawGraph(873, 228, g_2_1GrHandle, FALSE);
-		}
-		else if (BarLv == 22) {
-			DrawGraph(873, 228, g_2_2GrHandle, FALSE);
-		}
-		else if (BarLv == 23) {
-			DrawGraph(873, 228, g_2_3GrHandle, FALSE);
-		}
-
-		if (TheaterLv == 30) {
-			DrawGraph(170, 598, g_3_0GrHandle, FALSE);
-		}
-		else if (TheaterLv == 31) {
-			DrawGraph(170, 598, g_3_1GrHandle, FALSE);
-		}
-		else if (TheaterLv == 32) {
-			DrawGraph(170, 598, g_3_2GrHandle, FALSE);
-		}
-		else if (TheaterLv == 33) {
-			DrawGraph(170, 598, g_3_3GrHandle, FALSE);
-		}
-
 		if (BathLv == 40) {
-			DrawGraph(873, 598, g_4_0GrHandle, FALSE);
+			DrawGraph(873, 228, g_4_0GrHandle, FALSE);
 		}
 		else if (BathLv == 41) {
-			DrawGraph(873, 598, g_4_1GrHandle, FALSE);
+			DrawGraph(873, 228, g_4_1GrHandle, FALSE);
 		}
 		else if (BathLv == 42) {
-			DrawGraph(873, 598, g_4_2GrHandle, FALSE);
+			DrawGraph(873, 228, g_4_2GrHandle, FALSE);
 		}
 		else if (BathLv == 43) {
-			DrawGraph(873, 598, g_4_3GrHandle, FALSE);
+			DrawGraph(873, 228, g_4_3GrHandle, FALSE);
+		}
+
+		if (DiningLv == 50) {
+			DrawGraph(170, 598, g_5_0GrHandle, FALSE);
+		}
+		else if (DiningLv == 51) {
+			DrawGraph(170, 598, g_5_1GrHandle, FALSE);
+		}
+		else if (DiningLv == 52) {
+			DrawGraph(170, 598, g_5_2GrHandle, FALSE);
+		}
+		else if (DiningLv == 53) {
+			DrawGraph(170, 598, g_5_3GrHandle, FALSE);
+		}
+
+		if (NewspaperLv == 60) {
+			DrawGraph(873, 598, g_6_0GrHandle, FALSE);
+		}
+		else if (NewspaperLv == 61) {
+			DrawGraph(873, 598, g_6_1GrHandle, FALSE);
+		}
+		else if (NewspaperLv == 62) {
+			DrawGraph(873, 598, g_6_2GrHandle, FALSE);
+		}
+		else if (NewspaperLv == 63) {
+			DrawGraph(873, 598, g_6_3GrHandle, FALSE);
 		}
 		AABBDraw::MyDrawGraph(802, 943, downGrHandle, TRUE);
 	}
 
 	if (ScreenNo == 2) {
 
-		AABBDraw::MyDrawGraph(170, 228, g_5_0GrHandle, TRUE);
-		AABBDraw::MyDrawGraph(873, 228, g_6_0GrHandle, TRUE);
-		AABBDraw::MyDrawGraph(170, 598, g_7_0GrHandle, TRUE);
-		AABBDraw::MyDrawGraph(873, 598, g_8_0GrHandle, TRUE);
-
-		if (DiningLv == 50) {
-			AABBDraw::MyDrawGraph(170, 228, g_5_0GrHandle, FALSE);
-		}
-		else if (DiningLv == 51) {
-			AABBDraw::MyDrawGraph(170, 228, g_5_1GrHandle, FALSE);
-		}
-		else if (DiningLv == 52) {
-			AABBDraw::MyDrawGraph(170, 228, g_5_2GrHandle, FALSE);
-		}
-		else if (DiningLv == 53) {
-			AABBDraw::MyDrawGraph(170, 228, g_5_3GrHandle, FALSE);
-		}
-
-		if (NewspaperLv == 60) {
-			AABBDraw::MyDrawGraph(873, 228, g_6_0GrHandle, FALSE);
-		}
-		else if (NewspaperLv == 61) {
-			AABBDraw::MyDrawGraph(873, 228, g_6_1GrHandle, FALSE);
-		}
-		else if (NewspaperLv == 62) {
-			AABBDraw::MyDrawGraph(873, 228, g_6_2GrHandle, FALSE);
-		}
-		else if (NewspaperLv == 63) {
-			AABBDraw::MyDrawGraph(873, 228, g_6_3GrHandle, FALSE);
-		}
+		AABBDraw::MyDrawGraph(170, 228, g_7_0GrHandle, TRUE);
+		AABBDraw::MyDrawGraph(873, 228, g_8_0GrHandle, TRUE);
+		AABBDraw::MyDrawGraph(170, 598, g_9_0GrHandle, TRUE);
+		AABBDraw::MyDrawGraph(873, 598, g_10_0GrHandle, TRUE);
 
 		if (WeaponLv == 70) {
-			AABBDraw::MyDrawGraph(170, 598, g_7_0GrHandle, FALSE);
+			DrawGraph(170, 228, g_7_0GrHandle, FALSE);
 		}
 		else if (WeaponLv == 71) {
-			AABBDraw::MyDrawGraph(170, 598, g_7_1GrHandle, FALSE);
+			DrawGraph(170, 228, g_7_1GrHandle, FALSE);
 		}
 		else if (WeaponLv == 72) {
-			AABBDraw::MyDrawGraph(170, 598, g_7_2GrHandle, FALSE);
+			DrawGraph(170, 228, g_7_2GrHandle, FALSE);
 		}
 		else if (WeaponLv == 73) {
-			AABBDraw::MyDrawGraph(170, 598, g_7_3GrHandle, FALSE);
+			DrawGraph(170, 228, g_7_3GrHandle, FALSE);
 		}
 
 		if (ArmorLv == 80) {
-			AABBDraw::MyDrawGraph(873, 598, g_8_0GrHandle, FALSE);
+			DrawGraph(873, 228, g_8_0GrHandle, FALSE);
 		}
 		else if (ArmorLv == 81) {
-			AABBDraw::MyDrawGraph(873, 598, g_8_1GrHandle, FALSE);
+			DrawGraph(873, 228, g_8_1GrHandle, FALSE);
 		}
 		else if (ArmorLv == 82) {
-			AABBDraw::MyDrawGraph(873, 598, g_8_2GrHandle, FALSE);
+			DrawGraph(873, 228, g_8_2GrHandle, FALSE);
 		}
 		else if (ArmorLv == 83) {
-			AABBDraw::MyDrawGraph(873, 598, g_8_3GrHandle, FALSE);
+			DrawGraph(873, 228, g_8_3GrHandle, FALSE);
+		}
+
+		if (ChurchLv == 90) {
+			DrawGraph(170, 598, g_9_0GrHandle, FALSE);
+		}
+		else if (ChurchLv == 91) {
+			DrawGraph(170, 598, g_9_1GrHandle, FALSE);
+		}
+		else if (ChurchLv == 92) {
+			DrawGraph(170, 598, g_9_2GrHandle, FALSE);
+		}
+		else if (ChurchLv == 93) {
+			DrawGraph(170, 598, g_9_3GrHandle, FALSE);
+		}
+
+		if (RifleLv == 100) {
+			DrawGraph(873, 598, g_10_0GrHandle, FALSE);
+		}
+		else if (RifleLv == 101) {
+			DrawGraph(873, 598, g_10_1GrHandle, FALSE);
+		}
+		else if (RifleLv == 102) {
+			DrawGraph(873, 598, g_10_2GrHandle, FALSE);
+		}
+		else if (RifleLv == 103) {
+			DrawGraph(873, 598, g_10_3GrHandle, FALSE);
 		}
 		AABBDraw::MyDrawGraph(802, 121, upGrHandle, TRUE);
 		AABBDraw::MyDrawGraph(802, 943, downGrHandle, TRUE);
@@ -764,328 +1080,443 @@ void Guild::Guild_Render() {
 
 	if (ScreenNo == 3) {
 
-		AABBDraw::MyDrawGraph(170, 228, g_9_0GrHandle, TRUE);
-		AABBDraw::MyDrawGraph(873, 228, g_10_0GrHandle, TRUE);
-		AABBDraw::MyDrawGraph(170, 598, g_11_0GrHandle, TRUE);
-		AABBDraw::MyDrawGraph(873, 598, g_12_0GrHandle, TRUE);
-
-		if (ChurchLv == 90) {
-			AABBDraw::MyDrawGraph(170, 228, g_9_0GrHandle, FALSE);
-		}
-		else if (ChurchLv == 91) {
-			AABBDraw::MyDrawGraph(170, 228, g_9_1GrHandle, FALSE);
-		}
-		else if (ChurchLv == 92) {
-			AABBDraw::MyDrawGraph(170, 228, g_9_2GrHandle, FALSE);
-		}
-		else if (ChurchLv == 93) {
-			AABBDraw::MyDrawGraph(170, 228, g_9_3GrHandle, FALSE);
-		}
-
-		if (RifleLv == 100) {
-			AABBDraw::MyDrawGraph(873, 228, g_10_0GrHandle, FALSE);
-		}
-		else if (RifleLv == 101) {
-			AABBDraw::MyDrawGraph(873, 228, g_10_1GrHandle, FALSE);
-		}
-		else if (RifleLv == 102) {
-			AABBDraw::MyDrawGraph(873, 228, g_10_2GrHandle, FALSE);
-		}
-		else if (RifleLv == 103) {
-			AABBDraw::MyDrawGraph(873, 228, g_10_3GrHandle, FALSE);
-		}
-
-		if (SwordLv == 110) {
-			AABBDraw::MyDrawGraph(170, 598, g_11_0GrHandle, FALSE);
-		}
-		else if (SwordLv == 111) {
-			AABBDraw::MyDrawGraph(170, 598, g_11_1GrHandle, FALSE);
-		}
-		else if (SwordLv == 112) {
-			AABBDraw::MyDrawGraph(170, 598, g_11_2GrHandle, FALSE);
-		}
-		else if (SwordLv == 113) {
-			AABBDraw::MyDrawGraph(170, 598, g_11_3GrHandle, FALSE);
-		}
-
-		if (TrainingLv == 120) {
-			AABBDraw::MyDrawGraph(873, 598, g_12_0GrHandle, FALSE);
-		}
-		else if (TrainingLv == 121) {
-			AABBDraw::MyDrawGraph(873, 598, g_12_1GrHandle, FALSE);
-		}
-		else if (TrainingLv == 122) {
-			AABBDraw::MyDrawGraph(873, 598, g_12_2GrHandle, FALSE);
-		}
-		else if (TrainingLv == 123) {
-			AABBDraw::MyDrawGraph(873, 598, g_12_3GrHandle, FALSE);
-		}
-		AABBDraw::MyDrawGraph(802, 121, upGrHandle, TRUE);
-		AABBDraw::MyDrawGraph(802, 943, downGrHandle, TRUE);
-	}
-
-	if (ScreenNo == 4) {
-
+		AABBDraw::MyDrawGraph(170, 228, g_11_0GrHandle, TRUE);
+		AABBDraw::MyDrawGraph(873, 228, g_12_0GrHandle, TRUE);
 		AABBDraw::MyDrawGraph(170, 598, g_13_0GrHandle, TRUE);
 		AABBDraw::MyDrawGraph(873, 598, g_14_0GrHandle, TRUE);
 
+		if (SwordLv == 110) {
+			DrawGraph(170, 228, g_11_0GrHandle, FALSE);
+		}
+		else if (SwordLv == 111) {
+			DrawGraph(170, 228, g_11_1GrHandle, FALSE);
+		}
+		else if (SwordLv == 112) {
+			DrawGraph(170, 228, g_11_2GrHandle, FALSE);
+		}
+		else if (SwordLv == 113) {
+			DrawGraph(170, 228, g_11_3GrHandle, FALSE);
+		}
+
+		if (TrainingLv == 120) {
+			DrawGraph(873, 228, g_12_0GrHandle, FALSE);
+		}
+		else if (TrainingLv == 121) {
+			DrawGraph(873, 228, g_12_1GrHandle, FALSE);
+		}
+		else if (TrainingLv == 122) {
+			DrawGraph(873, 228, g_12_2GrHandle, FALSE);
+		}
+		else if (TrainingLv == 123) {
+			DrawGraph(873, 228, g_12_3GrHandle, FALSE);
+		}
+
 		if (AtelierLv == 130) {
-			AABBDraw::MyDrawGraph(170, 228, g_13_0GrHandle, FALSE);
+			DrawGraph(170, 598, g_13_0GrHandle, FALSE);
 		}
 		else if (AtelierLv == 131) {
-			AABBDraw::MyDrawGraph(170, 228, g_13_1GrHandle, FALSE);
+			DrawGraph(170, 598, g_13_1GrHandle, FALSE);
 		}
 		else if (AtelierLv == 132) {
-			AABBDraw::MyDrawGraph(170, 228, g_13_2GrHandle, FALSE);
+			DrawGraph(170, 598, g_13_2GrHandle, FALSE);
 		}
 		else if (AtelierLv == 133) {
-			AABBDraw::MyDrawGraph(170, 228, g_13_3GrHandle, FALSE);
+			DrawGraph(170, 598, g_13_3GrHandle, FALSE);
 		}
 
 		if (LibraryLv == 140) {
-			AABBDraw::MyDrawGraph(873, 228, g_14_0GrHandle, FALSE);
+			DrawGraph(873, 598, g_14_0GrHandle, FALSE);
 		}
 		else if (LibraryLv == 141) {
-			AABBDraw::MyDrawGraph(873, 228, g_14_1GrHandle, FALSE);
+			DrawGraph(873, 598, g_14_1GrHandle, FALSE);
 		}
 		else if (LibraryLv == 142) {
-			AABBDraw::MyDrawGraph(873, 228, g_14_2GrHandle, FALSE);
+			DrawGraph(873, 598, g_14_2GrHandle, FALSE);
 		}
 		else if (LibraryLv == 143) {
-			AABBDraw::MyDrawGraph(873, 228, g_14_3GrHandle, FALSE);
+			DrawGraph(873, 598, g_14_3GrHandle, FALSE);
 		}
 		AABBDraw::MyDrawGraph(802, 121, upGrHandle, TRUE);
 	}
+
 
 	switch (pattern)
 	{
 	case MENU_NUM::Set:
 	{
 		DrawGraph(377, 340, BoardGrHandle, TRUE);
-		if (TotalBuilding == MaxBuilding) {
-			DrawGraph(507, 625, YesGrHandle, TRUE);
-			DrawGraph(507, 625, YesGrHandle, TRUE);
-			DrawString(550, 400, "é{ê›è„å¿Ç≈Ç∑ÅB", GetColor(0, 0, 0));
-			break;
-		}
-	}
-	case MENU_NUM::GuildMenu:
-	{
-
-		if (TotalBuilding == MaxBuilding) {
-			DrawString(550, 400, "é{ê›è„å¿Ç≈Ç∑ÅB", GetColor(0, 0, 0));
-			break;
-		}
-
-		if (BuiltType == MENU_NUM::Guild)
+		AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+		if (BuiltType == MENU_NUM::Bath)
 		{
-			DrawString(1055, 240, "ÉMÉãÉhÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Bar && BarLv > 21)
-		{
-			DrawString(1055, 240, "éèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-		else if (BuiltType == MENU_NUM::Bar)
-		{
-			DrawString(1055, 240, "éèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Theater && TheaterLv > 31)
-		{
-			DrawString(1055, 240, "ââåÄèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-		else if (BuiltType == MENU_NUM::Theater)
-		{
-			DrawString(1055, 240, "ââåÄèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Bath && BathLv > 41)
-		{
-			DrawString(1055, 240, "ëÂóÅèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-		else if (BuiltType == MENU_NUM::Bath)
-		{
-			DrawString(1055, 240, "ëÂóÅèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Dining && DiningLv > 51)
-		{
-			DrawString(1055, 240, "êHì∞Çëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			DrawString(507, 400, "ëÂóÅèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Dining)
 		{
-			DrawString(1055, 240, "êHì∞Çåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Newspaper && NewspaperLv > 61)
-		{
-			DrawString(1055, 240, "êVï∑î≠çsèäÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "êHì∞Çåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Newspaper)
 		{
-			DrawString(1055, 240, "êVï∑î≠çsèäÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Weapon && WeaponLv > 71)
-		{
-			DrawString(1055, 240, "ïêäÌâÆÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "êVï∑î≠çsèäÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Weapon)
 		{
-			DrawString(1055, 240, "ïêäÌâÆÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Armor && ArmorLv > 81)
-		{
-			DrawString(1055, 240, "ñhãÔâÆÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "ïêäÌâÆÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Armor)
 		{
-			DrawString(1055, 240, "ñhãÔâÆÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Church && ChurchLv > 91)
-		{
-			DrawString(1055, 240, "ã≥âÔÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "ñhãÔâÆÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Church)
 		{
-			DrawString(1055, 240, "ã≥âÔÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Rifle && RifleLv > 101)
-		{
-			DrawString(1055, 240, "éÀåÇèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "ã≥âÔÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Rifle)
 		{
-			DrawString(1055, 240, "éÀåÇèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Sword && SwordLv > 111)
-		{
-			DrawString(1055, 240, "åïèpèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "éÀåÇèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Sword)
 		{
-			DrawString(1055, 240, "åïèpèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Training && TrainingLv > 121)
-		{
-			DrawString(1055, 240, "íbòBèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "åïèpèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Training)
 		{
-			DrawString(1055, 240, "íbòBèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Atelier && AtelierLv > 131)
-		{
-			DrawString(1055, 240, "ÉAÉgÉäÉGÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "íbòBèÍÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Atelier)
 		{
-			DrawString(1055, 240, "ÉAÉgÉäÉGÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
-		}
-
-		else if (BuiltType == MENU_NUM::Library && LibraryLv > 141)
-		{
-			DrawString(1055, 240, "ê}èëäŸÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "ÉAÉgÉäÉGÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
 		else if (BuiltType == MENU_NUM::Library)
 		{
-			DrawString(1055, 240, "ê}èëäŸÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "ê}èëäŸÇåöê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
 		}
-	}
-	break;
+		else if (BuiltType == MENU_NUM::Guild)
+		{
+			DrawString(507, 400, "Ç∑Ç≈Ç…ê›íuÇ≥ÇÍÇƒÇ¢Ç‹Ç∑ÅB", GetColor(0, 0, 0));
+		}
+		else if (MaxBuildFlag == true) {
+			DrawString(507, 400, "é{ê›è„å¿Ç≈Ç∑ÅB", GetColor(0, 0, 0));
+		}
+		else if (MoneyFlag == true) {
+			DrawString(507, 400, "èäéùã‡Ç™ë´ÇËÇ‹ÇπÇÒÅB", GetColor(0, 0, 0));
+		}
+
+		break;
 
 	case MENU_NUM::Development:
 	{
-		DrawGraph(480, 340, BoardGrHandle, TRUE);
+		DrawGraph(377, 340, BoardGrHandle, TRUE);
+		AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+
+
+
+		if (BuiltType == MENU_NUM::Guild)
+		{
+			DrawString(507, 400, "ÉMÉãÉhÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+
+		else if (BuiltType == MENU_NUM::Bath && BathLv > 40)
+		{
+			DrawString(507, 400, "ëÂóÅèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Dining && DiningLv > 50)
+		{
+			DrawString(507, 400, "êHì∞Çëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Newspaper && NewspaperLv > 60)
+		{
+			DrawString(507, 400, "êVï∑î≠çsèäÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Weapon && WeaponLv > 70)
+		{
+			DrawString(507, 400, "ïêäÌâÆÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Armor && ArmorLv > 80)
+		{
+			DrawString(507, 400, "ñhãÔâÆÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Church && ChurchLv > 90)
+		{
+			DrawString(507, 400, "ã≥âÔÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Rifle && RifleLv > 100)
+		{
+			DrawString(507, 400, "éÀåÇèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Sword && SwordLv > 110)
+		{
+			DrawString(507, 400, "åïèpèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Training && TrainingLv > 120)
+		{
+			DrawString(507, 400, "íbòBèÍÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Atelier && AtelierLv > 130)
+		{
+			DrawString(507, 400, "ÉAÉgÉäÉGÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (BuiltType == MENU_NUM::Library && LibraryLv > 140)
+		{
+			DrawString(507, 400, "ê}èëäŸÇëùê›ÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+		}
+		else if (TotalBuilding == MaxBuilding) {
+			AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+			DrawString(507, 400, "é{ê›è„å¿Ç≈Ç∑ÅB", GetColor(0, 0, 0));
+			break;
+		}
+		else if (MoneyFlag == true) {
+			DrawString(507, 400, "èäéùã‡Ç™ë´ÇËÇ‹ÇπÇÒÅB", GetColor(0, 0, 0));
+		}
 		break;
-	}
-	break;
 
 	case MENU_NUM::Delete:
 	{
-		DrawGraph(480, 340, BoardGrHandle, TRUE);
+		DrawGraph(377, 340, BoardGrHandle, TRUE);
+		AABBDraw::MyDrawGraph(707, 625, YesGrHandle, TRUE);  //ògÇÃê^ÇÒíÜÇ≠ÇÁÇ¢
+
+		if (BuiltType == MENU_NUM::Guild)
+		{
+			DrawString(507, 400, "çÌèúÇ≈Ç´Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+		}
+
+		else if (BuiltType == MENU_NUM::Bath)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "ëÂóÅèÍÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Dining)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "êHì∞ÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Newspaper)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "êVï∑î≠çsèäÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Weapon)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "ïêäÌâÆÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Armor)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "ñhãÔâÆÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Church)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "ã≥âÔÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Rifle)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "éÀåÇèÍÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Sword)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "åïèpèÍÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Training)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "íbòBèÍÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Atelier)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "ÉAÉgÉäÉGÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+		}
+		else if (BuiltType == MENU_NUM::Library)
+		{
+			if (DeleteFlag == false) {
+				DrawString(507, 400, "åöê›Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ", GetColor(0, 0, 0));
+			}
+			else if (DeleteFlag == true) {
+				DrawString(507, 400, "ê}èëäŸÇçÌèúÇµÇ‹ÇµÇΩ", GetColor(0, 0, 0));
+			}
+			break;
+		}
 		break;
 	}
-
 
 	case MENU_NUM::Guild:
 	{
 		DrawGraph(170, 228, g_0GrHandle, TRUE);
 		break;
 	}
-	case MENU_NUM::Bar:
-	{
-		DrawGraph(873, 228, g_0GrHandle, TRUE);
-		break;
-	}
-	case MENU_NUM::Theater:
-	{
-		DrawGraph(170, 598, g_0GrHandle, TRUE);
-		break;
-	}
 	case MENU_NUM::Bath:
 	{
-		DrawGraph(873, 598, g_0GrHandle, TRUE);
+		DrawGraph(873, 228, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Dining:
 	{
-		DrawGraph(170, 228, g_0GrHandle, TRUE);
+		DrawGraph(170, 598, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Newspaper:
 	{
-		DrawGraph(873, 228, g_0GrHandle, TRUE);
+		DrawGraph(873, 598, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Weapon:
 	{
-		DrawGraph(170, 598, g_0GrHandle, TRUE);
+		DrawGraph(170, 228, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Armor:
 	{
-		DrawGraph(873, 598, g_0GrHandle, TRUE);
+		DrawGraph(873, 228, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Church:
 	{
-		DrawGraph(170, 228, g_0GrHandle, TRUE);
+		DrawGraph(170, 598, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Rifle:
 	{
-		DrawGraph(873, 228, g_0GrHandle, TRUE);
+		DrawGraph(873, 598, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Sword:
 	{
-		DrawGraph(170, 598, g_0GrHandle, TRUE);
+		DrawGraph(170, 228, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Training:
 	{
-		DrawGraph(873, 598, g_0GrHandle, TRUE);
+		DrawGraph(873, 228, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Atelier:
 	{
-		DrawGraph(170, 228, g_0GrHandle, TRUE);
+		DrawGraph(170, 598, g_0GrHandle, TRUE);
 		break;
 	}
 	case MENU_NUM::Library:
 	{
-		DrawGraph(873, 228, g_0GrHandle, TRUE);
+		DrawGraph(873, 598, g_0GrHandle, TRUE);
 		break;
+	}
+	}
 	}
 	}
 }
 
 
+
+int Guild::GetBuildingMoney(MENU_NUM type) {
+	if (type == MENU_NUM::Guild) {
+		int Lv = GuildLv % 10;
+		if (Lv == 1) {
+			return 2000000;
+		}
+		else if (Lv == 2) {
+			return 5000000;
+		}
+	}
+	else {
+		int Lv = -1;
+		if (type == MENU_NUM::Bath) {
+			Lv = BathLv % 10;
+		}
+		else if (type == MENU_NUM::Bath) {
+			Lv = BathLv % 10;
+		}
+		else if (type == MENU_NUM::Dining) {
+			Lv = DiningLv % 10;
+		}
+		else if (type == MENU_NUM::Newspaper) {
+			Lv = NewspaperLv % 10;
+		}
+		else if (type == MENU_NUM::Weapon) {
+			Lv = WeaponLv % 10;
+		}
+		else if (type == MENU_NUM::Armor) {
+			Lv = ArmorLv % 10;
+		}
+		else if (type == MENU_NUM::Church) {
+			Lv = ChurchLv % 10;
+		}
+		else if (type == MENU_NUM::Rifle) {
+			Lv = RifleLv % 10;
+		}
+		else if (type == MENU_NUM::Sword) {
+			Lv = SwordLv % 10;
+		}
+		else if (type == MENU_NUM::Training) {
+			Lv = TrainingLv % 10;
+		}
+		else if (type == MENU_NUM::Atelier) {
+			Lv = AtelierLv % 10;
+		}
+		else if (type == MENU_NUM::Library) {
+			Lv = LibraryLv % 10;
+		}
+
+		if (Lv == 0) {
+			return 300000;
+		}
+		else if (Lv == 1) {
+			return 1000000;
+		}
+		else if (Lv == 2) {
+			return 3000000;
+		}
+	}
+	return 0;
+}

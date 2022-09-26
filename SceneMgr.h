@@ -6,7 +6,6 @@
 #include"Trede.h"
 #include"Investment.h"
 #include"NextMonth.h"
-#include"Math.h"
 #include "TurnNumber.h"
 #include"Title.h"
 #include"Save.h"
@@ -15,7 +14,7 @@
 class Game;
 
 
-class SceneMgr: public Math {
+class SceneMgr {
 public:
 	enum class eScene {
 		//Title,           //ƒ^ƒCƒgƒ‹
@@ -49,7 +48,7 @@ protected:
 	Trede trede;
 	Investment investment;
 	NextMonth nextmonth;
-	//Math math;
+	Math math;
 	TurnNumber turnnumber;
 	Save save;
 

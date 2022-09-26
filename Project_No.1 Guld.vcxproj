@@ -157,6 +157,7 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Ending.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Guild.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Adventurer_Status.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Ending.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Guild.h" />

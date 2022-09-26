@@ -136,3 +136,12 @@ int AABBDraw::GetHandle(LOAD_NUM type) {
 
 	return -1;
 }
+
+AABBDraw::LOAD_NUM AABBDraw::GetType(int handle) {
+	for (const auto& item : handles) {
+		if (item.second == handle) {
+			return item.first;
+		}
+	}
+	return LOAD_NUM::Null;
+}

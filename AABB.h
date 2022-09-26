@@ -23,6 +23,7 @@ public:
   ~AABBDraw();
 
   enum class LOAD_NUM {
+    Yes,  //はいボタン
     Return,  //メニューに戻る
     GuildMenu,  //メニュー
     Up, //上矢印
@@ -56,7 +57,8 @@ public:
     Adventurer7,
     Development,  //発展
     Delete,  //削除
-    Back
+    Back,
+    Null
       
 
 
@@ -70,6 +72,7 @@ public:
   static std::shared_ptr<AABBInfo> GetTouch();
   static bool SetHandle(LOAD_NUM type, int handle);
   static int GetHandle(LOAD_NUM type);
+  static LOAD_NUM GetType(int handle);
 
   static std::map<LOAD_NUM, int> handles;  //ハンドルの一覧
   static std::vector<AABBInfo> aabbInfo;  //静的メンバの宣言
